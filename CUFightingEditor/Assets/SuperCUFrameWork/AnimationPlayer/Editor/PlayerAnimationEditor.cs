@@ -13,7 +13,7 @@ using UnityEditor;
 using UnityEditorInternal;
 using UnityEngine.Animations;
 
-public class PlayerAnimationEditor : EditorWindow
+public partial class PlayerAnimationEditor : EditorWindow
 {
     public bool initFlag = false;
     public static PlayerAnimationEditor window = null;
@@ -55,33 +55,53 @@ public class PlayerAnimationEditor : EditorWindow
 	int nowAnimation = 0;
 	int _beforeAnimation = 0;
 
+	int custumStartNumber = 0;
+
     private Vector2 scrollPos;
+
+	enum Tab
+	{
+		技設定,
+		当たり判定,
+	}
+	private Tab _tab = Tab.当たり判定;
 
 	private void OnGUI()
 	{
-        if(initFlag)
-        {
-            Init();
-            initFlag = false;
-        }
+		if (initFlag)
+		{
+			Init();
+			initFlag = false;
+		}
 		//ゲームオブジェクトフィールド
 		gameObject = EditorGUILayout.ObjectField(gameObject, typeof(GameObject), true) as GameObject;
 		//アニメーション再生バーの表示
 		BarDraw();
+
+
 		//ゲームオブジェクトが入れ替わったとき
-		if(_beforeGameObject!=gameObject)
+		if (_beforeGameObject != gameObject)
 		{
 			Init();
 		}
 		//現在セットされているアニメーションを表示
-		nowAnimation = EditorGUILayout.Popup(nowAnimation,animationNames.ToArray());
-		if(_beforeAnimation != nowAnimation)
+		nowAnimation = EditorGUILayout.Popup(nowAnimation, animationNames.ToArray());
+		//タブ表示
+		using (new EditorGUILayout.HorizontalScope())
+		{
+			GUILayout.FlexibleSpace();
+			// タブを描画する
+			_tab = (Tab)GUILayout.Toolbar((int)_tab, Styles.TabToggles, Styles.TabButtonStyle, Styles.TabButtonSize);
+			GUILayout.FlexibleSpace();
+		}
+		//ゲームオブジェクト変更時
+		if (_beforeAnimation != nowAnimation)
 		{
 			value = 0;
 			_beforeAnimation = nowAnimation;
 			rightValue = (int)(animations[nowAnimation].frameRate * animations[nowAnimation].length);
 		}
-
+		//ゲームオブジェクトがnullでなくanimationPlayerがnullの時
 		if (gameObject != null)
 		{
 			if (animationPlayer == null)
@@ -89,25 +109,61 @@ public class PlayerAnimationEditor : EditorWindow
 				Init();
 			}
 		}
-        scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
-        skillSerializedObject.Update();
-        nomalReorderable.DoLayoutList();
-        skillSerializedObject.ApplyModifiedProperties();
 
-        skillSerializedObject.Update();
-        custumReorderable.DoLayoutList();
-        skillSerializedObject.ApplyModifiedProperties();
-        EditorGUILayout.EndScrollView();
-        //アニメーションの再生
-        if (gameObject!=null&&animationPlayer!=null)
-        {
-            animations[nowAnimation].SampleAnimation(gameObject, (float)value / animations[nowAnimation].frameRate);
-        }
+		if (_tab == Tab.技設定)
+		{
+			SkillSetting();
+		}
+		else if(_tab == Tab.当たり判定)
+		{
+			if (animationPlayer != null && gameObject!=null)
+			{
+				if (GUILayout.Button("当たり判定作成"))
+				{
+					//Custum
+					if(nowAnimation>=custumStartNumber)
+					{
+						GameObject o = new GameObject();
+						o.transform.parent = gameObject.transform;
+						o.name = "HitBox" + nowAnimation;
+						animationPlayer.custumSkills[nowAnimation - custumStartNumber].hitBoxObjects.Add(o);
+					}
+				}
+			}
+		}
+		if (animationPlayer == null)
+		{
+			return;
+		}
+		if (!EditorApplication.isPlaying)
+		{
+			//アニメーションの再生
+			if (gameObject != null && animationPlayer != null)
+			{
+				animations[nowAnimation].SampleAnimation(gameObject, (float)value / animations[nowAnimation].frameRate);
+			}
+		}
 	}
     private void OnEnable()
     {
         Init();
     }
+	private void SkillSetting()
+	{
+		if (animationPlayer != null)
+		{
+			scrollPos = EditorGUILayout.BeginScrollView(scrollPos);
+			skillSerializedObject.Update();
+			nomalReorderable.DoLayoutList();
+			skillSerializedObject.ApplyModifiedProperties();
+
+			skillSerializedObject.Update();
+			custumReorderable.DoLayoutList();
+			skillSerializedObject.ApplyModifiedProperties();
+			EditorGUILayout.EndScrollView();
+
+		}
+	}
     //数値入力とバーの表示
     private void BarDraw()
 	{
@@ -128,6 +184,7 @@ public class PlayerAnimationEditor : EditorWindow
     //初期化処理
     private void Init()
     {
+		animationPlayer = null;
         if (gameObject != null)
         {
             //AnimationPlayerがついていれば
@@ -150,6 +207,7 @@ public class PlayerAnimationEditor : EditorWindow
                     animationNames.Add(anim.characterAnimation.ToString() + i.ToString());
                     i++;
                 }
+				custumStartNumber = i;
                 foreach (AnimationPlayer.SkillAnim anim in animationPlayer.custumSkills)
                 {
                     animations.Add(anim.animationClip);
@@ -168,6 +226,10 @@ public class PlayerAnimationEditor : EditorWindow
         }
         _beforeGameObject = gameObject;
 
+		if (animationPlayer == null)
+		{
+			return;
+		}
         skillSerializedObject = new SerializedObject(animationPlayer);
 
         //ノーマルアニメーションのリストの表示
@@ -194,11 +256,11 @@ public class PlayerAnimationEditor : EditorWindow
             EditorGUI.ObjectField(rec, el, typeof(AnimationClip), new GUIContent(""));
             if (character != animationPlayer.nomalSkills[index].characterAnimation || clip != (AnimationClip)el.objectReferenceValue)
             {
-                //initFlag = true;
+                initFlag = true;
             }
         };
         //要素が変わった時
-        //nomalReorderable.onChangedCallback = (list) => { initFlag = true; };
+        nomalReorderable.onChangedCallback = (list) => { initFlag = true; };
         //ヘッダー
         nomalReorderable.drawHeaderCallback = (rec) => { EditorGUI.LabelField(rec, "通常スキル"); };
 

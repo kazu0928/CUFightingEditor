@@ -14,6 +14,11 @@ public class HitBoxSetting : MonoBehaviour
 	{
 		gameObject.SetActive(false);
 	}
+
+	public void OnHitBox()
+	{
+		this.gameObject.SetActive(true);
+	}
 #if UNITY_EDITOR
 	private void OnDrawGizmos()
 	{

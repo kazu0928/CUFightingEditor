@@ -20,12 +20,17 @@ public class AnimationPlayer : MonoBehaviour
 		public CharacterAnimation characterAnimation;
 		public AnimationClip animationClip;
 		public List<GameObject> hitBoxObjects;
+		public List<int> startFrame = new List<int>();
+		public List<int> endFrame = new List<int>();
 	}
 	[System.Serializable]
 	public class SkillAnim
 	{
 		public string skillName;
 		public AnimationClip animationClip;
+		public List<GameObject> hitBoxObjects;
+		public List<int> startFrame = new List<int>();
+		public List<int> endFrame = new List<int>();
 	}
 	public List<NomalAnim> nomalSkills;//通常のアニメーション
 	public List<SkillAnim> custumSkills;//追加アニメーション
@@ -97,6 +102,6 @@ public class AnimationPlayer : MonoBehaviour
 			return;
 		}
 		mixer.SetInputWeight(0, 1);
-		playableGraph.Evaluate(1.0f / frameSpeed);
+		playableGraph.Evaluate(1.0f / nomalSkills[0].animationClip.frameRate);
     }
 }
