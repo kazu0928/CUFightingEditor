@@ -143,7 +143,10 @@ public class PlayerSkillEditor : EditorWindow
     //数値入力とバーの表示
     private void BarDraw()
     {
-        rightValue = (int)(((int)(playerSkill.animationClip.length * playerSkill.animationClip.frameRate)) / playerSkill.animationSpeed);
+		if (playerSkill.animationClip != null)
+		{
+			rightValue = (int)(((int)(playerSkill.animationClip.length * playerSkill.animationClip.frameRate)) / playerSkill.animationSpeed);
+		}
         //数値入力とバーの表示
         value = EditorGUILayout.IntField(value);
         value = (int)GUILayout.HorizontalSlider(value, leftValue, rightValue,
@@ -165,7 +168,7 @@ public class PlayerSkillEditor : EditorWindow
         if (!EditorApplication.isPlaying)
         {
             //アニメーションの再生
-            if (previewCharacter != null && playerSkill != null)
+            if (previewCharacter != null && playerSkill != null && playerSkill.animationClip != null)
             {
                 playerSkill.animationClip.SampleAnimation(previewCharacter, ((float)value / playerSkill.animationClip.frameRate) * playerSkill.animationSpeed );
             }
