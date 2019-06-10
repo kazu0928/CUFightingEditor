@@ -13,7 +13,11 @@ public class PlayerSkill : ScriptableObject
     public bool inBlend = false;
     public bool outBlend = false;
 
-    //当たり判定
+	//当たり判定
+	//enumFrag
+	public bool headFrag = true;
+	public bool bodyFrag = true;
+	public bool footFlag = true;
     
     #region EDITOR_
 #if UNITY_EDITOR
