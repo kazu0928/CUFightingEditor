@@ -104,4 +104,10 @@ public class AnimationPlayer : MonoBehaviour
 		mixer.SetInputWeight(0, 1);
 		playableGraph.Evaluate(1.0f / nomalSkills[0].animationClip.frameRate);
     }
+#if UNITY_EDITOR
+    public List<Vector3> drawGizmoBox = new List<Vector3>();
+    private void OnDrawGizmos()
+    {
+    }
+#endif
 }
