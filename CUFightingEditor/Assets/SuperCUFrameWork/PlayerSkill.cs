@@ -28,7 +28,7 @@ public class PlayerSkill : ScriptableObject
         {
             if(GUILayout.Button("OpenSkillEditor"))
             {
-                PlayerSkillEditor.Open((PlayerSkill)target);
+				PlayerSkillEditor.Open((PlayerSkill)target);
             }
         }
     }

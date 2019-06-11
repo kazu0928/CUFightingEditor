@@ -37,9 +37,12 @@ public class PlayerSkillEditor : EditorWindow
 		previewCharacter = (EditorGUILayout.ObjectField(previewCharacter, typeof(GameObject), true) as GameObject);
 		if (_beforeCharacter != previewCharacter)
 		{
-			if (previewCharacter.GetComponent(typeof(AnimationPlayer)) == null)
+			if (previewCharacter != null)
 			{
-				previewCharacter = _beforeCharacter;
+				if (previewCharacter.GetComponent(typeof(FightingAnimationPlayer)) == null)
+				{
+					previewCharacter = _beforeCharacter;
+				}
 			}
 			_beforeCharacter = previewCharacter;
 		}
@@ -153,10 +156,9 @@ public class PlayerSkillEditor : EditorWindow
 			EditorGUILayout.LabelField("Foot");
 			EditorGUILayout.EndHorizontal();
 		}
-		if(playerSkill.headFrag)
-		{
-			HitBoxSetting(HitBoxPosition.Head);
-		}
+		if (playerSkill.headFrag) HitBoxSetting(HitBoxPosition.Head);
+		if (playerSkill.bodyFrag) HitBoxSetting(HitBoxPosition.Body);
+		if (playerSkill.footFlag) HitBoxSetting(HitBoxPosition.Foot);
 	}
 	private bool headFold;
 	private bool bodyFold;
@@ -167,6 +169,12 @@ public class PlayerSkillEditor : EditorWindow
 		{
 			case HitBoxPosition.Head:
 				headFold = CustomUI.Foldout("Head", headFold);
+				break;
+			case HitBoxPosition.Body:
+				bodyFold = CustomUI.Foldout("Body", bodyFold);
+				break;
+			case HitBoxPosition.Foot:
+				footFold = CustomUI.Foldout("Foot", footFold);
 				break;
 		}
 	}

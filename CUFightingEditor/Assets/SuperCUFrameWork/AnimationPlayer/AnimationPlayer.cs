@@ -13,45 +13,36 @@ using UnityEngine.Animations;
 
 public class AnimationPlayer : MonoBehaviour
 {
-	//キャラクタの持つアニメーション
-	[System.Serializable]
-	public class NomalAnim
-	{
-		public CharacterAnimation characterAnimation;
-		public AnimationClip animationClip;
-		public List<GameObject> hitBoxObjects;
-		public List<int> startFrame = new List<int>();
-		public List<int> endFrame = new List<int>();
-	}
-	[System.Serializable]
-	public class SkillAnim
-	{
-		public string skillName;
-		public AnimationClip animationClip;
-		public List<GameObject> hitBoxObjects;
-		public List<int> startFrame = new List<int>();
-		public List<int> endFrame = new List<int>();
-	}
-	public List<NomalAnim> nomalSkills;//通常のアニメーション
-	public List<SkillAnim> custumSkills;//追加アニメーション
-	//--------------------------------------------------------
 	[SerializeField]
 	private int frameSpeed = 60;//アニメーションの速さ
+	[SerializeField]
+	private AnimationClip nowPlayAnimatin = null;//再生中のAnimationClip
 
-    private PlayableGraph playableGraph; //playableGraph
+	#region Playable_Properties
+	private PlayableGraph playableGraph; //playableGraph
 	AnimationMixerPlayable mixer;   //animationmixerPlayable
-	//通常アニメーションのプレイアブル
-	private Dictionary<CharacterAnimation, AnimationClipPlayable> nomalSkillPlayables = new Dictionary<CharacterAnimation, AnimationClipPlayable>();
-	//追加アニメーションのプレイアブル
-	private Dictionary<string, AnimationClipPlayable> custumSkillPlayables = new Dictionary<string, AnimationClipPlayable>();
 	private AnimationClipPlayable _nowPlayAnimation;
 	private AnimationClipPlayable _beforePlayAnimation;
+	#endregion
 
-    void Start()
+	#region 初期化処理
+	private void Awake()
+	{
+		playableGraph = PlayableGraph.Create();
+	}
+	private void Start()
     {
-        AnimationInit();
+		if(nowPlayAnimatin != null)
+		{
+			// AnimationClipをMixerに登録
+			_nowPlayAnimation = AnimationClipPlayable.Create(playableGraph, nowPlayAnimatin);
+			mixer = AnimationMixerPlayable.Create(playableGraph, 2, true);
+			mixer.ConnectInput(0, _nowPlayAnimation, 0);
+			mixer.SetInputWeight(0, 1);
+		}
     }
-    private void Update()
+	#endregion
+	private void Update()
     {
         UpdateAnimate();
     }
@@ -70,16 +61,6 @@ public class AnimationPlayer : MonoBehaviour
 		var playableOutput = AnimationPlayableOutput.Create(playableGraph, "Animation", gameObject.GetComponent<Animator>());
 		//mixerの作成
 		mixer = AnimationMixerPlayable.Create(playableGraph);
-
-		//animationClipをラップして格納
-		foreach (AnimationPlayer.NomalAnim anim in nomalSkills)
-		{
-			nomalSkillPlayables.Add(anim.characterAnimation,AnimationClipPlayable.Create(playableGraph, anim.animationClip));
-		}
-		foreach (AnimationPlayer.SkillAnim anim in custumSkills)
-		{
-			custumSkillPlayables.Add(anim.skillName, AnimationClipPlayable.Create(playableGraph, anim.animationClip));
-		}
 
 		//mixerの設定
 		//mixerにanimationClipPlayableを追加
@@ -101,7 +82,8 @@ public class AnimationPlayer : MonoBehaviour
 		{
 			return;
 		}
-		mixer.SetInputWeight(0, 1);
+		mixer.SetInputWeight(0, 0.5f);
+		mixer.SetInputWeight(1, 0.5f);
 		playableGraph.Evaluate(1.0f / nomalSkills[0].animationClip.frameRate);
     }
 #if UNITY_EDITOR
