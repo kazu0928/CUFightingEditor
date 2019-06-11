@@ -44,7 +44,6 @@ public class AnimationPlayer : MonoBehaviour
 	#endregion
 	private void Update()
     {
-        UpdateAnimate();
     }
     void OnDisable()
     {
@@ -52,40 +51,40 @@ public class AnimationPlayer : MonoBehaviour
         playableGraph.Destroy();
     }
 
-    public void AnimationInit()
-    {
-		//playableGraphの設定
-		playableGraph = PlayableGraph.Create();
-		playableGraph.SetTimeUpdateMode(DirectorUpdateMode.Manual);
-		//animationPlayableOutputの作成
-		var playableOutput = AnimationPlayableOutput.Create(playableGraph, "Animation", gameObject.GetComponent<Animator>());
-		//mixerの作成
-		mixer = AnimationMixerPlayable.Create(playableGraph);
+ //   public void AnimationInit()
+ //   {
+	//	//playableGraphの設定
+	//	playableGraph = PlayableGraph.Create();
+	//	playableGraph.SetTimeUpdateMode(DirectorUpdateMode.Manual);
+	//	//animationPlayableOutputの作成
+	//	var playableOutput = AnimationPlayableOutput.Create(playableGraph, "Animation", gameObject.GetComponent<Animator>());
+	//	//mixerの作成
+	//	mixer = AnimationMixerPlayable.Create(playableGraph);
 
-		//mixerの設定
-		//mixerにanimationClipPlayableを追加
-		foreach (KeyValuePair<CharacterAnimation,AnimationClipPlayable> pair in nomalSkillPlayables)
-		{
-			mixer.AddInput(pair.Value, 0);
-		}
-		foreach(KeyValuePair<string,AnimationClipPlayable> pair in custumSkillPlayables)
-		{
-			mixer.AddInput(pair.Value, 0);
-		}
-		//mixerをoutputに接続
-		playableOutput.SetSourcePlayable(mixer);
-		playableGraph.Play();
-	}
-	public void UpdateAnimate()
-    {
-		if(frameSpeed<=0)
-		{
-			return;
-		}
-		mixer.SetInputWeight(0, 0.5f);
-		mixer.SetInputWeight(1, 0.5f);
-		playableGraph.Evaluate(1.0f / nomalSkills[0].animationClip.frameRate);
-    }
+	//	//mixerの設定
+	//	//mixerにanimationClipPlayableを追加
+	//	foreach (KeyValuePair<CharacterAnimation,AnimationClipPlayable> pair in nomalSkillPlayables)
+	//	{
+	//		mixer.AddInput(pair.Value, 0);
+	//	}
+	//	foreach(KeyValuePair<string,AnimationClipPlayable> pair in custumSkillPlayables)
+	//	{
+	//		mixer.AddInput(pair.Value, 0);
+	//	}
+	//	//mixerをoutputに接続
+	//	playableOutput.SetSourcePlayable(mixer);
+	//	playableGraph.Play();
+	//}
+	//public void UpdateAnimate()
+ //   {
+	//	if(frameSpeed<=0)
+	//	{
+	//		return;
+	//	}
+	//	mixer.SetInputWeight(0, 0.5f);
+	//	mixer.SetInputWeight(1, 0.5f);
+	//	playableGraph.Evaluate(1.0f / nomalSkills[0].animationClip.frameRate);
+ //   }
 #if UNITY_EDITOR
     public List<Vector3> drawGizmoBox = new List<Vector3>();
     private void OnDrawGizmos()
