@@ -12,7 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3a4e349150f6ec64a910f6c21f5f3c73, type: 3}
   m_Name: New Player Skill
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: ca4054b55ce566b4a820cace2a6cf079, type: 2}
+  animationClip: {fileID: 7400000, guid: 02b23c1bf41cc4b4082903c5b88e7c69, type: 2}
   animationSpeed: 1
   inBlend: 0
   outBlend: 0
+  plusHeadHitBox:
+  - hitBox:
+      size: {x: 0, y: 0, z: 0}
+      localPosition: {x: 0, y: -0.06, z: 0}
+    startFrame: 11
+    endFrame: 16
+  plusBodyHitBox: []
+  plusFootHitBox: []
+  plusGrabHitBox:
+  - hitBox:
+      size: {x: 0, y: 0, z: 0}
+      localPosition: {x: 0, y: 0, z: 0}
+    startFrame: 0
+    endFrame: 12
+  customHitBox:
+  - mode: 0
+    frameHitBoxes:
+    - hitBox:
+        size: {x: 0.5, y: 0.4, z: 1}
+        localPosition: {x: 0.61, y: 1.22, z: 0}
+      startFrame: 16
+      endFrame: 20
+  - mode: 2
+    frameHitBoxes:
+    - hitBox:
+        size: {x: 0.16, y: 0.22, z: 1}
+        localPosition: {x: 0.33, y: 1.24, z: 0}
+      startFrame: 11
+      endFrame: 27
+  - mode: 1
+    frameHitBoxes:
+    - hitBox:
+        size: {x: 0.43, y: 0.34, z: 1}
+        localPosition: {x: 0.33, y: 1.21, z: 0}
+      startFrame: 11
+      endFrame: 27
+  headFrag: 1
+  bodyFrag: 1
+  footFlag: 1
+  grabFrag: 1

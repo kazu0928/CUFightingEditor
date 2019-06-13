@@ -39,11 +39,14 @@ public class FigterEditor : EditorWindow
 				break;
 		}
 		GUILayout.EndScrollView();
+        //エディタ全体の再描画
+        EditorApplication.QueuePlayerLoopUpdate();
 	}
 	#region 当たり判定_Tab
 	private bool headFold = false;
 	private bool bodyFold = false;
 	private bool footFold = false;
+    private bool grabFold = false;
 	private void HitBoxTabDraw()
 	{
 		EditorGUILayout.BeginVertical("Box");
@@ -64,8 +67,14 @@ public class FigterEditor : EditorWindow
 			HitFoldOut(ref fighterStatus.footHitBox);
 		}
 		EditorGUILayout.EndVertical();
-	}
-	private void HitFoldOut(ref FighterStatus.HitBox_ hitBox_)
+        EditorGUILayout.BeginVertical("Box");
+        if (grabFold = CustomUI.Foldout("Grab", grabFold))
+        {
+            HitFoldOut(ref fighterStatus.grabHitBox);
+        }
+        EditorGUILayout.EndVertical();
+    }
+    private void HitFoldOut(ref FighterStatus.HitBox_ hitBox_)
 	{
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.BeginVertical("Box");

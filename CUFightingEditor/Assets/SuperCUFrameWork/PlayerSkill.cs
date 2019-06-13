@@ -7,6 +7,12 @@ using UnityEditor;
 [CreateAssetMenu(menuName = "Fighting/キャラクター")]
 public class PlayerSkill : ScriptableObject
 {
+    public enum HitBoxMode
+    {
+        HitBox,
+        HurtBox,
+        GrabAndSqueeze,
+    }
 	[System.Serializable]
 	public struct HitBox_
 	{
@@ -20,7 +26,13 @@ public class PlayerSkill : ScriptableObject
 		public int startFrame;
 		public int endFrame;
 	}
-	public AnimationClip animationClip = null;
+    [System.Serializable]
+    public class CustomHitBox
+    {
+        public HitBoxMode mode;
+        public List<FrameHitBox> frameHitBoxes = new List<FrameHitBox>();
+    }
+    public AnimationClip animationClip = null;
     public float animationSpeed = 1;
     //ブレンドフラグ
     public bool inBlend = false;
@@ -30,10 +42,14 @@ public class PlayerSkill : ScriptableObject
 	public List<FrameHitBox> plusHeadHitBox = new List<FrameHitBox>();
 	public List<FrameHitBox> plusBodyHitBox = new List<FrameHitBox>();
 	public List<FrameHitBox> plusFootHitBox = new List<FrameHitBox>();
+    public List<FrameHitBox> plusGrabHitBox = new List<FrameHitBox>();
+
+    public List<CustomHitBox> customHitBox = new List<CustomHitBox>();
 	//enumFrag
 	public bool headFrag = true;
 	public bool bodyFrag = true;
 	public bool footFlag = true;
+    public bool grabFrag = true;
     
     #region EDITOR_
 #if UNITY_EDITOR
@@ -42,7 +58,7 @@ public class PlayerSkill : ScriptableObject
     {
         public override void OnInspectorGUI()
         {
-            if(GUILayout.Button("OpenSkillEditor"))
+            if(GUILayout.Button("技設定画面を開く"))
             {
 				PlayerSkillEditor.Open((PlayerSkill)target);
             }

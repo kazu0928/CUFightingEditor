@@ -2,7 +2,7 @@
 // ファイル名：AnimationPlayer.cs
 // 作成者    ：村上一真
 // 作成日　　：20190531
-// Animation,当たり判定（アニメーション中）を管理するクラス
+// Animationを再生,ブレンドするクラス
 //===============================================================
 
 using System.Collections;
@@ -26,7 +26,9 @@ public class AnimationPlayer : MonoBehaviour
 
 	[SerializeField]
 	private int changeFrameNow = 10;
-
+    //現在のフレーム
+    [SerializeField]
+    private int nowFrame = 0;
 	#region Playable_Properties
 	private PlayableGraph playableGraph; //playableGraph
 	AnimationMixerPlayable mixer;   //animationmixerPlayable
@@ -95,8 +97,21 @@ public class AnimationPlayer : MonoBehaviour
 				mixer.SetInputWeight(1, num);
 			}
 			playableGraph.Evaluate((1.0f / nowPlayAnimation.frameRate) * frameSpeed);
-		}
+            nowFrame = (int)(((float)mixer.GetTime() * nowPlayAnimation.frameRate) * frameSpeed);
+            //ループ
+            if (nowFrame >= (nowPlayAnimation.length * nowPlayAnimation.frameRate * frameSpeed)&&nowPlayAnimation.isLooping)
+            {
+                mixer.SetTime(0);
+                _nowPlayAnimation.SetTime(0);
+                if(_beforePlayAnimation.IsValid()) _beforePlayAnimation.SetTime(0);
+            }
+        }
 	}
+    public int GetAnimationTime()
+    {
+        return nowFrame;
+    }
+    //次のアニメーションのプレイアブル作成
 	private void SetNextAnimationPlayable()
 	{
 		if (setPlayAnimation != null && playableGraph.IsValid())
@@ -130,6 +145,12 @@ public class AnimationPlayer : MonoBehaviour
 			mixer.ConnectInput(1, _beforePlayAnimation, 0);
 		}
 	}
+    /// <summary>
+    /// 次のアニメーションのセット
+    /// </summary>
+    /// <param name="clip">AnimationClip</param>
+    /// <param name="speed">速度</param>
+    /// <param name="weightFrame">ウェイト</param>
 	public void SetPlayAnimation(AnimationClip clip, float speed , int weightFrame = 0)
 	{
 		setPlayAnimation = clip;
@@ -142,45 +163,4 @@ public class AnimationPlayer : MonoBehaviour
 	{
 		if(playableGraph.IsValid()) playableGraph.Destroy();
 	}
-
- //   public void AnimationInit()
- //   {
-	//	//playableGraphの設定
-	//	playableGraph = PlayableGraph.Create();
-	//	playableGraph.SetTimeUpdateMode(DirectorUpdateMode.Manual);
-	//	//animationPlayableOutputの作成
-	//	var playableOutput = AnimationPlayableOutput.Create(playableGraph, "Animation", gameObject.GetComponent<Animator>());
-	//	//mixerの作成
-	//	mixer = AnimationMixerPlayable.Create(playableGraph);
-
-	//	//mixerの設定
-	//	//mixerにanimationClipPlayableを追加
-	//	foreach (KeyValuePair<CharacterAnimation,AnimationClipPlayable> pair in nomalSkillPlayables)
-	//	{
-	//		mixer.AddInput(pair.Value, 0);
-	//	}
-	//	foreach(KeyValuePair<string,AnimationClipPlayable> pair in custumSkillPlayables)
-	//	{
-	//		mixer.AddInput(pair.Value, 0);
-	//	}
-	//	//mixerをoutputに接続
-	//	playableOutput.SetSourcePlayable(mixer);
-	//	playableGraph.Play();
-	//}
-	//public void UpdateAnimate()
- //   {
-	//	if(frameSpeed<=0)
-	//	{
-	//		return;
-	//	}
-	//	mixer.SetInputWeight(0, 0.5f);
-	//	mixer.SetInputWeight(1, 0.5f);
-	//	playableGraph.Evaluate(1.0f / nomalSkills[0].animationClip.frameRate);
- //   }
-#if UNITY_EDITOR
-    public List<Vector3> drawGizmoBox = new List<Vector3>();
-    private void OnDrawGizmos()
-    {
-    }
-#endif
 }

@@ -69,10 +69,12 @@ public class PlayerSkillEditor : EditorWindow
 		}
 		GUILayout.EndScrollView();
 		AnimationPlayFrame();
-	}
+        //エディタ全体の再描画
+        EditorApplication.QueuePlayerLoopUpdate();
+    }
 
-	#region タブ_Styles
-	private enum Tab
+    #region タブ_Styles
+    private enum Tab
 	{
 		アニメーション,
 		当たり判定,
@@ -147,8 +149,9 @@ public class PlayerSkillEditor : EditorWindow
 		}
 		EditorGUILayout.EndVertical();
 	}
-	#endregion
-	#region 当たり判定_Tab
+    #endregion
+    #region 当たり判定_Tab
+    private List<bool> foldOutFlags = new List<bool>();
 	private void HitBoxTabDraw()
 	{
 		if (playerSkill != null)
@@ -157,35 +160,76 @@ public class PlayerSkillEditor : EditorWindow
 			playerSkill.headFrag = EditorGUILayout.Toggle("Head",playerSkill.headFrag);
 			playerSkill.bodyFrag = EditorGUILayout.Toggle("Body",playerSkill.bodyFrag);
 			playerSkill.footFlag = EditorGUILayout.Toggle("Foot",playerSkill.footFlag);
-			EditorGUILayout.EndHorizontal();
+            playerSkill.grabFrag = EditorGUILayout.Toggle("Grab", playerSkill.footFlag);
+            EditorGUILayout.EndHorizontal();
 		}
 		if (playerSkill.headFrag) HitBoxSetting(HitBoxPosition.Head);
 		if (playerSkill.bodyFrag) HitBoxSetting(HitBoxPosition.Body);
 		if (playerSkill.footFlag) HitBoxSetting(HitBoxPosition.Foot);
+        if (playerSkill.grabFrag) HitBoxSetting(HitBoxPosition.Grab);
+        int i = 0;
+        if (GUILayout.Button("当たり判定作成"))
+        {
+            playerSkill.customHitBox.Add(new PlayerSkill.CustomHitBox());
+        }
+        List<int> removeNumber = new List<int>();
+        //カスタム当たり判定設定
+        foreach (PlayerSkill.CustomHitBox box in playerSkill.customHitBox)
+        {
+            if (foldOutFlags.Count < i + 1)
+            {
+                while (foldOutFlags.Count < i + 1)
+                {
+                    foldOutFlags.Add(new bool());
+                }
+            }
+            EditorGUILayout.BeginVertical("Box");
+            EditorGUILayout.BeginHorizontal();
+            //mode選択
+            box.mode = (PlayerSkill.HitBoxMode)EditorGUILayout.EnumPopup(box.mode);
+            if (GUILayout.Button("×", GUILayout.Width(20))) removeNumber.Add(i);
+            EditorGUILayout.EndHorizontal();
+            bool temp = foldOutFlags[i];
+            //FoldOut
+            foldOutFlags[i] = FoldOutHitBox(box.frameHitBoxes, i.ToString(), ref temp);
+            i++;
+            EditorGUILayout.EndVertical();
+        }
+        //削除
+        for(int j = 0; j<removeNumber.Count; j++)
+        {
+            playerSkill.customHitBox.RemoveAt(removeNumber[j]);
+        }
 	}
 	private bool headFold;
 	private bool bodyFold;
 	private bool footFold;
+    private bool grabFold;
+    //デフォルトヒットBox
 	private void HitBoxSetting(HitBoxPosition? eHitBox = null)
 	{
 		EditorGUILayout.BeginVertical("Box");
 		switch (eHitBox)
 		{
 			case HitBoxPosition.Head:
-				FoldOutHitBox(playerSkill.plusHeadHitBox);
+                FoldOutHitBox(playerSkill.plusHeadHitBox, "Head_Default", ref headFold);
 				break;
 			case HitBoxPosition.Body:
-				bodyFold = CustomUI.Foldout("Body_Default", bodyFold);
-				break;
+                FoldOutHitBox(playerSkill.plusBodyHitBox, "Body_Default", ref bodyFold);
+                break;
 			case HitBoxPosition.Foot:
-				footFold = CustomUI.Foldout("Foot_Default", footFold);
-				break;
+                FoldOutHitBox(playerSkill.plusFootHitBox, "Foot_Default", ref footFold);
+                break;
+            case HitBoxPosition.Grab:
+                FoldOutHitBox(playerSkill.plusGrabHitBox, "Grab_Default", ref grabFold);
+                break;
 		}
 		EditorGUILayout.EndVertical();
 	}
-	private void FoldOutHitBox(List<PlayerSkill.FrameHitBox> frameHitBox)
+    //ヒットボックス個々（FoldOutした中身）
+	private bool FoldOutHitBox(List<PlayerSkill.FrameHitBox> frameHitBox,string label,ref bool frag)
 	{
-		if (headFold = CustomUI.Foldout("Head_Default", headFold))
+		if (frag = CustomUI.Foldout(label, frag))
 		{
 			EditorGUILayout.BeginHorizontal();
 			EditorGUILayout.LabelField(frameHitBox.Count.ToString());
@@ -213,19 +257,32 @@ public class PlayerSkillEditor : EditorWindow
 				frameEnd = (int)EditorGUILayout.FloatField(frameEnd,GUILayout.Width(30));
 				if (frameEnd < frameStart) frameEnd = frameEnd - 1;
 				if (frameEnd > rightValue) frameEnd = rightValue;
-				EditorGUILayout.EndHorizontal();
+                //削除
+                bool f = false;
+                if (GUILayout.Button("×", GUILayout.Width(20)))
+                {
+                    f = true;
+                }
+                EditorGUILayout.EndHorizontal();
 
-				frameHitBox[i].startFrame = (int)frameStart;
+                frameHitBox[i].startFrame = (int)frameStart;
 				frameHitBox[i].endFrame = (int)frameEnd;
 
 				//当たり判定の設定
 				HitFoldOut(frameHitBox[i]);
-
-				EditorGUILayout.EndVertical();
-			}
+                EditorGUILayout.EndVertical();
+                if(f)
+                {
+                    frameHitBox.Remove(frameHitBox[i]);
+                }
+                
+            }
 		}
+        return frag;
 	}
-	private void HitFoldOut(PlayerSkill.FrameHitBox hitBox_)
+
+    //当たり判定
+    private void HitFoldOut(PlayerSkill.FrameHitBox hitBox_)
 	{
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.BeginVertical("Box");
@@ -244,11 +301,11 @@ public class PlayerSkillEditor : EditorWindow
 		EditorGUILayout.EndVertical();
 		EditorGUILayout.EndHorizontal();
 
-	}
+    }   
 
-	#endregion
-	#region バー_BarDraw()
-	int value = 0;//現在の位置
+    #endregion
+    #region バー_BarDraw()
+    public int value = 0;//現在の位置
     int rightValue = 0;//最大値
     int leftValue = 0;//最小値
 
