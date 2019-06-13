@@ -168,19 +168,84 @@ public class PlayerSkillEditor : EditorWindow
 	private bool footFold;
 	private void HitBoxSetting(HitBoxPosition? eHitBox = null)
 	{
-		switch(eHitBox)
+		EditorGUILayout.BeginVertical("Box");
+		switch (eHitBox)
 		{
 			case HitBoxPosition.Head:
-				headFold = CustomUI.Foldout("Head", headFold);
+				FoldOutHitBox(playerSkill.plusHeadHitBox);
 				break;
 			case HitBoxPosition.Body:
-				bodyFold = CustomUI.Foldout("Body", bodyFold);
+				bodyFold = CustomUI.Foldout("Body_Default", bodyFold);
 				break;
 			case HitBoxPosition.Foot:
-				footFold = CustomUI.Foldout("Foot", footFold);
+				footFold = CustomUI.Foldout("Foot_Default", footFold);
 				break;
 		}
+		EditorGUILayout.EndVertical();
 	}
+	private void FoldOutHitBox(List<PlayerSkill.FrameHitBox> frameHitBox)
+	{
+		if (headFold = CustomUI.Foldout("Head_Default", headFold))
+		{
+			EditorGUILayout.BeginHorizontal();
+			EditorGUILayout.LabelField(frameHitBox.Count.ToString());
+			if (GUILayout.Button("判定作成"))
+			{
+				frameHitBox.Add(new PlayerSkill.FrameHitBox());
+			}
+			EditorGUILayout.EndHorizontal();
+			//スライダーその他の作成
+			for(int i = 0; i<frameHitBox.Count; i++)
+			{
+				EditorGUILayout.BeginVertical("Box");
+				//数値の入れ替え
+				float frameStart = frameHitBox[i].startFrame;
+				float frameEnd = frameHitBox[i].endFrame;
+
+				EditorGUILayout.BeginHorizontal();
+				//左
+				frameStart = (int)EditorGUILayout.FloatField(frameStart,GUILayout.Width(30));
+				if (frameStart > frameEnd) frameStart = frameEnd - 1;
+				if (frameStart < 0) frameStart = 0;
+				//スライダー
+				EditorGUILayout.MinMaxSlider(ref frameStart, ref frameEnd, 0, rightValue);
+				//右
+				frameEnd = (int)EditorGUILayout.FloatField(frameEnd,GUILayout.Width(30));
+				if (frameEnd < frameStart) frameEnd = frameEnd - 1;
+				if (frameEnd > rightValue) frameEnd = rightValue;
+				EditorGUILayout.EndHorizontal();
+
+				frameHitBox[i].startFrame = (int)frameStart;
+				frameHitBox[i].endFrame = (int)frameEnd;
+
+				//当たり判定の設定
+				HitFoldOut(frameHitBox[i]);
+
+				EditorGUILayout.EndVertical();
+			}
+		}
+	}
+	private void HitFoldOut(PlayerSkill.FrameHitBox hitBox_)
+	{
+		EditorGUILayout.BeginHorizontal();
+		EditorGUILayout.BeginVertical("Box");
+		EditorGUILayout.LabelField("Position");
+		//Undoに対応
+		Undo.RecordObject(playerSkill, "fighterStatus");
+		hitBox_.hitBox.localPosition.x = EditorGUILayout.FloatField("X", hitBox_.hitBox.localPosition.x);
+		hitBox_.hitBox.localPosition.y = EditorGUILayout.FloatField("Y", hitBox_.hitBox.localPosition.y);
+		hitBox_.hitBox.localPosition.z = EditorGUILayout.FloatField("Z", hitBox_.hitBox.localPosition.z);
+		EditorGUILayout.EndVertical();
+		EditorGUILayout.BeginVertical("Box");
+		EditorGUILayout.LabelField("サイズ");
+		hitBox_.hitBox.size.x = EditorGUILayout.FloatField("X", hitBox_.hitBox.size.x);
+		hitBox_.hitBox.size.y = EditorGUILayout.FloatField("Y", hitBox_.hitBox.size.y);
+		hitBox_.hitBox.size.z = EditorGUILayout.FloatField("Z", hitBox_.hitBox.size.z);
+		EditorGUILayout.EndVertical();
+		EditorGUILayout.EndHorizontal();
+
+	}
+
 	#endregion
 	#region バー_BarDraw()
 	int value = 0;//現在の位置
@@ -235,7 +300,7 @@ public class PlayerSkillEditor : EditorWindow
         GUI.backgroundColor = backColor;
         guiStyle.normal = styleState;
         guiStyle.fontSize = fontSize;
-        GUILayout.Label(text, guiStyle); //labelFieldだとうまくいかない？
+        GUILayout.Label(text, guiStyle); //labelFieldだとうまくいかない
 
         GUI.backgroundColor = beforeBackColor;
     }

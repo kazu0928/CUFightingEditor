@@ -7,13 +7,29 @@ using UnityEditor;
 [CreateAssetMenu(menuName = "Fighting/キャラクター")]
 public class PlayerSkill : ScriptableObject
 {
-    public AnimationClip animationClip = null;
+	[System.Serializable]
+	public struct HitBox_
+	{
+		public Vector3 size;
+		public Vector3 localPosition;
+	}
+	[System.Serializable]
+	public class FrameHitBox
+	{
+		public HitBox_ hitBox;
+		public int startFrame;
+		public int endFrame;
+	}
+	public AnimationClip animationClip = null;
     public float animationSpeed = 1;
     //ブレンドフラグ
     public bool inBlend = false;
     public bool outBlend = false;
 
 	//当たり判定
+	public List<FrameHitBox> plusHeadHitBox = new List<FrameHitBox>();
+	public List<FrameHitBox> plusBodyHitBox = new List<FrameHitBox>();
+	public List<FrameHitBox> plusFootHitBox = new List<FrameHitBox>();
 	//enumFrag
 	public bool headFrag = true;
 	public bool bodyFrag = true;

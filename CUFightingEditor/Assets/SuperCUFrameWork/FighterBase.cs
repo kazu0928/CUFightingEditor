@@ -23,13 +23,16 @@ public class FighterBase : MonoBehaviour
 	{
 		if(status != null)
 		{
-			if (PlayerSkillEditorParameter.instance.window.previewCharacter == animationPlayer.gameObject)
+			if (PlayerSkillEditorParameter.instance.window != null)
 			{
-				//アニメーションのフラグとか見てやる
-				Gizmos.color = Color.green;
-				//Gizmos.DrawWireCube(transform.position + status.headHitBox.localPosition + PlayerSkillEditorParameter.instance.window.playerSkill., status.headHitBox.size);
-				Gizmos.DrawWireCube(transform.position + status.bodyHitBox.localPosition, status.bodyHitBox.size);
-				Gizmos.DrawWireCube(transform.position + status.footHitBox.localPosition, status.footHitBox.size);
+				if (PlayerSkillEditorParameter.instance.window.previewCharacter == animationPlayer.gameObject)
+				{
+					//アニメーションのフラグとか見てやる
+					Gizmos.color = Color.green;
+					//Gizmos.DrawWireCube(transform.position + status.headHitBox.localPosition + PlayerSkillEditorParameter.instance.window.playerSkill., status.headHitBox.size);
+					Gizmos.DrawWireCube(transform.position + status.bodyHitBox.localPosition, status.bodyHitBox.size);
+					Gizmos.DrawWireCube(transform.position + status.footHitBox.localPosition, status.footHitBox.size);
+				}
 			}
 			else
 			{
