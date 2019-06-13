@@ -6,9 +6,13 @@ using System.Linq;
 using UnityEngine;
 using UnityEditor;
 
+public class PlayerSkillEditorParameter : ScriptableSingleton<PlayerSkillEditorParameter>
+{
+	public PlayerSkillEditor window;
+}
+
 public class PlayerSkillEditor : EditorWindow
 {
-	public static PlayerSkillEditor window;
 	public PlayerSkill playerSkill = null;
 	public GameObject previewCharacter;
 	public GameObject _beforeCharacter = null;
@@ -17,15 +21,15 @@ public class PlayerSkillEditor : EditorWindow
 	#region ウィンドウオープン
 	public static void Open(PlayerSkill ps)
 	{
-		if (window == null)
+		if (PlayerSkillEditorParameter.instance.window == null)
 		{
-			window = (PlayerSkillEditor)CreateInstance(typeof(PlayerSkillEditor));
-			window.playerSkill = ps;
-			window.Show();
+			PlayerSkillEditorParameter.instance.window = (PlayerSkillEditor)CreateInstance(typeof(PlayerSkillEditor));
+			PlayerSkillEditorParameter.instance.window.playerSkill = ps;
+			PlayerSkillEditorParameter.instance.window.Show();
 		}
 		else
 		{
-			window.playerSkill = ps;
+			PlayerSkillEditorParameter.instance.window.playerSkill = ps;
 		}
 	}
 	#endregion
@@ -39,7 +43,11 @@ public class PlayerSkillEditor : EditorWindow
 		{
 			if (previewCharacter != null)
 			{
-				if (previewCharacter.GetComponent(typeof(FightingAnimationPlayer)) == null)
+				if (previewCharacter.GetComponent(typeof(FighterBase)) != null)
+				{
+					previewCharacter = previewCharacter.GetComponent<FighterBase>().AnimationPlayerCompornent.gameObject;
+				}
+				if (previewCharacter.GetComponent(typeof(AnimationPlayer)) == null)
 				{
 					previewCharacter = _beforeCharacter;
 				}
@@ -133,10 +141,8 @@ public class PlayerSkillEditor : EditorWindow
 			EditorGUILayout.EndHorizontal();
 			//ブレンド
 			EditorGUILayout.BeginHorizontal();
-			EditorGUILayout.LabelField("再生時ブレンド");
-			playerSkill.inBlend = EditorGUILayout.Toggle(playerSkill.inBlend);
-			EditorGUILayout.LabelField("終了時ブレンド");
-			playerSkill.outBlend = EditorGUILayout.Toggle(playerSkill.outBlend);
+			playerSkill.inBlend = EditorGUILayout.Toggle("再生時ブレンド",playerSkill.inBlend);
+			playerSkill.outBlend = EditorGUILayout.Toggle("終了時ブレンド",playerSkill.outBlend);
 			EditorGUILayout.EndHorizontal();
 		}
 		EditorGUILayout.EndVertical();
@@ -148,12 +154,9 @@ public class PlayerSkillEditor : EditorWindow
 		if (playerSkill != null)
 		{
 			EditorGUILayout.BeginHorizontal();
-			playerSkill.headFrag = EditorGUILayout.Toggle(playerSkill.headFrag);
-			EditorGUILayout.LabelField("Head");
-			playerSkill.bodyFrag = EditorGUILayout.Toggle(playerSkill.bodyFrag);
-			EditorGUILayout.LabelField("Body");
-			playerSkill.footFlag = EditorGUILayout.Toggle(playerSkill.footFlag);
-			EditorGUILayout.LabelField("Foot");
+			playerSkill.headFrag = EditorGUILayout.Toggle("Head",playerSkill.headFrag);
+			playerSkill.bodyFrag = EditorGUILayout.Toggle("Body",playerSkill.bodyFrag);
+			playerSkill.footFlag = EditorGUILayout.Toggle("Foot",playerSkill.footFlag);
 			EditorGUILayout.EndHorizontal();
 		}
 		if (playerSkill.headFrag) HitBoxSetting(HitBoxPosition.Head);

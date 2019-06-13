@@ -14,10 +14,18 @@ using UnityEngine.Animations;
 public class AnimationPlayer : MonoBehaviour
 {
 	[SerializeField]
-	private int frameSpeed = 60;//アニメーションの速さ
+	private float frameSpeed = 1;//アニメーションの速さ
 	[SerializeField]
 	private AnimationClip nowPlayAnimation = null;//再生中のAnimationClip
-	public AnimationClip SetPlayAnimation;
+	private AnimationClip _beforeNowPlayClip = null;
+	[SerializeField]
+	private AnimationClip setPlayAnimation;
+	[SerializeField]
+	private int changeWeightFrame = 0;
+	private int _nowChangeFrame = 0;
+
+	[SerializeField]
+	private int changeFrameNow = 10;
 
 	#region Playable_Properties
 	private PlayableGraph playableGraph; //playableGraph
@@ -25,6 +33,9 @@ public class AnimationPlayer : MonoBehaviour
 	private AnimationClipPlayable _nowPlayAnimation;
 	private AnimationClipPlayable _beforePlayAnimation;
 	#endregion
+
+	[Range(0, 1)]
+	public float num = 0;
 
 	#region 初期化処理
 	private void Awake()
@@ -36,6 +47,7 @@ public class AnimationPlayer : MonoBehaviour
     {
 		if (nowPlayAnimation != null)
 		{
+			_beforeNowPlayClip = nowPlayAnimation;
 			// AnimationClipをMixerに登録
 			_nowPlayAnimation = AnimationClipPlayable.Create(playableGraph, nowPlayAnimation);
 			mixer = AnimationMixerPlayable.Create(playableGraph, 2, true);
@@ -50,44 +62,86 @@ public class AnimationPlayer : MonoBehaviour
 	#endregion
 	private void Update()
     {
-		if(SetPlayAnimation != null && playableGraph.IsValid())
+		if(nowPlayAnimation == null)
 		{
-			playableGraph.Disconnect(mixer, 0);
-			playableGraph.Disconnect(mixer, 1);
-			if(_beforePlayAnimation.IsValid())
-			{
-				_beforePlayAnimation.Destroy();
-			}
-			if(_nowPlayAnimation.IsValid())
-			{
-				_beforePlayAnimation = _nowPlayAnimation;
-				_nowPlayAnimation.Destroy();
-			}
-			//今のアニメーションに設定
-			nowPlayAnimation = SetPlayAnimation;
-			SetPlayAnimation = null;
-			//アニメーションプレイアブル作成
+			if(mixer.IsValid())mixer.Destroy();
+			_beforeNowPlayClip = null;
 		}
-		if (playableGraph.IsValid())
+		else if (_beforeNowPlayClip != nowPlayAnimation)
+		{
+			SetPlayAnimation(nowPlayAnimation, frameSpeed , changeFrameNow);
+		}
+		SetNextAnimationPlayable();
+		if (playableGraph.IsValid() && mixer.IsValid())
 		{
 			if (frameSpeed <= 0)
 			{
 				return;
 			}
-			mixer.SetInputWeight(0, 1f);
-			playableGraph.Evaluate(1.0f / nowPlayAnimation.frameRate);
+			if (changeWeightFrame > 0)
+			{
+				mixer.SetInputWeight(0, (1.0f - num) - ((1.0f) - (((float)_nowChangeFrame) / ((float)changeWeightFrame))));
+				mixer.SetInputWeight(1, num + ((1.0f) - (((float)_nowChangeFrame) / ((float)changeWeightFrame))));
+				if (_nowChangeFrame >= changeWeightFrame)
+				{
+					changeWeightFrame = 0;
+					_nowChangeFrame = 0;
+				}
+				_nowChangeFrame++;
+			}
+			else
+			{
+				mixer.SetInputWeight(0, (1.0f - num));
+				mixer.SetInputWeight(1, num);
+			}
+			playableGraph.Evaluate((1.0f / nowPlayAnimation.frameRate) * frameSpeed);
 		}
 	}
+	private void SetNextAnimationPlayable()
+	{
+		if (setPlayAnimation != null && playableGraph.IsValid())
+		{
+			if (mixer.IsValid())
+			{
+				playableGraph.Disconnect(mixer, 0);
+				playableGraph.Disconnect(mixer, 1);
+			}
+			else
+			{
+				mixer = AnimationMixerPlayable.Create(playableGraph, 2, true);
+				var output = AnimationPlayableOutput.Create(playableGraph, "output", GetComponent<Animator>());
+				output.SetSourcePlayable(mixer);
+			}
+			if (_beforePlayAnimation.IsValid())
+			{
+				_beforePlayAnimation.Destroy();
+			}
+			if (_nowPlayAnimation.IsValid())
+			{
+				_beforePlayAnimation = _nowPlayAnimation;
+			}
+			//今のアニメーションに設定
+			nowPlayAnimation = setPlayAnimation;
+			_beforeNowPlayClip = nowPlayAnimation;
+			setPlayAnimation = null;
+			//アニメーションプレイアブル作成
+			_nowPlayAnimation = AnimationClipPlayable.Create(playableGraph, nowPlayAnimation);
+			mixer.ConnectInput(0, _nowPlayAnimation, 0);
+			mixer.ConnectInput(1, _beforePlayAnimation, 0);
+		}
+	}
+	public void SetPlayAnimation(AnimationClip clip, float speed , int weightFrame = 0)
+	{
+		setPlayAnimation = clip;
+		changeWeightFrame = weightFrame;
+		_nowChangeFrame = 0;
+		frameSpeed = speed;
+	}
+
 	private void OnDestroy()
 	{
-		playableGraph.Destroy();
+		if(playableGraph.IsValid()) playableGraph.Destroy();
 	}
-	void OnDisable()
-    {
-        // グラフで作成されたすべての Playables と PlayableOutputs を破棄します
-        playableGraph.Destroy();
-    }
-
 
  //   public void AnimationInit()
  //   {
