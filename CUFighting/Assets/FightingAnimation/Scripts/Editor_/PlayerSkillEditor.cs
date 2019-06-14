@@ -58,6 +58,8 @@ public class PlayerSkillEditor : EditorWindow
 		BarDraw();
 		TabDraw();
 		scrollPos = GUILayout.BeginScrollView(scrollPos);
+		//Undoに対応
+		Undo.RecordObject(playerSkill, "fighterStatus");
 		switch (_tab)
 		{
 			case Tab.アニメーション:
@@ -65,6 +67,9 @@ public class PlayerSkillEditor : EditorWindow
 				break;
 			case Tab.当たり判定:
 				HitBoxTabDraw();
+				break;
+			case Tab.移動速度設定:
+				MoveSettingDraw();
 				break;
 		}
 		GUILayout.EndScrollView();
@@ -246,7 +251,6 @@ public class PlayerSkillEditor : EditorWindow
 				//数値の入れ替え
 				float frameStart = frameHitBox[i].startFrame;
 				float frameEnd = frameHitBox[i].endFrame;
-
 				EditorGUILayout.BeginHorizontal();
 				//左
 				frameStart = (int)EditorGUILayout.FloatField(frameStart,GUILayout.Width(30));
@@ -288,8 +292,6 @@ public class PlayerSkillEditor : EditorWindow
 		EditorGUILayout.BeginHorizontal();
 		EditorGUILayout.BeginVertical("Box");
 		EditorGUILayout.LabelField("Position");
-		//Undoに対応
-		Undo.RecordObject(playerSkill, "fighterStatus");
 		hitBox_.hitBox.localPosition.x = EditorGUILayout.FloatField("X", hitBox_.hitBox.localPosition.x);
 		hitBox_.hitBox.localPosition.y = EditorGUILayout.FloatField("Y", hitBox_.hitBox.localPosition.y);
 		hitBox_.hitBox.localPosition.z = EditorGUILayout.FloatField("Z", hitBox_.hitBox.localPosition.z);
@@ -302,11 +304,42 @@ public class PlayerSkillEditor : EditorWindow
 		EditorGUILayout.EndVertical();
 		EditorGUILayout.EndHorizontal();
 
-    }   
+    }
 
-    #endregion
-    #region バー_BarDraw()
-    public int value = 0;//現在の位置
+	#endregion
+	#region 移動速度設定_Tab
+	private void MoveSettingDraw()
+	{
+		if(GUILayout.Button("移動作成",GUILayout.Width(80)))
+		{
+			playerSkill.movements.Add(new PlayerSkill.Move());
+		}
+		for (int i = 0; i < playerSkill.movements.Count; i++)
+		{
+			EditorGUILayout.BeginVertical("Box");
+			EditorGUILayout.BeginHorizontal();
+			//インパクトフラグ
+			playerSkill.movements[i].inpact = EditorGUILayout.Toggle("インパクト",playerSkill.movements[i].inpact);
+			bool removeFrag = false;
+			playerSkill.movements[i].startFrame = EditorGUILayout.IntField("スタートフレーム",playerSkill.movements[i].startFrame);
+			//削除ボタン
+		   if(GUILayout.Button("×",GUILayout.Width(20)))
+			{
+				removeFrag = true;
+			}
+		   //削除
+			EditorGUILayout.EndHorizontal();
+			EditorGUILayout.BeginVertical("Box");
+			//Vector3入力
+			playerSkill.movements[i].movement = EditorGUILayout.Vector3Field("移動量", playerSkill.movements[i].movement);
+			EditorGUILayout.EndVertical();
+			EditorGUILayout.EndVertical();
+			if (removeFrag) playerSkill.movements.RemoveAt(i);
+		}
+	}
+	#endregion
+	#region バー_BarDraw()
+	public int value = 0;//現在の位置
     int rightValue = 0;//最大値
     int leftValue = 0;//最小値
 
@@ -366,3 +399,4 @@ public class PlayerSkillEditor : EditorWindow
 
 }
 #endif
+
