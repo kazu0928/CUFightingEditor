@@ -12,18 +12,50 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 35caa3a08ab080f45824c1a42537ced1, type: 3}
   m_Name: New Player Skill
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 0}
+  animationClip: {fileID: 7400000, guid: d5421a0be76e0214193a6b72de437fdf, type: 2}
   animationSpeed: 1
   inBlend: 0
   outBlend: 0
-  plusHeadHitBox: []
-  plusBodyHitBox: []
-  plusFootHitBox: []
-  plusGrabHitBox: []
-  customHitBox: []
-  movements: []
+  plusHeadHitBox:
+  - hitBox:
+      size: {x: 0, y: 0, z: 0}
+      localPosition: {x: 0.24, y: 0, z: 0}
+    startFrame: 0
+    endFrame: 60
+  plusBodyHitBox:
+  - hitBox:
+      size: {x: 0.19, y: 0, z: 0}
+      localPosition: {x: 0.27, y: 0, z: 0}
+    startFrame: 0
+    endFrame: 60
+  plusFootHitBox:
+  - hitBox:
+      size: {x: -0.36, y: 0, z: 0}
+      localPosition: {x: 0.38, y: 0, z: 0}
+    startFrame: 0
+    endFrame: 60
+  plusGrabHitBox:
+  - hitBox:
+      size: {x: 0, y: 0, z: 0}
+      localPosition: {x: 0.39, y: 0, z: 0}
+    startFrame: 0
+    endFrame: 60
+  customHitBox:
+  - mode: 0
+    frameHitBoxes:
+    - hitBox:
+        size: {x: 0.75, y: 0.45, z: 1}
+        localPosition: {x: 1.08, y: 1.33, z: 0}
+      startFrame: 18
+      endFrame: 26
+  movements:
+  - inpact: 0
+    movement: {x: 0, y: 0, z: 0}
+    minusMovement: {x: 0, y: 0, z: 0}
+    limitMovement: {x: 0, y: 0, z: 0}
+    startFrame: 0
   gravityMove: []
-  headFrag: 1
+  headFrag: 0
   bodyFrag: 1
   footFlag: 1
   grabFrag: 1

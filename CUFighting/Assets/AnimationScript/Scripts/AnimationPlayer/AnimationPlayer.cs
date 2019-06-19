@@ -14,20 +14,21 @@ using UnityEngine.Animations;
 public class AnimationPlayer : MonoBehaviour
 {
 	[SerializeField]
-	private float frameSpeed = 1;//アニメーションの速さ
+	protected float frameSpeed = 1;//アニメーションの速さ
 	[SerializeField]
-	private AnimationClip nowPlayAnimation = null;//再生中のAnimationClip
-	private AnimationClip _beforeNowPlayClip = null;
-	[SerializeField]	private AnimationClip setPlayAnimation;
+	protected AnimationClip nowPlayAnimation = null;//再生中のAnimationClip
+	protected AnimationClip _beforeNowPlayClip = null;
 	[SerializeField]
-	private int changeWeightFrame = 0;
-	private int _nowChangeFrame = 0;
+	protected AnimationClip setPlayAnimation;
+	[SerializeField]
+	protected int changeWeightFrame = 0;
+	protected int _nowChangeFrame = 0;
 
 	[SerializeField]
-	private int changeFrameNow = 10;
+	protected int changeFrameNow = 10;
     //現在のフレーム
     [SerializeField]
-    private int nowFrame = 0;
+    protected int nowFrame = 0;
 	#region Playable_Properties
 	private PlayableGraph playableGraph; //playableGraph
 	AnimationMixerPlayable mixer;   //animationmixerPlayable
@@ -39,12 +40,12 @@ public class AnimationPlayer : MonoBehaviour
 	public float num = 0;
 
 	#region 初期化処理
-	private void Awake()
+	protected void Awake()
 	{
 		playableGraph = PlayableGraph.Create();
 		playableGraph.SetTimeUpdateMode(DirectorUpdateMode.Manual);
 	}
-	private void Start()
+	protected void Start()
     {
 		if (nowPlayAnimation != null)
 		{
@@ -61,7 +62,7 @@ public class AnimationPlayer : MonoBehaviour
 		
 	}
 	#endregion
-	private void Update()
+	protected void Update()
     {
 		if (nowPlayAnimation == null)
 		{
@@ -96,10 +97,9 @@ public class AnimationPlayer : MonoBehaviour
 				mixer.SetInputWeight(1, num);
 			}
 			playableGraph.Evaluate((1.0f / nowPlayAnimation.frameRate) * frameSpeed);
-            nowFrame = (int)(((float)mixer.GetTime() * nowPlayAnimation.frameRate) * frameSpeed);
-			//ループ
-			Debug.Log(nowFrame);
-			if (nowFrame >= (int)((nowPlayAnimation.length * nowPlayAnimation.frameRate * frameSpeed))&&nowPlayAnimation.isLooping)
+            nowFrame = (int)(((float)mixer.GetTime() * nowPlayAnimation.frameRate) * (1 / frameSpeed));//フレーム取得
+																								 //ループ
+			if (nowFrame >= (int)((nowPlayAnimation.length * nowPlayAnimation.frameRate *(1.0f / frameSpeed)))&&nowPlayAnimation.isLooping)
             {
                 mixer.SetTime(0);
                 _nowPlayAnimation.SetTime(0);
@@ -107,6 +107,7 @@ public class AnimationPlayer : MonoBehaviour
             }
         }
 	}
+	//時間取得
     public int GetAnimationTime()
     {
         return nowFrame;
@@ -157,6 +158,13 @@ public class AnimationPlayer : MonoBehaviour
 		changeWeightFrame = weightFrame;
 		_nowChangeFrame = 0;
 		frameSpeed = speed;
+		//再生時間を0にする
+		if (playableGraph.IsValid() && mixer.IsValid())
+		{
+			mixer.SetTime(0);
+			_nowPlayAnimation.SetTime(0);
+			if (_beforePlayAnimation.IsValid()) _beforePlayAnimation.SetTime(0);
+		}
 	}
 
 	private void OnDestroy()

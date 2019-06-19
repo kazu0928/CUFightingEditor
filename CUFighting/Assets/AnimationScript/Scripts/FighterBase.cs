@@ -23,9 +23,18 @@ public class FighterBase : MonoBehaviour
 		get { return nowPlaySkill; }
 	}
 
-    #region ギズモ
+	private void Update()
+	{
+		//現在の技の取得
+		if (nowPlaySkill != ((FighterAnimationPlayer)animationPlayer).NowPlaySkill)
+		{
+			nowPlaySkill = ((FighterAnimationPlayer)animationPlayer).NowPlaySkill;
+		}
+	}
+
+	#region ギズモ
 #if UNITY_EDITOR
-    private void OnDrawGizmos()
+	private void OnDrawGizmos()
     {
         if (status == null)
         {

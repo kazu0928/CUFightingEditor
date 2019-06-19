@@ -13,10 +13,9 @@ public class PlayerMover : MonoBehaviour
     void Update()
     {
 		//移動
-		//transform.Translate(x, 0, 0);
-		//x -= 0.2f;
-		
-		//fb.NowPlaySkill;
+		transform.Translate(x, 0, 0);
+		x -= 0.2f;
+
 		//重力
 	}
 }
