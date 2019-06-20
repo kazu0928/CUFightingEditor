@@ -6,8 +6,8 @@ using UnityEditor;
 #endif
 public class FighterBase : MonoBehaviour
 {
-    [SerializeField]
-    private AnimationPlayer animationPlayer = null;
+    public AnimationPlayer animationPlayer = null;
+	public PlayerMover playerMover = null;
     public AnimationPlayer AnimationPlayerCompornent
     {
         get { return animationPlayer; }
@@ -15,21 +15,25 @@ public class FighterBase : MonoBehaviour
     [SerializeField]
     private FighterStatus status = null;
     [SerializeField]
-    private PlayerSkill playerSkill = null;
-    [SerializeField]
     private PlayerSkill nowPlaySkill = null;
 	public PlayerSkill NowPlaySkill
 	{
 		get { return nowPlaySkill; }
 	}
-
+	private bool changeSkill = false;
+	private void Start()
+	{
+		playerMover = GetComponent<PlayerMover>();
+	}
 	private void Update()
 	{
 		//現在の技の取得
 		if (nowPlaySkill != ((FighterAnimationPlayer)animationPlayer).NowPlaySkill)
 		{
+			playerMover.changeSkillFrag = true;
 			nowPlaySkill = ((FighterAnimationPlayer)animationPlayer).NowPlaySkill;
 		}
+		playerMover.UpdateGame();
 	}
 
 	#region ギズモ

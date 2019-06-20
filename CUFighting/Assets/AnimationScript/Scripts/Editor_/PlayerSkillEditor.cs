@@ -318,8 +318,6 @@ public class PlayerSkillEditor : EditorWindow
 		{
 			EditorGUILayout.BeginVertical("Box");
 			EditorGUILayout.BeginHorizontal();
-			//インパクトフラグ
-			playerSkill.movements[i].inpact = EditorGUILayout.Toggle("インパクト",playerSkill.movements[i].inpact);
 			bool removeFrag = false;
 			playerSkill.movements[i].startFrame = EditorGUILayout.IntField("スタートフレーム",playerSkill.movements[i].startFrame);
 			//削除ボタン

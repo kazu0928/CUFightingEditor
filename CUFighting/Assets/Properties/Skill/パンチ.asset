@@ -40,25 +40,13 @@ MonoBehaviour:
         localPosition: {x: 0.52, y: 0.93, z: 0}
       startFrame: 15
       endFrame: 24
-  - mode: 0
-    frameHitBoxes:
-    - hitBox:
-        size: {x: 2.3, y: 1.32, z: 0.27}
-        localPosition: {x: 0, y: 0.83, z: 0}
-      startFrame: 6
-      endFrame: 15
   movements:
-  - inpact: 0
-    movement: {x: 0, y: 0, z: 0}
-    minusMovement: {x: 0, y: 0, z: 0}
-    limitMovement: {x: 0, y: 0, z: 0}
+  - movement: {x: 0, y: 0.69, z: 0}
     startFrame: 0
-  - inpact: 0
-    movement: {x: 0, y: 0, z: 0}
-    minusMovement: {x: 0, y: 0, z: 0}
-    limitMovement: {x: 0, y: 0, z: 0}
+  gravityMove:
+  - movement: {x: 0, y: -0.3, z: 0}
+    limitMove: {x: 0, y: 0, z: 0}
     startFrame: 0
-  gravityMove: []
   headFrag: 1
   bodyFrag: 1
   footFlag: 1

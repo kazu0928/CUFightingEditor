@@ -36,13 +36,17 @@ public class PlayerSkill : ScriptableObject
 	[System.Serializable]
 	public class Move
 	{
-		public bool inpact = false;
 		public Vector3 movement;
-		public Vector3 minusMovement;
-		public Vector3 limitMovement;
 		public int startFrame;
 	}
-    public AnimationClip animationClip = null;
+	[System.Serializable]
+	public class GravityMove
+	{
+		public Vector3 movement;
+		public Vector3 limitMove;
+		public int startFrame;
+	}
+	public AnimationClip animationClip = null;
     public float animationSpeed = 1;
     //ブレンドフラグ
     public bool inBlend = false;
@@ -58,7 +62,7 @@ public class PlayerSkill : ScriptableObject
 
 	//移動
 	public List<Move> movements = new List<Move>();
-	public List<Move> gravityMove = new List<Move>();
+	public List<GravityMove> gravityMove = new List<GravityMove>();
 
 	//enumFrag
 	public bool headFrag = true;
