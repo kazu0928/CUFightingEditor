@@ -4,15 +4,36 @@ using UnityEngine;
 
 public class FighterCore : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[SerializeField] private GameObject playerModel = null;
+	[SerializeField] private PlayerNumber playerNumber; //プレイヤー番号
+	private FightingAnimationPlayer animationPlayer;//アニメーション再生クラス
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+	private void Start()
+	{
+		if (InitErrorCheck())
+		{
+			animationPlayer = playerModel.GetComponent<FightingAnimationPlayer>();
+		}
+	}
+	private void Update()
+	{
+		animationPlayer.UpdateAnimation();
+	}
+	private bool InitErrorCheck()
+	{
+		if (playerModel == null)
+		{
+			Debug.LogError("PlayerModelがありません");
+			return false;
+		}
+		else
+		{
+			if (playerModel.GetComponent(typeof(FightingAnimationPlayer)) == null)
+			{
+				Debug.LogError("FightingAnimationPlayerがついていません");
+				return false;
+			}
+		}
+		return true;
+	}
 }
