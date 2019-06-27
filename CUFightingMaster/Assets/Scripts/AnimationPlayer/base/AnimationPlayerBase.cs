@@ -176,10 +176,6 @@ public abstract class AnimationPlayerBase : MonoBehaviour
         {
             return;
         }
-        //更新
-        playableGraph.Evaluate((1.0f / nowClip.frameRate) * animationSpeed);
-        //フレーム取得
-        nowFrame = (int)(((float)mixer.GetTime() * nowClip.frameRate) * (1 / animationSpeed));
         //ブレンドフレームが設定されていれば
         if (changeWeightFrame > 0)
         {
@@ -199,7 +195,11 @@ public abstract class AnimationPlayerBase : MonoBehaviour
             mixer.SetInputWeight(0, 1.0f);
             mixer.SetInputWeight(1, 0);
         }
-        bool endAnimation = nowFrame >= (int)((nowClip.length * nowClip.frameRate * (1.0f / animationSpeed)));
+        //更新
+        playableGraph.Evaluate((1.0f / nowClip.frameRate) * animationSpeed);
+        //フレーム取得
+        nowFrame = (int)(((float)mixer.GetTime() * nowClip.frameRate) * (1 / animationSpeed));
+        bool endAnimation = (nowFrame >= (int)((nowClip.length * nowClip.frameRate * (1.0f / animationSpeed))));
         //現在のフレーム数が最大であれば
         if (endAnimation)
         {
@@ -214,6 +214,10 @@ public abstract class AnimationPlayerBase : MonoBehaviour
         endAnimFrag = endAnimation;
 
         frameCount++;
+        if(frameCount>=int.MaxValue-1)
+        {
+            frameCount = 0;
+        }
     }
     #endregion
 

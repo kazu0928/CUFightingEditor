@@ -5,9 +5,17 @@ using UnityEngine;
 public class FighterCore : MonoBehaviour
 {
 	[SerializeField] private GameObject playerModel = null;
+	public GameObject PlayerModel
+    {
+        get { return playerModel; }
+    }
 	[SerializeField] private PlayerNumber playerNumber; //プレイヤー番号
-	private FightingAnimationPlayer animationPlayer;//アニメーション再生クラス
-
+	[SerializeField] private FightingAnimationPlayer animationPlayer;//アニメーション再生クラス
+    [SerializeField] private FighterSkill nextAnimation = null;//ここにいれればアニメーションが再生される
+    public FightingAnimationPlayer AnimationPlayerCompornent
+	{
+        get { return animationPlayer; }
+    }
 	private void Start()
 	{
 		if (InitErrorCheck())
@@ -17,8 +25,15 @@ public class FighterCore : MonoBehaviour
 	}
 	private void Update()
 	{
+		if(nextAnimation!=null)
+		{
+            animationPlayer.SetSkillAnimation(nextAnimation);
+            nextAnimation = null;
+        }
+		//技が入れ替わってから動作させたいのでanimationのアップデートは後
 		animationPlayer.UpdateAnimation();
 	}
+	#region 初期化時エラーチェック
 	private bool InitErrorCheck()
 	{
 		if (playerModel == null)
@@ -36,4 +51,5 @@ public class FighterCore : MonoBehaviour
 		}
 		return true;
 	}
+	#endregion
 }
