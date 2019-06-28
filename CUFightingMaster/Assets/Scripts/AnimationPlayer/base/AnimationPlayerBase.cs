@@ -22,12 +22,12 @@ public abstract class AnimationPlayerBase : MonoBehaviour
     [SerializeField] private int changeWeightFrame = 0;
     //現在再生中のアニメーションのフレーム数
     [SerializeField] private int nowFrame = 0;
-    public int NowFrame
+	//再生されてからの合計のフレーム数
+	[SerializeField] private int frameCount = 0;
+	public int NowFrame
     {
         get { return nowFrame; }
     }
-    //再生されてからの合計のフレーム数
-    [SerializeField] private int frameCount = 0;
     public int FrameCount
     {
         get { return frameCount; }

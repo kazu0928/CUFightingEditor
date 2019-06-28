@@ -23,7 +23,7 @@ public class FightingAnimationPlayer : AnimationPlayerBase
         }
         base.Start();
     }
-    public void UpdateAnimation()
+    public new void UpdateGame()
     {
         //技のセット
         if (nowPlaySkill != beforeNowPlaySkill)
@@ -51,4 +51,5 @@ public class FightingAnimationPlayer : AnimationPlayerBase
             SetPlayAnimation(skill.animationClip, skill.animationSpeed, weightFrame);
         }
     }
+
 }

@@ -2,5 +2,5 @@
 {
     HitBox,
     HurtBox,
-    GrabAndSqueezeMode,
+    GrabAndSqueeze,
 }

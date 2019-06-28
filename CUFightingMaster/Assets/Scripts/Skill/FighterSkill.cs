@@ -4,6 +4,7 @@ using UnityEngine;
 #if UNITY_EDITOR
 using UnityEditor;
 #endif
+
 [CreateAssetMenu(menuName = "Fighting/スキル")]
 public class FighterSkill : ScriptableObject
 {
@@ -61,8 +62,10 @@ public class FighterSkill : ScriptableObject
 
     public List<CustomHitBox> customHitBox = new List<CustomHitBox>();//カスタム
 
-    //移動
-    public List<Move> movements = new List<Move>();
+	//重力継続判定
+	public bool isContinue = false;
+	//移動
+	public List<Move> movements = new List<Move>();
     public List<GravityMove> gravityMoves = new List<GravityMove>();
 
     //Default当たり判定があるかないか

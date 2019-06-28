@@ -310,6 +310,7 @@ public class PlayerSkillEditor : EditorWindow
 	#region 移動速度設定_Tab
 	private void MoveSettingDraw()
 	{
+		playerSkill.isContinue = EditorGUILayout.Toggle("制動継続", playerSkill.isContinue);
 		if(GUILayout.Button("移動作成",GUILayout.Width(80)))
 		{
 			playerSkill.movements.Add(new FighterSkill.Move());
