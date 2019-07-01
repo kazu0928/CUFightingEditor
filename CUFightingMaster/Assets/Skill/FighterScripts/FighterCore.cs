@@ -12,6 +12,7 @@ public class FighterCore : MonoBehaviour
 	[SerializeField] private FightingAnimationPlayer animationPlayer = null;//アニメーション再生クラス
 	[SerializeField] private FighterStatus status = null;
 	private FighterMover mover = null;
+    private HitBoxJudgement hitJudgement = null;
     [SerializeField] private FighterSkill nextAnimation = null;//ここにいれればアニメーションが再生される
 	[SerializeField] private FighterSkill nowPlaySkill = null;
 	public bool changeSkill { get; private set; }//技が入れ替わったかどうか
@@ -28,15 +29,28 @@ public class FighterCore : MonoBehaviour
 	{
 		get { return nowPlaySkill; }
 	}
-	#endregion
-	private void Start()
+	public PlayerNumber PlayerNumber
+	{
+        get { return playerNumber; }
+    }
+	public FighterStatus Status
+    {
+        get
+        {
+            return status;
+        }
+    }
+    #endregion
+    private void Start()
 	{
 		//アタッチエラーチェック
 		if (InitErrorCheck())
 		{
+			//アニメーションプレイヤーの取得
 			animationPlayer = playerModel.GetComponent<FightingAnimationPlayer>();
 			mover = new FighterMover(this);
-		}
+            hitJudgement = new HitBoxJudgement(this);
+        }
 	}
 	private void Update()
 	{
@@ -53,8 +67,10 @@ public class FighterCore : MonoBehaviour
 		CheckNowPlaySkill();
 		//移動のアップデート
 		mover.UpdateGame();
-		//終了
-		UpdateEnd();
+        //当たり判定のアップデート
+        hitJudgement.UpdateGame();
+        //終了
+        UpdateEnd();
 	}
 	#region 初期化時エラーチェック
 	private bool InitErrorCheck()
@@ -102,8 +118,10 @@ public class FighterCore : MonoBehaviour
 	private void OnDrawGizmos()
 	{
 		//足元
-		Gizmos.DrawWireSphere(transform.position, 0.5f);
-		if (status == null) return;
+        Gizmos.color = Color.black;
+        Vector3 vector3 = new Vector3(1, 1, 1);
+        Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + (vector3.y / 2), transform.position.z), vector3 );
+        if (status == null) return;
 		#region 未再生
 		if (!EditorApplication.isPlaying)
 		{
