@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - HurtBox
+  - HitBox
+  - Grab
+  - Ground
   layers:
   - Default
   - TransparentFX
@@ -15,11 +19,11 @@ TagManager:
   - 
   - PostProcessing
   - 
-  - HitBox
-  - HurtBox
-  - Grab
-  - 
-  - 
+  - Player1
+  - Player2
+  - Player3
+  - Player4
+  - Ground
   - 
   - 
   - 
