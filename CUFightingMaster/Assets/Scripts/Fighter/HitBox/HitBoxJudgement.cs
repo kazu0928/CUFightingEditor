@@ -6,9 +6,10 @@ public class HitBoxJudgement
 {
     private FighterCore core;
     private Transform transform;//動かすTransform
+    public bool isGround { get;private set; }
 
 #region 初期化
-	public HitBoxJudgement(FighterCore fighter)
+public HitBoxJudgement(FighterCore fighter)
 	{
 		transform = fighter.transform;
 		core = fighter;
@@ -65,8 +66,10 @@ public class HitBoxJudgement
 		Collider[] col = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + (vector3.y / 2), transform.position.z), vector3 / 2.0f, Quaternion.identity, 1 << LayerMask.NameToLayer(CommonConstants.Layers.Ground));
 		if (col.Length <= 0)
 		{
-			return;
+            isGround = false;
+            return;
 		}
+        isGround = true;
         //transform.positionをコライダーの上に
         transform.position = new Vector3(transform.position.x, col[0].transform.position.y + ((BoxCollider)col[0]).center.y + (((BoxCollider)col[0]).size.y / 2), transform.position.z);
     }

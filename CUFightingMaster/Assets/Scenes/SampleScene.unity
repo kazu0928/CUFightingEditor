@@ -179,7 +179,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &534669902
 GameObject:
@@ -256,12 +256,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.91, z: -2.5300002}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 1401809366}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &932139630
 GameObject:
@@ -276,7 +276,7 @@ GameObject:
   - component: {fileID: 932139632}
   - component: {fileID: 932139631}
   m_Layer: 14
-  m_Name: Cube
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,7 +352,7 @@ Transform:
   m_LocalScale: {x: 26.66, y: 1, z: 18.15}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1220882751
 GameObject:
@@ -364,8 +364,10 @@ GameObject:
   m_Component:
   - component: {fileID: 1220882752}
   - component: {fileID: 1220882753}
+  - component: {fileID: 1220882754}
+  - component: {fileID: 1220882755}
   m_Layer: 0
-  m_Name: FighterState
+  m_Name: FighterStateSample
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -379,11 +381,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1220882751}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.313265, y: 1.8987534, z: -9.956308}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1220882753
 MonoBehaviour:
@@ -401,19 +403,326 @@ MonoBehaviour:
     stateName: FighterState1
     stateMove: 0
     states:
-    - stateName: 
+    - stateName: Entry_Point
       ID:
         number: 1
-      nextStateJudge: []
+      nextStateJudge:
+      - nextStateName: "\u5730\u4E0A"
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: True_Method
+        judgeFuncInstance: {fileID: 1220882754}
+        priority: 0
+        comment: "TRUE\u8FD4\u3057\u3066\u308B\u3060\u3051"
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 208, y: 228}
+      nodePosition: {x: 8, y: 115}
+      toggleWindow: 1
+      stateMode: 0
+      stateBody:
+        stateName: 
+        stateMove: 0
+        states: []
+    - stateName: "\u5730\u4E0A"
+      ID:
+        number: 2
+      nextStateJudge:
+      - nextStateName: "\u7A7A\u4E2D"
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: Jump_Input
+        judgeFuncInstance: {fileID: 1220882755}
+        priority: 0
+        comment: "\u30B8\u30E3\u30F3\u30D7"
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 291, y: 153}
       toggleWindow: 1
       stateMode: 1
       stateBody:
         stateName: 
         stateMove: 0
-        states: []
+        states:
+        - stateName: Idle
+          ID:
+            number: 1
+          nextStateJudge:
+          - nextStateName: Front_Walk
+            nextID:
+              number: 2
+            arg1:
+              object_Arg: {fileID: 0}
+              int_Arg: 0
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            arg2:
+              object_Arg: {fileID: 0}
+              int_Arg: 0
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            argMode: 0
+            argType1: 0
+            argType2: 0
+            judgeFuncName: Front_Walk
+            judgeFuncInstance: {fileID: 1220882755}
+            priority: 0
+            comment: 
+          execDelegate:
+          - actionName: ChangeSkill
+            instance: {fileID: 1220882754}
+            arg1:
+              object_Arg: {fileID: 11400000, guid: 048e121f7d7bda0468e9a9c3c8a0e993,
+                type: 2}
+              int_Arg: 0
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            arg2:
+              object_Arg: {fileID: 0}
+              int_Arg: 5
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            argMode: 2
+            argType1: 0
+            argType2: 1
+            comment: 
+          playUpdateDelegate: []
+          nodePosition: {x: 44, y: 93}
+          toggleWindow: 1
+          stateMode: 0
+          stateBody:
+            stateName: 
+            stateMove: 0
+            states: []
+        - stateName: Front_Walk
+          ID:
+            number: 2
+          nextStateJudge:
+          - nextStateName: Idle
+            nextID:
+              number: 1
+            arg1:
+              object_Arg: {fileID: 0}
+              int_Arg: 0
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            arg2:
+              object_Arg: {fileID: 0}
+              int_Arg: 0
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            argMode: 0
+            argType1: 0
+            argType2: 0
+            judgeFuncName: UpFrontWalk
+            judgeFuncInstance: {fileID: 1220882755}
+            priority: 0
+            comment: 
+          execDelegate:
+          - actionName: ChangeSkill
+            instance: {fileID: 1220882754}
+            arg1:
+              object_Arg: {fileID: 11400000, guid: 4ffcb7025c167ab4f87101f280e8c280,
+                type: 2}
+              int_Arg: 0
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            arg2:
+              object_Arg: {fileID: 0}
+              int_Arg: 5
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            argMode: 2
+            argType1: 0
+            argType2: 1
+            comment: 
+          playUpdateDelegate: []
+          nodePosition: {x: 454, y: 200}
+          toggleWindow: 1
+          stateMode: 0
+          stateBody:
+            stateName: 
+            stateMove: 0
+            states: []
+    - stateName: "\u7A7A\u4E2D"
+      ID:
+        number: 3
+      nextStateJudge:
+      - nextStateName: "\u5730\u4E0A"
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: GroundCheck
+        judgeFuncInstance: {fileID: 1220882755}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 599, y: 114}
+      toggleWindow: 1
+      stateMode: 1
+      stateBody:
+        stateName: 
+        stateMove: 0
+        states:
+        - stateName: Jump
+          ID:
+            number: 1
+          nextStateJudge: []
+          execDelegate:
+          - actionName: ChangeSkill
+            instance: {fileID: 1220882754}
+            arg1:
+              object_Arg: {fileID: 11400000, guid: f972e72482677e84aacbaf784d9a038f,
+                type: 2}
+              int_Arg: 0
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            arg2:
+              object_Arg: {fileID: 0}
+              int_Arg: 5
+              float_Arg: 0
+              string_Arg: 
+              bool_Arg: 0
+              enum_Arg: 0
+              enum_Name: 
+              assembly_Name: 
+            argMode: 2
+            argType1: 0
+            argType2: 1
+            comment: 
+          playUpdateDelegate: []
+          nodePosition: {x: 241, y: 224}
+          toggleWindow: 1
+          stateMode: 0
+          stateBody:
+            stateName: 
+            stateMove: 0
+            states: []
+--- !u!114 &1220882754
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220882751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79bb4e4a13b7cd34abc4e072e2aff0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateName: Fighter
+  fighter: {fileID: 1401809365}
+--- !u!114 &1220882755
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1220882751}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454ee937ecff3884b9ad3e84bfaa9268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateName: 
 --- !u!1 &1401809364
 GameObject:
   m_ObjectHideFlags: 0
@@ -447,7 +756,7 @@ MonoBehaviour:
   playerNumber: 0
   animationPlayer: {fileID: 2098207827}
   status: {fileID: 11400000, guid: 97379bbb96774a6459e1cfbbc365e344, type: 2}
-  nextAnimation: {fileID: 11400000, guid: f972e72482677e84aacbaf784d9a038f, type: 2}
+  nextAnimation: {fileID: 0}
   nowPlaySkill: {fileID: 0}
 --- !u!4 &1401809366
 Transform:
@@ -461,8 +770,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2098207829}
+  - {fileID: 534669905}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1660738366
 GameObject:
@@ -505,7 +815,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1725526276
 PrefabInstance:
@@ -557,7 +867,7 @@ PrefabInstance:
     - target: {fileID: 8986002022294389509, guid: 3e460a65c49da924ea0b092f809801cf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8986002022294389509, guid: 3e460a65c49da924ea0b092f809801cf,
         type: 3}

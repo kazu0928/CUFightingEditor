@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
-  m_Name: New Fighter Skill
+  m_Name: Front_Walk
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: 74c1aedf3486f5e4baf081da23d75f5c, type: 2}
+  animationClip: {fileID: 0}
   animationSpeed: 1
   inBlend: 0
   outBlend: 0
@@ -22,13 +22,8 @@ MonoBehaviour:
   plusGrabHitBox: []
   customHitBox: []
   isContinue: 0
-  movements:
-  - movement: {x: 0.13, y: 1.13, z: 0}
-    startFrame: 0
-  gravityMoves:
-  - movement: {x: 0, y: -0.06, z: 0}
-    limitMove: {x: 0, y: -2.97, z: 0}
-    startFrame: 0
+  movements: []
+  gravityMoves: []
   headFlag: 1
   bodyFlag: 1
   footFlag: 1

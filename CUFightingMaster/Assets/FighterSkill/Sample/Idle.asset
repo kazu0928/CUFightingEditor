@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
-  m_Name: New Fighter Skill 1
+  m_Name: Idle
   m_EditorClassIdentifier: 
   animationClip: {fileID: 0}
   animationSpeed: 1
@@ -21,6 +21,7 @@ MonoBehaviour:
   plusFootHitBox: []
   plusGrabHitBox: []
   customHitBox: []
+  isContinue: 0
   movements: []
   gravityMoves: []
   headFlag: 1

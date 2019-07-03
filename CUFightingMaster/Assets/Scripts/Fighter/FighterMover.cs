@@ -10,10 +10,10 @@ public class FighterMover
 	private int nowPlayGravityNumber = -1;  //現在再生中の重力配列の要素数(-1だと動かない)
 	private List<FighterSkill.Move> moves = new List<FighterSkill.Move>();//移動配列
 	private List<FighterSkill.GravityMove> gravity = new List<FighterSkill.GravityMove>();//重力配列
-	private int gravityFrame = 0;	//重力用のフレーム数
+	private int gravityFrame = 0;   //重力用のフレーム数
 
-	//初期化
-	public FighterMover(FighterCore fighterCore)
+    //初期化
+    public FighterMover(FighterCore fighterCore)
 	{
 		core = fighterCore;
 		transform = fighterCore.transform;
@@ -82,7 +82,6 @@ public class FighterMover
 	//重力移動
 	private void GravityMovementSkill()
 	{
-		
 		if ((gravity == null) || (gravity.Count == 0)) return;
 		if (gravity.Count > nowPlayGravityNumber + 1)
 		{
