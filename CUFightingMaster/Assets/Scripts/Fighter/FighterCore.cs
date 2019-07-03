@@ -11,6 +11,7 @@ public class FighterCore : MonoBehaviour
     [SerializeField] private PlayerNumber playerNumber; //プレイヤー番号
     [SerializeField] private FightingAnimationPlayer animationPlayer = null;//アニメーション再生クラス
     [SerializeField] private FighterStatus status = null;
+    [SerializeField] private PlayerDirection direction;
     private FighterMover mover = null;
     private HitBoxJudgement hitJudgement = null;
     [SerializeField] private FighterSkill nextAnimation = null;//ここにいれればアニメーションが再生される
@@ -36,10 +37,11 @@ public class FighterCore : MonoBehaviour
     }
     public FighterStatus Status
     {
-        get
-        {
-            return status;
-        }
+        get { return status; }
+    }
+    public PlayerDirection Direction
+    {
+        get { return direction; }
     }
     #endregion
     private void Start()

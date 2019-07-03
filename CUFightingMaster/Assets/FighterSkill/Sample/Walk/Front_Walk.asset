@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
+  m_Name: Front_Walk
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: ee1ed53b825eb0e4783f7febdb39a5ce, type: 2}
+  animationSpeed: 0.8
+  inBlend: 0
+  outBlend: 0
+  plusHeadHitBox: []
+  plusBodyHitBox: []
+  plusFootHitBox: []
+  plusGrabHitBox: []
+  customHitBox: []
+  isContinue: 0
+  movements:
+  - movement: {x: -1.85, y: 0, z: 0}
+    startFrame: 0
+  gravityMoves:
+  - movement: {x: 0, y: -0.23, z: 0}
+    limitMove: {x: 0, y: -2.4, z: 0}
+    startFrame: 0
+  headFlag: 1
+  bodyFlag: 1
+  footFlag: 1
+  grabFlag: 1

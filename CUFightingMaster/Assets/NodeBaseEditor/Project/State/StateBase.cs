@@ -199,16 +199,16 @@ namespace CUEngine.Pattern
         public List<ActionDelegate> playUpdateDelegate = new List<ActionDelegate>();        //ステート移行時に常時プレイするデリゲートリスト
         public virtual void PlayUpdate()//常時実行処理まとめ
         {
-            if (updateJudgeDelegate != null)
-            {
-                updateJudgeDelegate();
-            }
             if (playUpdateDelegate != null)
             {
                 foreach (ActionDelegate action in playUpdateDelegate)
                 {
                     action.action.Invoke();
                 }
+            }
+            if (updateJudgeDelegate != null)
+            {
+                updateJudgeDelegate();
             }
         }
         /*ノードエディターで使用するプロパティ*/

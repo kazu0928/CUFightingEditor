@@ -196,6 +196,7 @@ namespace CUEngine.Pattern
                 }
             }
             StateBody pa = parant;
+            //親のジャッジ処理も行う
             while(pa!=null)
             {
                 pa.stateProcessor.PlayUpdate();
