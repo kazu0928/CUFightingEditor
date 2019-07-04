@@ -1,0 +1,1160 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &7962788169887061480
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7962788169887061481}
+  - component: {fileID: 7962788169887061484}
+  - component: {fileID: 7962788169887061483}
+  - component: {fileID: 7962788169887061482}
+  m_Layer: 0
+  m_Name: FighterStateSample-2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7962788169887061481
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962788169887061480}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -11.902432, y: -2.3747387, z: -11.624247}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7962788169887061484
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962788169887061480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 65440b06c5fdc3c4db9bf3616fe820d9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateBody:
+  - ID:
+      number: 1
+    stateName: 
+    stateMove: 0
+    states:
+    - stateName: Entry_Point
+      ID:
+        number: 1
+      nextStateJudge:
+      - nextStateName: "\u5730\u4E0A"
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: True_Method
+        judgeFuncInstance: {fileID: 7962788169887061483}
+        priority: 0
+        comment: TRUE
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 54, y: 119}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 1
+    - stateName: "\u5730\u4E0A"
+      ID:
+        number: 2
+      nextStateJudge:
+      - nextStateName: "\u30B8\u30E3\u30F3\u30D7"
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 3
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: "\u30B8\u30E3\u30F3\u30D7"
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 5
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: "\u30B8\u30E3\u30F3\u30D7"
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 6
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 399, y: 348}
+      toggleWindow: 1
+      stateMode: 1
+      subStateID:
+        number: 2
+      isSkipState: 0
+    - stateName: "\u30B8\u30E3\u30F3\u30D7"
+      ID:
+        number: 3
+      nextStateJudge:
+      - nextStateName: Entry_Point
+        nextID:
+          number: 1
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 1
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 4
+        argType2: 0
+        judgeFuncName: GroundCheck
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 746, y: 135}
+      toggleWindow: 1
+      stateMode: 1
+      subStateID:
+        number: 4
+      isSkipState: 0
+  - ID:
+      number: 2
+    stateName: 
+    stateMove: 0
+    states:
+    - stateName: Entry_Point
+      ID:
+        number: 1
+      nextStateJudge:
+      - nextStateName: "\u7ACB\u3061"
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: True_Method
+        judgeFuncInstance: {fileID: 7962788169887061483}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 14, y: 203}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 1
+    - stateName: "\u7ACB\u3061"
+      ID:
+        number: 2
+      nextStateJudge:
+      - nextStateName: "\u3057\u3083\u304C\u307F"
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 4
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: "\u3057\u3083\u304C\u307F"
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 7
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: "\u3057\u3083\u304C\u307F"
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 8
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 472, y: 92}
+      toggleWindow: 1
+      stateMode: 1
+      subStateID:
+        number: 3
+      isSkipState: 0
+    - stateName: "\u3057\u3083\u304C\u307F"
+      ID:
+        number: 3
+      nextStateJudge:
+      - nextStateName: "\u7ACB\u3061"
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: "\u7ACB\u3061"
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 1
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: "\u7ACB\u3061"
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 2
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 457, y: 436}
+      toggleWindow: 1
+      stateMode: 1
+      subStateID:
+        number: 5
+      isSkipState: 0
+  - ID:
+      number: 3
+    stateName: 
+    stateMove: 0
+    states:
+    - stateName: Entry_Point
+      ID:
+        number: 1
+      nextStateJudge:
+      - nextStateName: Idle
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: Front_Walk
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 1
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: Back_Walk
+        nextID:
+          number: 4
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 2
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 10, y: 204}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 1
+    - stateName: Idle
+      ID:
+        number: 2
+      nextStateJudge:
+      - nextStateName: Front_Walk
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 1
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: Back_Walk
+        nextID:
+          number: 4
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 2
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate:
+      - actionName: ChangeSkill
+        instance: {fileID: 7962788169887061483}
+        arg1:
+          object_Arg: {fileID: 11400000, guid: 048e121f7d7bda0468e9a9c3c8a0e993, type: 2}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 10
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 2
+        argType1: 0
+        argType2: 1
+        comment: 
+      playUpdateDelegate: []
+      nodePosition: {x: 481, y: 202}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+    - stateName: Front_Walk
+      ID:
+        number: 3
+      nextStateJudge:
+      - nextStateName: Idle
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: Back_Walk
+        nextID:
+          number: 4
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 2
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate:
+      - actionName: ChangeSkill
+        instance: {fileID: 7962788169887061483}
+        arg1:
+          object_Arg: {fileID: 11400000, guid: 4ffcb7025c167ab4f87101f280e8c280, type: 2}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 5
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 2
+        argType1: 0
+        argType2: 1
+        comment: 
+      playUpdateDelegate: []
+      nodePosition: {x: 822, y: 76}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+    - stateName: Back_Walk
+      ID:
+        number: 4
+      nextStateJudge:
+      - nextStateName: Idle
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: Front_Walk
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 1
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate:
+      - actionName: ChangeSkill
+        instance: {fileID: 7962788169887061483}
+        arg1:
+          object_Arg: {fileID: 11400000, guid: 8d582050ac006f742b333cd6265dcad5, type: 2}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 5
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 2
+        argType1: 0
+        argType2: 1
+        comment: 
+      playUpdateDelegate: []
+      nodePosition: {x: 830, y: 398}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+  - ID:
+      number: 4
+    stateName: 
+    stateMove: 0
+    states:
+    - stateName: Entry_Point
+      ID:
+        number: 1
+      nextStateJudge:
+      - nextStateName: Jump
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 3
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: Jump_Front
+        nextID:
+          number: 3
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 5
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      - nextStateName: Jump_Back
+        nextID:
+          number: 4
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 6
+          enum_Name: Direction
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 5
+        argType2: 0
+        judgeFuncName: Input_Direction
+        judgeFuncInstance: {fileID: 7962788169887061482}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 89, y: 235}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 1
+    - stateName: Jump
+      ID:
+        number: 2
+      nextStateJudge: []
+      execDelegate:
+      - actionName: ChangeSkill
+        instance: {fileID: 7962788169887061483}
+        arg1:
+          object_Arg: {fileID: 11400000, guid: 2d501e7d5335f984fa923f77ce6afdd7, type: 2}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 2
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 2
+        argType1: 0
+        argType2: 1
+        comment: 
+      playUpdateDelegate: []
+      nodePosition: {x: 589, y: 88}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+    - stateName: Jump_Front
+      ID:
+        number: 3
+      nextStateJudge: []
+      execDelegate:
+      - actionName: ChangeSkill
+        instance: {fileID: 7962788169887061483}
+        arg1:
+          object_Arg: {fileID: 11400000, guid: fec45e3b022f4104482be49b39515510, type: 2}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 2
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 2
+        argType1: 0
+        argType2: 1
+        comment: 
+      playUpdateDelegate: []
+      nodePosition: {x: 589, y: 265}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+    - stateName: Jump_Back
+      ID:
+        number: 4
+      nextStateJudge: []
+      execDelegate:
+      - actionName: ChangeSkill
+        instance: {fileID: 7962788169887061483}
+        arg1:
+          object_Arg: {fileID: 11400000, guid: a24a8d05e09f5174e84d5b1321592301, type: 2}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 2
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 2
+        argType1: 0
+        argType2: 1
+        comment: 
+      playUpdateDelegate: []
+      nodePosition: {x: 573, y: 441}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+  - ID:
+      number: 5
+    stateName: 
+    stateMove: 0
+    states:
+    - stateName: Entry_Point
+      ID:
+        number: 1
+      nextStateJudge:
+      - nextStateName: "\u3057\u3083\u304C\u307F"
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: True_Method
+        judgeFuncInstance: {fileID: 7962788169887061483}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 169, y: 286}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 1
+    - stateName: "\u3057\u3083\u304C\u307F"
+      ID:
+        number: 2
+      nextStateJudge: []
+      execDelegate:
+      - actionName: ChangeSkill
+        instance: {fileID: 7962788169887061483}
+        arg1:
+          object_Arg: {fileID: 11400000, guid: 91a3f71b2d032ef4e8b5893dc0523603, type: 2}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 5
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 2
+        argType1: 0
+        argType2: 1
+        comment: 
+      playUpdateDelegate: []
+      nodePosition: {x: 588, y: 373}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+--- !u!114 &7962788169887061483
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962788169887061480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 79bb4e4a13b7cd34abc4e072e2aff0b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateName: Fighter
+  fighter: {fileID: 0}
+--- !u!114 &7962788169887061482
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7962788169887061480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 454ee937ecff3884b9ad3e84bfaa9268, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stateName: 
