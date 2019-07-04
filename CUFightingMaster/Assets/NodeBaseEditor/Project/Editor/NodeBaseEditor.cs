@@ -179,10 +179,14 @@ namespace CUEngine.Pattern
             var cla = gameObject.GetComponent<StateMonobehavior>();
             Array.Resize(ref stateMonoOption, 0);
             stateMonobehaviors = gameObject.GetComponents<StateMonobehavior>();
+            if(stateMonobehaviors[nowStateMonoNuber].stateBody.Count <= 0)
+            {
+                stateMonobehaviors[nowStateMonoNuber].stateBody.Add(new StateBody());
+            }
             for (int i = 0; i < stateMonobehaviors.Length; i++)
             {
                 Array.Resize(ref stateMonoOption, stateMonoOption.Length + 1);
-                stateMonoOption[i] = stateMonobehaviors[i].stateBody.stateName;
+                stateMonoOption[i] = stateMonobehaviors[i].stateBody[0].stateName;
             }
             if(isSubStateEditor == true)
             {
@@ -190,7 +194,7 @@ namespace CUEngine.Pattern
             }
             else
             {
-                states = stateMonobehaviors[nowStateMonoNuber].stateBody.states;
+                states = stateMonobehaviors[nowStateMonoNuber].stateBody[0].states;
             }
             if (nodes == null)
             {
@@ -241,6 +245,12 @@ namespace CUEngine.Pattern
             }
             //IDを振り分け
             int countOne = 1;
+            int countBody = 1;
+            for(int i = 0;i<stateMonobehaviors[nowStateMonoNuber].stateBody.Count;i++)
+            {
+                stateMonobehaviors[nowStateMonoNuber].stateBody[i].ID.number = countBody;
+                countBody++;
+            }
             foreach (NomalState nomal in states)
             {
                 nomal.ID.number = countOne;
@@ -435,8 +445,11 @@ namespace CUEngine.Pattern
             //ノード、ステート追加
             NomalState statePlus = new NomalState();
             statePlus.stateMode = StateMode.SubState;
+            StateBody s = new StateBody();
+            stateMonobehaviors[nowStateMonoNuber].stateBody.Add(s);
+            statePlus.subStateID = s.ID;
             states.Add(statePlus);
-
+            initFlag = true;
             if (nodes == null)
             {
                 nodes = new List<Node>();
@@ -691,6 +704,17 @@ namespace CUEngine.Pattern
                 }
 
                 connectionsToRemove = null;
+            }
+            if(node.myState.stateMode == StateMode.SubState)
+            {
+                foreach(StateBody s in node.stateMonobehavior.stateBody)
+                {
+                    if (s.ID.number == node.myState.subStateID.number)
+                    {
+                        node.stateMonobehavior.stateBody.Remove(s);
+                        break;
+                    }
+                }
             }
             states.Remove(node.myState);
             //ノードの削除

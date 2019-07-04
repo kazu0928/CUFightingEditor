@@ -61,6 +61,7 @@ namespace CUEngine.Pattern
             //ステートの名前を変更する
             myState.stateName = EditorGUILayout.TextField(myState.stateName, GUILayout.Width(rect.width - 25));
             EditorGUILayout.EndHorizontal();
+            myState.isSkipState = EditorGUILayout.Toggle("SkipFrame", myState.isSkipState);
             //名前が変更されたら更新
             if (nowStateName != myState.stateName)
             {
@@ -72,7 +73,7 @@ namespace CUEngine.Pattern
             GetDrawMethod(ref compornentsBool, typeof(bool), ref nowMethodsBool, ref nowOptionsBool);
 
             //規定の高さ
-            rect.height = 45 + 57;
+            rect.height = 55 + 57;
 
             EditorGUILayout.LabelField("移行時処理");
             PopupNonReturnStartMethod();
@@ -105,7 +106,7 @@ namespace CUEngine.Pattern
             if (GUILayout.Button("開く"))
             {
                 NodeBaseEditorParameter.instance.window.isSubStateEditor = true;
-                NodeBaseEditorParameter.instance.window.subStates = myState.stateBody;
+                SubStateSet();
                 NodeBaseEditor.initFlag = true;
             }
             EditorGUILayout.LabelField("条件処理");
@@ -121,6 +122,20 @@ namespace CUEngine.Pattern
             //規定の高さ
             rect.height = 45 + 57;
             PopupBoolMethod();
+        }
+        private void SubStateSet()
+        {
+            for (int i = 0; i < stateMonobehavior.stateBody.Count; i++)
+            {
+                if (stateMonobehavior.stateBody[i].ID.number == myState.subStateID.number)
+                {
+                    NodeBaseEditorParameter.instance.window.subStates = stateMonobehavior.stateBody[i];
+                    return;
+                }
+            }
+            StateBody s = new StateBody();
+            myState.subStateID = s.ID;
+            stateMonobehavior.stateBody.Add(s);
         }
         private void EndStateFunc(int id)
         {

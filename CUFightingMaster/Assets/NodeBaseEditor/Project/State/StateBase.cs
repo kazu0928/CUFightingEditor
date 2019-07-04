@@ -218,7 +218,10 @@ namespace CUEngine.Pattern
         //ステート名を取得するメソッド
         public abstract string getStateName();
         public StateMode stateMode = StateMode.Normal;
+        public InstanceID subStateID = new InstanceID();
+        [NonSerialized]
         public StateBody stateBody = new StateBody();
+        public bool isSkipState = false;
     }
     //通常ステート
     [System.Serializable]

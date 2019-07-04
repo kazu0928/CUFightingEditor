@@ -149,6 +149,7 @@ namespace CUEngine.Pattern
         //次に入れ替わることの出来るステートの名前
         public string nextStateName;
         //次に入れ替わるステート本体(シリアライズ化不可)
+        [NonSerialized] 
         public StateBase nextState;
         //次に入れ替わるステートのID
         public InstanceID nextID = new InstanceID();

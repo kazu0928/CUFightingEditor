@@ -17,13 +17,29 @@ namespace CUEngine.Pattern
     public class StateMonobehavior : MonoBehaviour, IEventable
     {
         //現在処理中の本体
-        public StateBody stateBody = new StateBody();
+        public List<StateBody> stateBody = new List<StateBody>();
         public StateBody nowPlayStateBody{ get;set; }
 
+        public Dictionary<int, StateBody> bodyDic = new Dictionary<int, StateBody>();
         protected virtual void Awake() 
         {
-            nowPlayStateBody = stateBody;
+            foreach(StateBody s in stateBody)
+            {
+                bodyDic.Add(s.ID.number, s);
+            }
+            foreach (StateBody s in stateBody)
+            {
+                foreach (NomalState sb in s.states)
+                {
+                    if (sb.stateMode == StateMode.SubState)
+                    {
+                        sb.stateBody = bodyDic[sb.subStateID.number];
+                    }
+                }
+            }
+            nowPlayStateBody = stateBody[0];
             nowPlayStateBody.AwakeInit();
+            bodyDic.Clear();
         }
         protected virtual void Start() 
         {
@@ -46,6 +62,7 @@ namespace CUEngine.Pattern
     //ステート本体
     public class StateBody
     {
+        public InstanceID ID = new InstanceID();
         public StateBody parant = null;
         private StateMonobehavior mono = null;
         //名前
@@ -193,13 +210,18 @@ namespace CUEngine.Pattern
                             mono.nowPlayStateBody.stateProcessor.PlayUpdate();
                         }
                     }
+                    if(judge.nextState.isSkipState)
+                    {
+                        mono.nowPlayStateBody.NomalStateJudge();
+                    }
+                    break;
                 }
             }
             StateBody pa = parant;
             //親のジャッジ処理も行う
             while(pa!=null)
             {
-                pa.stateProcessor.PlayUpdate();
+                pa.UpdateGame();
                 pa = pa.parant;
             }
         }

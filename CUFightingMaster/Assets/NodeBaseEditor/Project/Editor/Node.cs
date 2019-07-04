@@ -161,7 +161,7 @@ namespace CUEngine.Pattern
                 float ypos = -((rect.height / 2)) + 53f;
                 ypos += updateFuncs.Count * 62;
                 ypos += startFuncs.Count * 62;
-                ypos += 57;//ラベル分
+                ypos += 70;//ラベル分
                 for (int i = 0; i < outPoints.Count; i++)
                 {
                     outPoints[i].outPoint.Draw(new Rect(rect.position + new Vector2(0, ypos), rect.size));
