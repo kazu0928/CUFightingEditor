@@ -20,7 +20,9 @@ public class FighterInputState : StateBaseScriptMonoBehaviour
                 break;
         }
     }
-    private Direction GetPlayerMoveDirection()
+	#region 移動
+	//移動の取得
+	private Direction GetPlayerMoveDirection()
     {
         switch (input.playerDirection)
         {
@@ -87,8 +89,35 @@ public class FighterInputState : StateBaseScriptMonoBehaviour
         }
         return Direction.Neutral;
     }
-    //ジャンプ
-    public bool Input_Direction(Direction _dir)
+	#endregion
+	#region 攻撃取得
+	private string GetPlayerAtk()
+	{
+		string s = null;
+		if(input.atkBotton == "_Atk1")
+		{
+			s = "_Atk1";
+		}
+		return s;
+	}
+	#endregion
+	#region 攻撃系
+	public bool Input_Atk(string _atk)
+	{
+		Debug.Log(GetPlayerAtk());
+		return _atk == GetPlayerAtk();
+	}
+	public bool Input_Atk_True()
+	{
+		return GetPlayerAtk() != null;
+	}
+	public bool GetEndAtk()
+	{
+		return state.fighter.AnimationPlayerCompornent.EndAnimFrag;
+	}
+	#endregion
+	//ジャンプ
+	public bool Input_Direction(Direction _dir)
     {
         return GetPlayerMoveDirection() == _dir;
     }

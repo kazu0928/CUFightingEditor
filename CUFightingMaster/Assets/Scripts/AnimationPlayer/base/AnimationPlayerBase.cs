@@ -39,8 +39,8 @@ public abstract class AnimationPlayerBase : MonoBehaviour
         get { return endAnimFrag; }
     }
     //フレーム開始時に再生していたAnimationClip
-    private AnimationClip beforeClip = null; 
- 
+    private AnimationClip beforeClip = null;
+	private double beforeClipTime = 0;
     #region Playable系プロパティ
     private PlayableGraph playableGraph; //playableGraph
     private AnimationMixerPlayable mixer; //mixer
@@ -84,6 +84,7 @@ public abstract class AnimationPlayerBase : MonoBehaviour
         frameCount = 0;
         if (playableGraph.IsValid() && mixer.IsValid())
         {
+			beforeClipTime = nowClipPlayable.GetTime();
             mixer.SetTime(0);
             nowClipPlayable.SetTime(0);
             if (beforeClipPlayable.IsValid()) beforeClipPlayable.SetTime(0);
@@ -197,8 +198,13 @@ public abstract class AnimationPlayerBase : MonoBehaviour
         }
         //更新
         playableGraph.Evaluate((1.0f / nowClip.frameRate) * animationSpeed);
-        //フレーム取得
-        nowFrame = (int)(((float)mixer.GetTime() * nowClip.frameRate) * (1 / animationSpeed));
+		if (beforeClipPlayable.IsValid()) beforeClipPlayable.SetTime(beforeClipTime);
+		if (beforeClipPlayable.IsValid())
+		{
+			beforeClipPlayable.SetTime(beforeClipPlayable.GetAnimationClip().length);
+		}
+		//フレーム取得
+		nowFrame = (int)(((float)nowClipPlayable.GetTime() * nowClip.frameRate) * (1 / animationSpeed));
         bool endAnimation = (nowFrame >= (int)((nowClip.length * nowClip.frameRate * (1.0f / animationSpeed))));
         //現在のフレーム数が最大であれば
         if (endAnimation)

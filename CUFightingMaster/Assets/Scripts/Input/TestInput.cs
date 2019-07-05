@@ -33,7 +33,7 @@ public class TestInput : MonoBehaviour {
 	void Start () {
 		player = string.Format ("Player{0}_", playerIndex);
 	}
-	void Update () {
+	public void UpdateGame () {
 		DownKeyCheck ();
 	}
 
@@ -94,7 +94,7 @@ public class TestInput : MonoBehaviour {
 		SetAtkBotton ();
 		if (Input.anyKey) {
 			//ジョイスティックまたはキーボードでの方向
-			Debug.Log (player + playerDirection);
+
 
 			//攻撃ボタン
 			if (atkBotton != "") Debug.Log (atkBotton);

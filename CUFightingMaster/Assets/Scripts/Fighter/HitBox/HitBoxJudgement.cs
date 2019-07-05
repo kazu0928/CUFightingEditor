@@ -73,4 +73,8 @@ public HitBoxJudgement(FighterCore fighter)
         //transform.positionをコライダーの上に
         transform.position = new Vector3(transform.position.x, col[0].transform.position.y + ((BoxCollider)col[0]).center.y + (((BoxCollider)col[0]).size.y / 2), transform.position.z);
     }
+	public void SetGround(bool _f)
+	{
+		isGround = _f;
+	}
 }

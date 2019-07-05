@@ -55,7 +55,7 @@ public class FighterCore : MonoBehaviour
             hitJudgement = new HitBoxJudgement(this);
         }
     }
-    private void Update()
+    public void UpdateGame()
     {
         //技の入れ替え
         if (nextAnimation != null)
@@ -89,6 +89,10 @@ public class FighterCore : MonoBehaviour
 	{
         return hitJudgement.isGround;
     }
+	public void SetIsGround(bool _f)
+	{
+		hitJudgement.SetGround(_f);
+	}
     #endregion
 
     #region 初期化時エラーチェック

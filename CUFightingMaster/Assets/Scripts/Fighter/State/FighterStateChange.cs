@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿	using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using CUEngine.Pattern;
@@ -12,7 +12,12 @@ public class FighterStateChange : StateBaseScriptMonoBehaviour
     {
         fighter.SetSkill(_change,_weightFrame);
     }
-    public bool True_Method()
+	public void ChangeSkillJump(FighterSkill _change, int _weightFrame)
+	{
+		fighter.SetIsGround(false);
+		fighter.SetSkill(_change, _weightFrame);
+	}
+	public bool True_Method()
     {
         return true;
     }

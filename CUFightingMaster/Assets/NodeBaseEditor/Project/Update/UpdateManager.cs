@@ -26,7 +26,7 @@ namespace CUEngine
         {
             updateList.Add(ev);
         }
-        private void Update()
+        public void UpdateGame()
         {
             //アップデートリストにあるすべてを呼び出し
             for(int i = 0;i<updateList.Count;i++)

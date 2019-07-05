@@ -160,18 +160,9 @@ namespace CUEngine.Pattern
             {
                 //現在のステートの常時実行処理
                 stateProcessor.PlayUpdate();
-                //ステートの値が変更されたら実行処理を行う
-                if (stateProcessor.State == null)
-                {
-                    return;
-                }
-                if (stateMove)
-                {
-                    _beforeStateName = stateProcessor.State.getStateName();
-                    stateProcessor.Execute();
-                }
             }
         }
+		public bool _frag = false;
         /// <summary>
         /// 判定処理、現在のステートの中身から判定処理を実行(delegate)
         /// </summary>
@@ -194,6 +185,7 @@ namespace CUEngine.Pattern
                     }
                     stateProcessor.State = judge.nextState;
                     stateMove = true;
+					bool subState = false;
                     //サブステート有の場合
                     if(judge.nextState.stateMode == StateMode.SubState)
                     {
@@ -201,6 +193,7 @@ namespace CUEngine.Pattern
                         judge.nextState.stateBody.stateProcessor.State = judge.nextState.stateBody.states[0];
                         judge.nextState.stateBody.stateMove = true;
                         mono.nowPlayStateBody.stateProcessor.Execute();
+						subState = true;
                     }
                     else if(judge.nextState.stateMode == StateMode.EndState)
                     {
@@ -210,20 +203,40 @@ namespace CUEngine.Pattern
                             mono.nowPlayStateBody.stateProcessor.PlayUpdate();
                         }
                     }
-                    if(judge.nextState.isSkipState)
+					if(subState)
+					{
+						if(judge.nextState.stateBody.states[0].isSkipState)
+						{
+							mono.nowPlayStateBody._frag = true;
+							mono.nowPlayStateBody.NomalStateJudge();
+						}
+					}
+                    else if(judge.nextState.isSkipState)
                     {
+						mono.nowPlayStateBody._frag = true;
                         mono.nowPlayStateBody.NomalStateJudge();
                     }
-                    break;
+					//ステートの値が変更されたら実行処理を行う
+					if (stateProcessor.State == null)
+					{
+						return;
+					}
+					if (stateMove)
+					{
+						_beforeStateName = stateProcessor.State.getStateName();
+						stateProcessor.Execute();
+					}
+					break;
                 }
             }
             StateBody pa = parant;
             //親のジャッジ処理も行う
-            while(pa!=null)
+            while((pa!=null) &&( _frag == false))
             {
                 pa.UpdateGame();
                 pa = pa.parant;
             }
+			_frag = false;
         }
         //親のセット
         public void SetParant(StateBody parant)
