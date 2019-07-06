@@ -177,6 +177,7 @@ public abstract class AnimationPlayerBase : MonoBehaviour
         {
             return;
         }
+        mixer.SetTime(0);
         //ブレンドフレームが設定されていれば
         if (changeWeightFrame > 0)
         {
@@ -197,12 +198,8 @@ public abstract class AnimationPlayerBase : MonoBehaviour
             mixer.SetInputWeight(1, 0);
         }
         //更新
+        if (beforeClipPlayable.IsValid()) beforeClipPlayable.SetTime(beforeClipTime);
         playableGraph.Evaluate((1.0f / nowClip.frameRate) * animationSpeed);
-		if (beforeClipPlayable.IsValid()) beforeClipPlayable.SetTime(beforeClipTime);
-		if (beforeClipPlayable.IsValid())
-		{
-			beforeClipPlayable.SetTime(beforeClipPlayable.GetAnimationClip().length);
-		}
 		//フレーム取得
 		nowFrame = (int)(((float)nowClipPlayable.GetTime() * nowClip.frameRate) * (1 / animationSpeed));
         bool endAnimation = (nowFrame >= (int)((nowClip.length * nowClip.frameRate * (1.0f / animationSpeed))));

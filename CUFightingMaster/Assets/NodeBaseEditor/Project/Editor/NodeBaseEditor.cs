@@ -735,6 +735,7 @@ namespace CUEngine.Pattern
             if (isNowPlayng == PlayModeStateChange.EnteredEditMode)
             {
                 initFlag = true;
+                isSubStateEditor = false;
             }
         }
         void UndoCall()

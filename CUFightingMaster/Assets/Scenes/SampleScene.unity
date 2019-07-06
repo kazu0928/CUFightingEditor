@@ -4291,7 +4291,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 3.8810003, y: 0, z: 0}
 --- !u!1 &601904340 stripped
 GameObject:
@@ -4354,8 +4354,91 @@ Transform:
   - {fileID: 1220882752}
   - {fileID: 2030158169}
   m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1038537583
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1038537584}
+  m_Layer: 0
+  m_Name: Fighter
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1038537584
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1038537583}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.03866744, y: 1.6813972, z: 7.2753544}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1865372485}
+  - {fileID: 1401809366}
+  m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1085984943
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1085984944}
+  - component: {fileID: 1085984945}
+  m_Layer: 0
+  m_Name: InputManager1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1085984944
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085984943}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1435219477}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1085984945
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1085984943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b261c89b84d644681f150775643c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 0
+  player: 
+  controllerName: 
+  inputDirection: {x: 0, y: 0}
+  direction: 
+  lastDir: 5
+  playerDirection: 
+  atkBotton: 
 --- !u!1 &1220882751
 GameObject:
   m_ObjectHideFlags: 0
@@ -4441,7 +4524,7 @@ MonoBehaviour:
         comment: TRUE
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 54, y: 119}
+      nodePosition: {x: -87, y: 104}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -4535,9 +4618,37 @@ MonoBehaviour:
         judgeFuncInstance: {fileID: 1220882755}
         priority: 0
         comment: 
+      - nextStateName: "\u7ACB\u3061\u653B\u6483"
+        nextID:
+          number: 4
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: Input_Atk_True
+        judgeFuncInstance: {fileID: 1220882755}
+        priority: 0
+        comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 413, y: 324}
+      nodePosition: {x: 308, y: 312}
       toggleWindow: 1
       stateMode: 1
       subStateID:
@@ -4577,12 +4688,53 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 746, y: 135}
+      nodePosition: {x: 332, y: -35}
       toggleWindow: 1
       stateMode: 1
       subStateID:
         number: 4
       isSkipState: 0
+    - stateName: "\u7ACB\u3061\u653B\u6483"
+      ID:
+        number: 4
+      nextStateJudge:
+      - nextStateName: Entry_Point
+        nextID:
+          number: 1
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: GetEndAtk
+        judgeFuncInstance: {fileID: 1220882755}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 730, y: 399}
+      toggleWindow: 1
+      stateMode: 1
+      subStateID:
+        number: 6
+      isSkipState: 0
+    _frag: 0
   - ID:
       number: 2
     stateName: 
@@ -4622,7 +4774,7 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 14, y: 203}
+      nodePosition: {x: 22, y: 249}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -4718,7 +4870,7 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 472, y: 92}
+      nodePosition: {x: 428, y: 78}
       toggleWindow: 1
       stateMode: 1
       subStateID:
@@ -4814,12 +4966,13 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 457, y: 436}
+      nodePosition: {x: 455, y: 419}
       toggleWindow: 1
       stateMode: 1
       subStateID:
         number: 5
       isSkipState: 0
+    _frag: 0
   - ID:
       number: 3
     stateName: 
@@ -4915,7 +5068,7 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 10, y: 204}
+      nodePosition: {x: 56, y: 216}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -5007,7 +5160,7 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 481, y: 202}
+      nodePosition: {x: 450, y: 180}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -5099,7 +5252,7 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 822, y: 76}
+      nodePosition: {x: 868, y: 88}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -5191,12 +5344,13 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 830, y: 398}
+      nodePosition: {x: 876, y: 410}
       toggleWindow: 1
       stateMode: 0
       subStateID:
         number: 0
       isSkipState: 0
+    _frag: 0
   - ID:
       number: 4
     stateName: 
@@ -5406,6 +5560,7 @@ MonoBehaviour:
       subStateID:
         number: 0
       isSkipState: 0
+    _frag: 0
   - ID:
       number: 5
     stateName: 
@@ -5487,6 +5642,89 @@ MonoBehaviour:
       subStateID:
         number: 0
       isSkipState: 0
+    _frag: 0
+  - ID:
+      number: 6
+    stateName: 
+    stateMove: 0
+    states:
+    - stateName: Atk_Entry
+      ID:
+        number: 1
+      nextStateJudge:
+      - nextStateName: zyaku
+        nextID:
+          number: 2
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: _Atk1
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 3
+        argType2: 0
+        judgeFuncName: Input_Atk
+        judgeFuncInstance: {fileID: 1220882755}
+        priority: 0
+        comment: 
+      execDelegate: []
+      playUpdateDelegate: []
+      nodePosition: {x: 225, y: 216}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 1
+    - stateName: zyaku
+      ID:
+        number: 2
+      nextStateJudge: []
+      execDelegate:
+      - actionName: ChangeSkill
+        instance: {fileID: 1220882754}
+        arg1:
+          object_Arg: {fileID: 11400000, guid: f93e4baadabcb60439c367092f0cfdf9, type: 2}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 2
+        argType1: 0
+        argType2: 1
+        comment: 
+      playUpdateDelegate: []
+      nodePosition: {x: 604, y: 185}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+    _frag: 0
 --- !u!114 &1220882754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5558,6 +5796,57 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 50, y: 10, z: 50}
   m_Center: {x: 0, y: -5, z: 0}
+--- !u!1 &1326219561
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1326219562}
+  - component: {fileID: 1326219563}
+  m_Layer: 0
+  m_Name: InputManager2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1326219562
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326219561}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1435219477}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1326219563
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1326219561}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1b261c89b84d644681f150775643c93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerIndex: 1
+  player: 
+  controllerName: 
+  inputDirection: {x: 0, y: 0}
+  direction: 
+  lastDir: 5
+  playerDirection: 
+  atkBotton: 
 --- !u!1 &1401809364
 GameObject:
   m_ObjectHideFlags: 0
@@ -5601,12 +5890,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1401809364}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -5, y: 0, z: -7.47}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -5.0386677, y: -1.6813972, z: -14.745354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 601904343}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 1038537584}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1435219473
@@ -5619,8 +5908,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1435219477}
   - component: {fileID: 1435219476}
-  - component: {fileID: 1435219475}
-  - component: {fileID: 1435219474}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -5628,46 +5915,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1435219474
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435219473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b261c89b84d644681f150775643c93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerIndex: 1
-  player: 
-  controllerName: 
-  inputDirection: {x: 0, y: 0}
-  direction: 
-  lastDir: 5
-  playerDirection: 
-  atkBotton: 
---- !u!114 &1435219475
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1435219473}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1b261c89b84d644681f150775643c93, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerIndex: 0
-  player: 
-  controllerName: 
-  inputDirection: {x: 0, y: 0}
-  direction: 
-  lastDir: 5
-  playerDirection: 
-  atkBotton: 
 --- !u!114 &1435219476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5681,7 +5928,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDs: 0
-  testInput: []
+  testInput:
+  - {fileID: 1085984945}
+  - {fileID: 1326219563}
 --- !u!4 &1435219477
 Transform:
   m_ObjectHideFlags: 0
@@ -5692,9 +5941,11 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 5.1561656, y: 2.8064237, z: -7.5762215}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1085984944}
+  - {fileID: 1326219562}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1453529985
 PrefabInstance:
@@ -5872,9 +6123,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1660738366}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 844f5bf961e48ea4989ccca2d8bd1b54, type: 3}
+  m_Script: {fileID: 11500000, guid: 7fc95ad1fd78bad4aacc9e59fc7c7e34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDs: 0
+  Player_one: {fileID: 1401809365}
+  Player_two: {fileID: 1865372484}
+  input_one: {fileID: 1085984945}
+  input_two: {fileID: 1326219563}
 --- !u!4 &1660738368
 Transform:
   m_ObjectHideFlags: 0
@@ -5887,7 +6143,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1725526276
 PrefabInstance:
@@ -5939,7 +6195,7 @@ PrefabInstance:
     - target: {fileID: 8986002022294389509, guid: 3e460a65c49da924ea0b092f809801cf,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8986002022294389509, guid: 3e460a65c49da924ea0b092f809801cf,
         type: 3}
@@ -6001,13 +6257,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1865372483}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5, y: 0, z: -7.47}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.9613323, y: -1.6813972, z: -14.745354}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2134508036}
-  m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_Father: {fileID: 1038537584}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2030158168
 GameObject:
@@ -6263,6 +6519,7 @@ MonoBehaviour:
       subStateID:
         number: 4
       isSkipState: 0
+    _frag: 0
   - ID:
       number: 2
     stateName: 
@@ -6500,6 +6757,7 @@ MonoBehaviour:
       subStateID:
         number: 5
       isSkipState: 0
+    _frag: 0
   - ID:
       number: 3
     stateName: 
@@ -6877,6 +7135,7 @@ MonoBehaviour:
       subStateID:
         number: 0
       isSkipState: 0
+    _frag: 0
   - ID:
       number: 4
     stateName: 
@@ -7086,6 +7345,7 @@ MonoBehaviour:
       subStateID:
         number: 0
       isSkipState: 0
+    _frag: 0
   - ID:
       number: 5
     stateName: 
@@ -7167,6 +7427,7 @@ MonoBehaviour:
       subStateID:
         number: 0
       isSkipState: 0
+    _frag: 0
 --- !u!1 &2134508033 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100242, guid: c4f3f2f8e501f7e44813ca8998dd4fd2,

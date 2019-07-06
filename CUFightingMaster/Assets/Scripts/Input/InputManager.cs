@@ -6,9 +6,4 @@ using CUEngine.Pattern;
 public class InputManager : SingletonMono<InputManager>
 {
     public TestInput[] testInput;
-    private new void Awake()
-    {
-        base.Awake();
-        testInput = GetComponents<TestInput>();
-    }
 }
