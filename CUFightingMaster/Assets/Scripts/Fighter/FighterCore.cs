@@ -274,106 +274,104 @@ public class FighterCore : MonoBehaviour
             Vector3 pos; Vector3 size;
             if (nowPlaySkill != null)
             {
+                #region Head
                 if (nowPlaySkill.headFlag)
                 {
-                    #region Head
-                    if (nowPlaySkill.headFlag)
+                    pos = transform.position + status.headHitBox.localPosition;
+                    size = status.headHitBox.size;
+                    for (int i = 0; i < nowPlaySkill.plusHeadHitBox.Count; i++)
                     {
-                        pos = transform.position + status.headHitBox.localPosition;
-                        size = status.headHitBox.size;
-                        for (int i = 0; i < nowPlaySkill.plusHeadHitBox.Count; i++)
+                        if ((nowPlaySkill.plusHeadHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusHeadHitBox[i].endFrame >= animationPlayer.NowFrame)
                         {
-                            if ((nowPlaySkill.plusHeadHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusHeadHitBox[i].endFrame >= animationPlayer.NowFrame)
-                            {
-                                pos = transform.position + status.headHitBox.localPosition + nowPlaySkill.plusHeadHitBox[i].hitBox.localPosition;
-                                size = status.headHitBox.size + nowPlaySkill.plusHeadHitBox[i].hitBox.size;
-                            }
-                        }
-                        Gizmos.DrawWireCube(pos, size);
-                    }
-                    #endregion
-                    #region Body
-                    if (nowPlaySkill.bodyFlag)
-                    {
-                        pos = transform.position + status.bodyHitBox.localPosition;
-                        size = status.bodyHitBox.size;
-                        for (int i = 0; i < nowPlaySkill.plusBodyHitBox.Count; i++)
-                        {
-                            if ((nowPlaySkill.plusBodyHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusBodyHitBox[i].endFrame >= animationPlayer.NowFrame)
-                            {
-                                pos = transform.position + status.bodyHitBox.localPosition + nowPlaySkill.plusBodyHitBox[i].hitBox.localPosition;
-                                size = status.bodyHitBox.size + nowPlaySkill.plusBodyHitBox[i].hitBox.size;
-                            }
-                        }
-                        Gizmos.DrawWireCube(pos, size);
-                    }
-                    #endregion
-                    #region Foot
-                    if (nowPlaySkill.footFlag)
-                    {
-                        pos = transform.position + status.footHitBox.localPosition;
-                        size = status.footHitBox.size;
-                        for (int i = 0; i < nowPlaySkill.plusFootHitBox.Count; i++)
-                        {
-                            if ((nowPlaySkill.plusFootHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusFootHitBox[i].endFrame >= animationPlayer.NowFrame)
-                            {
-                                pos = transform.position + status.footHitBox.localPosition + nowPlaySkill.plusFootHitBox[i].hitBox.localPosition;
-                                size = status.footHitBox.size + nowPlaySkill.plusFootHitBox[i].hitBox.size;
-                            }
-                        }
-                        Gizmos.DrawWireCube(pos, size);
-                    }
-                    #endregion
-                    #region Grab
-                    if (nowPlaySkill.grabFlag)
-                    {
-                        Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
-                        pos = transform.position + status.grabHitBox.localPosition;
-                        size = status.grabHitBox.size;
-                        for (int i = 0; i < nowPlaySkill.plusGrabHitBox.Count; i++)
-                        {
-                            if ((nowPlaySkill.plusGrabHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusGrabHitBox[i].endFrame >= animationPlayer.NowFrame)
-                            {
-                                pos = transform.position + status.grabHitBox.localPosition + nowPlaySkill.plusGrabHitBox[i].hitBox.localPosition;
-                                size = status.grabHitBox.size + nowPlaySkill.plusGrabHitBox[i].hitBox.size;
-                            }
-                        }
-                        Gizmos.DrawCube(pos, size);
-                    }
-                    #endregion
-                    #region Custom
-                    for (int i = 0; i < nowPlaySkill.customHitBox.Count; i++)
-                    {
-                        pos = transform.position;
-                        size = Vector3.zero;
-                        for (int j = 0; j < nowPlaySkill.customHitBox[i].frameHitBoxes.Count; j++)
-                        {
-                            if ((nowPlaySkill.customHitBox[i].frameHitBoxes[j].startFrame <= animationPlayer.NowFrame) &&
-                                (nowPlaySkill.customHitBox[i].frameHitBoxes[j].endFrame >= animationPlayer.NowFrame))
-                            {
-                                pos = transform.position + nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.localPosition;
-                                size = nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.size;
-                            }
-                        }
-                        switch (nowPlaySkill.customHitBox[i].mode)
-                        {
-                            case HitBoxMode.HitBox:
-                                Gizmos.color = new Color(1, 0, 0, 0.5f);
-                                Gizmos.DrawCube(pos, size);
-                                break;
-                            case HitBoxMode.HurtBox:
-                                Gizmos.color = Color.green;
-                                Gizmos.DrawWireCube(pos, size);
-                                break;
-                            case HitBoxMode.GrabAndSqueeze:
-                                Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
-                                Gizmos.DrawCube(pos, size);
-                                break;
+                            pos = transform.position + status.headHitBox.localPosition + nowPlaySkill.plusHeadHitBox[i].hitBox.localPosition;
+                            size = status.headHitBox.size + nowPlaySkill.plusHeadHitBox[i].hitBox.size;
                         }
                     }
-                    #endregion
+                    Gizmos.DrawWireCube(pos, size);
                 }
+                #endregion
+                #region Body
+                if (nowPlaySkill.bodyFlag)
+                {
+                    pos = transform.position + status.bodyHitBox.localPosition;
+                    size = status.bodyHitBox.size;
+                    for (int i = 0; i < nowPlaySkill.plusBodyHitBox.Count; i++)
+                    {
+                        if ((nowPlaySkill.plusBodyHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusBodyHitBox[i].endFrame >= animationPlayer.NowFrame)
+                        {
+                            pos = transform.position + status.bodyHitBox.localPosition + nowPlaySkill.plusBodyHitBox[i].hitBox.localPosition;
+                            size = status.bodyHitBox.size + nowPlaySkill.plusBodyHitBox[i].hitBox.size;
+                        }
+                    }
+                    Gizmos.DrawWireCube(pos, size);
+                }
+                #endregion
+                #region Foot
+                if (nowPlaySkill.footFlag)
+                {
+                    pos = transform.position + status.footHitBox.localPosition;
+                    size = status.footHitBox.size;
+                    for (int i = 0; i < nowPlaySkill.plusFootHitBox.Count; i++)
+                    {
+                        if ((nowPlaySkill.plusFootHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusFootHitBox[i].endFrame >= animationPlayer.NowFrame)
+                        {
+                            pos = transform.position + status.footHitBox.localPosition + nowPlaySkill.plusFootHitBox[i].hitBox.localPosition;
+                            size = status.footHitBox.size + nowPlaySkill.plusFootHitBox[i].hitBox.size;
+                        }
+                    }
+                    Gizmos.DrawWireCube(pos, size);
+                }
+                #endregion
+                #region Grab
+                if (nowPlaySkill.grabFlag)
+                {
+                    Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
+                    pos = transform.position + status.grabHitBox.localPosition;
+                    size = status.grabHitBox.size;
+                    for (int i = 0; i < nowPlaySkill.plusGrabHitBox.Count; i++)
+                    {
+                        if ((nowPlaySkill.plusGrabHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusGrabHitBox[i].endFrame >= animationPlayer.NowFrame)
+                        {
+                            pos = transform.position + status.grabHitBox.localPosition + nowPlaySkill.plusGrabHitBox[i].hitBox.localPosition;
+                            size = status.grabHitBox.size + nowPlaySkill.plusGrabHitBox[i].hitBox.size;
+                        }
+                    }
+                    Gizmos.DrawCube(pos, size);
+                }
+                #endregion
+                #region Custom
+                for (int i = 0; i < nowPlaySkill.customHitBox.Count; i++)
+                {
+                    pos = transform.position;
+                    size = Vector3.zero;
+                    for (int j = 0; j < nowPlaySkill.customHitBox[i].frameHitBoxes.Count; j++)
+                    {
+                        if ((nowPlaySkill.customHitBox[i].frameHitBoxes[j].startFrame <= animationPlayer.NowFrame) &&
+                            (nowPlaySkill.customHitBox[i].frameHitBoxes[j].endFrame >= animationPlayer.NowFrame))
+                        {
+                            pos = transform.position + nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.localPosition;
+                            size = nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.size;
+                        }
+                    }
+                    switch (nowPlaySkill.customHitBox[i].mode)
+                    {
+                        case HitBoxMode.HitBox:
+                            Gizmos.color = new Color(1, 0, 0, 0.5f);
+                            Gizmos.DrawCube(pos, size);
+                            break;
+                        case HitBoxMode.HurtBox:
+                            Gizmos.color = Color.green;
+                            Gizmos.DrawWireCube(pos, size);
+                            break;
+                        case HitBoxMode.GrabAndSqueeze:
+                            Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
+                            Gizmos.DrawCube(pos, size);
+                            break;
+                    }
+                }
+                #endregion
             }
+
             else
             {
                 DefaultHitBoxDraw();

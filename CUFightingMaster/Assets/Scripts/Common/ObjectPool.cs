@@ -19,6 +19,8 @@ public class ComponentObjectPool<T>　where T : Component
         //オブジェクトプール用親オブジェクト生成
         var obj = new GameObject();
         if(parant!=null)obj.transform.parent = parant.transform;//親子付け
+        obj.transform.localPosition = Vector3.zero;
+        obj.transform.localRotation = Quaternion.identity;
         obj.name = name;
         //リストの初期化
         poolObjList = new List<GameObject>();
@@ -44,7 +46,8 @@ public class ComponentObjectPool<T>　where T : Component
 		newObj.name = typeof(T).Name + (poolObjList.Count + 1);
 		T com = newObj.AddComponent(typeof(T)) as T;
 		newObj.transform.parent = parantObject.transform;
-        newObj.transform.position = Vector3.zero;
+        newObj.transform.localPosition = Vector3.zero;
+        newObj.transform.localRotation = Quaternion.identity;
         return newObj;
 	}
 

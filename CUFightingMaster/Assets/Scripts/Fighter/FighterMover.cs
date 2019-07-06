@@ -75,6 +75,14 @@ public class FighterMover
                 nowPlayMoveNumber++;
             }
         }
+        //ループ時
+        else
+        {
+            if(moves[0].startFrame<=core.AnimationPlayerCompornent.NowFrame && moves[nowPlayMoveNumber].startFrame > core.AnimationPlayerCompornent.NowFrame)
+            {
+                nowPlayMoveNumber = 0;
+            }
+        }
         if (nowPlayMoveNumber < 0) return;//-1なら動かない
         int xDirection = 1;
         if (core.Direction == PlayerDirection.Left) xDirection = -1;

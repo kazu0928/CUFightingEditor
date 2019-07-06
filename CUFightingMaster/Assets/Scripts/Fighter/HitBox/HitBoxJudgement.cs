@@ -8,8 +8,13 @@ public class HitBoxJudgement
     private Transform transform;//動かすTransform
     public bool isGround { get;private set; }
 
-#region 初期化
-public HitBoxJudgement(FighterCore fighter)
+    private List<FighterSkill.CustomHitBox> customs = new List<FighterSkill.CustomHitBox>();
+    private List<int> startFrames = new List<int>();
+    private List<int> nowPlayCustomNumber = new List<int>();
+    private List<ComponentObjectPool<BoxCollider>.Objs> nowPlayCollider = new List<ComponentObjectPool<BoxCollider>.Objs>();
+
+    #region 初期化
+    public HitBoxJudgement(FighterCore fighter)
 	{
 		transform = fighter.transform;
 		core = fighter;
@@ -57,6 +62,8 @@ public HitBoxJudgement(FighterCore fighter)
 	}
     public void UpdateGame()
     {
+        ChangeSkillInit();
+        CustomHitBoxes();
         GroundCheck();
     }
     //地面判定
@@ -77,4 +84,94 @@ public HitBoxJudgement(FighterCore fighter)
 	{
 		isGround = _f;
 	}
+    	#region 技入れ替えチェック
+	//入れ替わり処理
+	private void ChangeSkillInit()
+	{
+		//入れ替わったかどうか
+		if (core.changeSkill == false) return;
+        if (core.NowPlaySkill != null)
+        {
+            foreach(ComponentObjectPool<BoxCollider>.Objs g in nowPlayCollider)
+            {
+                if (g.gameObject != null)
+                {
+                    g.gameObject.SetActive(false);
+                }
+            }
+            customs = new List<FighterSkill.CustomHitBox>(core.NowPlaySkill.customHitBox);
+            nowPlayCustomNumber = new List<int>();
+            nowPlayCollider = new List<ComponentObjectPool<BoxCollider>.Objs>();
+            foreach (FighterSkill.CustomHitBox c in customs)
+            {
+                c.frameHitBoxes = new List<FighterSkill.FrameHitBox>(c.frameHitBoxes);
+                nowPlayCollider.Add(new ComponentObjectPool<BoxCollider>.Objs());
+            }
+            //移動配列のソート、フレームが近い順に並べる
+            for (int i = 0; i < customs.Count; i++)
+            {
+                if (customs[i].frameHitBoxes.Count > 1)
+                {
+                    customs[i].frameHitBoxes.Sort((a, b) => a.startFrame - b.startFrame);
+                }
+                nowPlayCustomNumber.Add(-1);
+            }
+        }
+        //なければなし
+        else
+        {
+            customs = null;
+        }
+    }
+    private void CustomHitBoxes()
+    {
+        if ((customs == null) || (customs.Count == 0)) return;
+        for (int i = 0; i < customs.Count; i++)
+        {
+            if((customs[i].frameHitBoxes == null)||(customs.Count == 0)) continue;
+            if (customs[i].frameHitBoxes.Count > nowPlayCustomNumber[i] + 1)
+            {
+                //現在再生中の次フレームを越えれば
+                if (customs[i].frameHitBoxes[nowPlayCustomNumber[i] + 1].startFrame <= core.AnimationPlayerCompornent.NowFrame)
+                {
+                    //処理
+                    if (nowPlayCollider[i].gameObject != null)
+                    {
+                        nowPlayCollider[i].gameObject.SetActive(false);
+                    }
+                    nowPlayCustomNumber[i]++;
+                    nowPlayCollider[i] = hitBoxCollider.GetObjects();
+                    nowPlayCollider[i].gameObject.tag = CommonConstants.Tags.GetTags(customs[i].mode);
+                    nowPlayCollider[i].gameObject.layer = LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber));
+                    nowPlayCollider[i].component.size = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.size;
+                    nowPlayCollider[i].component.center = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
+                }
+            }
+            //ループ時
+            else
+            {
+                if (customs[i].frameHitBoxes[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && customs[i].frameHitBoxes[nowPlayCustomNumber[i]].startFrame > core.AnimationPlayerCompornent.NowFrame)
+                {
+                    //処理
+                    if (nowPlayCollider[i].gameObject != null)
+                    {
+                        nowPlayCollider[i].gameObject.SetActive(false);
+                    }
+                    nowPlayCustomNumber[i] = 0;
+                    //処理
+                    nowPlayCollider[i] = hitBoxCollider.GetObjects();
+                    nowPlayCollider[i].gameObject.tag = CommonConstants.Tags.GetTags(customs[i].mode);
+                    nowPlayCollider[i].gameObject.layer = LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber));
+                    nowPlayCollider[i].component.size = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.size;
+                    nowPlayCollider[i].component.center = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
+                }
+            }
+            if (nowPlayCustomNumber[i] < 0) continue;
+            if(customs[i].frameHitBoxes[nowPlayCustomNumber[i]].endFrame < core.AnimationPlayerCompornent.NowFrame)
+            {
+                nowPlayCollider[i].gameObject.SetActive(false);
+            }
+        }
+    }
+    #endregion
 }
