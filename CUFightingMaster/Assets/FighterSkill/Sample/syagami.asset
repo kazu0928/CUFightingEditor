@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: syagami
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 0}
+  animationClip: {fileID: 7400000, guid: 9ff9a4f373abf1143ad4b3288e8cfd5d, type: 2}
   animationSpeed: 1
   inBlend: 0
   outBlend: 0

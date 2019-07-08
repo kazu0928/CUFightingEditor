@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: Middle_Punch
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 0}
+  animationClip: {fileID: 7400000, guid: 160482ab48241e741bb12fa7c6e3b375, type: 2}
   animationSpeed: 1
   inBlend: 0
   outBlend: 0
@@ -28,4 +28,3 @@ MonoBehaviour:
   bodyFlag: 1
   footFlag: 1
   grabFlag: 1
-  preceding_Input_Frame: 0

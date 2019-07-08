@@ -35,7 +35,17 @@ public class PlayerSkillEditor : EditorWindow
 	#endregion
 	private void OnGUI()
 	{
+		EditorGUILayout.BeginHorizontal();
 		CustomLabel(playerSkill.name, Color.white, Color.gray, 20, FontStyle.Italic);
+		if (GUILayout.Button("保存", GUILayout.Height(50), GUILayout.Width(80)))
+		{
+			//ダーティとしてマークする(変更があった事を記録する)
+			EditorUtility.SetDirty(playerSkill);
+
+			//保存する
+			AssetDatabase.SaveAssets();
+		}
+		EditorGUILayout.EndHorizontal();
 		EditorGUILayout.BeginVertical("Box");
 		EditorGUILayout.LabelField("プレビュー用キャラプレハブ");
 		previewCharacter = (EditorGUILayout.ObjectField(previewCharacter, typeof(GameObject), true) as GameObject);
@@ -76,7 +86,7 @@ public class PlayerSkillEditor : EditorWindow
 		AnimationPlayFrame();
         //エディタ全体の再描画
         EditorApplication.QueuePlayerLoopUpdate();
-    }
+	}
 
     #region タブ_Styles
     private enum Tab

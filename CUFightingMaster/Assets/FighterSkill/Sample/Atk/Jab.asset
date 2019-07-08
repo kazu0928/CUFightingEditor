@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: Jab
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 0}
+  animationClip: {fileID: 7400000, guid: 39d96726e7921204d967d1d5ba9b7c24, type: 2}
   animationSpeed: 1
   inBlend: 0
   outBlend: 0
@@ -20,7 +20,14 @@ MonoBehaviour:
   plusBodyHitBox: []
   plusFootHitBox: []
   plusGrabHitBox: []
-  customHitBox: []
+  customHitBox:
+  - mode: 0
+    frameHitBoxes:
+    - hitBox:
+        size: {x: 1, y: 1, z: 1}
+        localPosition: {x: 2.07, y: 3.76, z: 0}
+      startFrame: 2
+      endFrame: 4
   isContinue: 0
   movements: []
   gravityMoves: []

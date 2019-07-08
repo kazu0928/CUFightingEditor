@@ -29,7 +29,17 @@ public class FigterEditor : EditorWindow
 	#endregion
 	private void OnGUI()
 	{
+		EditorGUILayout.BeginHorizontal();
 		CustomLabel(fighterStatus.name, Color.white, Color.gray, 20, FontStyle.Italic);
+		if (GUILayout.Button("保存", GUILayout.Height(50), GUILayout.Width(80)))
+		{
+			//ダーティとしてマークする(変更があった事を記録する)
+			EditorUtility.SetDirty(fighterStatus);
+
+			//保存する
+			AssetDatabase.SaveAssets();
+		}
+		EditorGUILayout.EndHorizontal();
 		TabDraw();
 		scrollPos = GUILayout.BeginScrollView(scrollPos);
 		switch (_tab)

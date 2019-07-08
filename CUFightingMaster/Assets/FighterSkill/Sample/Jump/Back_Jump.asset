@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: Back_Jump
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: fac312b4768b8054bae040539b5de939, type: 2}
+  animationClip: {fileID: 7400000, guid: b50b85bf5a555414f903d8512672e46c, type: 2}
   animationSpeed: 0.5
   inBlend: 0
   outBlend: 0
@@ -26,8 +26,8 @@ MonoBehaviour:
   - movement: {x: 0, y: 4.89, z: 0}
     startFrame: 0
   gravityMoves:
-  - movement: {x: 1.5, y: -0.24, z: 0}
-    limitMove: {x: 1.5, y: -22.36, z: 0}
+  - movement: {x: -1.5, y: -0.24, z: 0}
+    limitMove: {x: -1.5, y: -22.36, z: 0}
     startFrame: 0
   headFlag: 1
   bodyFlag: 1

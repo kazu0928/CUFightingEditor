@@ -184,7 +184,7 @@ public class FighterCore : MonoBehaviour
                             if ((skill.plusHeadHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusHeadHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
                             {
                                 Vector3 lPos = status.headHitBox.localPosition;
-                                Vector3 plusLpos = nowPlaySkill.plusHeadHitBox[i].hitBox.localPosition;
+                                Vector3 plusLpos = skill.plusHeadHitBox[i].hitBox.localPosition;
                                 lPos.x *= dir;
                                 plusLpos *= dir;
                                 pos = transform.position + lPos + plusLpos;
@@ -204,7 +204,7 @@ public class FighterCore : MonoBehaviour
                             if ((skill.plusBodyHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusBodyHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
                             {
                                 Vector3 lPos = status.bodyHitBox.localPosition;
-                                Vector3 plusLpos = nowPlaySkill.plusBodyHitBox[i].hitBox.localPosition;
+                                Vector3 plusLpos = skill.plusBodyHitBox[i].hitBox.localPosition;
                                 lPos.x *= dir;
                                 plusLpos *= dir;
                                 pos = transform.position + lPos + plusLpos;
@@ -224,7 +224,7 @@ public class FighterCore : MonoBehaviour
                             if ((skill.plusFootHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusFootHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
                             {
                                 Vector3 lPos = status.footHitBox.localPosition;
-                                Vector3 plusLpos = nowPlaySkill.plusFootHitBox[i].hitBox.localPosition;
+                                Vector3 plusLpos = skill.plusFootHitBox[i].hitBox.localPosition;
                                 lPos.x *= dir;
                                 plusLpos *= dir;
                                 pos = transform.position + lPos + plusLpos;
@@ -245,7 +245,7 @@ public class FighterCore : MonoBehaviour
                             if ((skill.plusGrabHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusGrabHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
                             {
                                 Vector3 lPos = status.grabHitBox.localPosition;
-                                Vector3 plusLpos = nowPlaySkill.plusGrabHitBox[i].hitBox.localPosition;
+                                Vector3 plusLpos = skill.plusGrabHitBox[i].hitBox.localPosition;
                                 lPos.x *= dir;
                                 plusLpos *= dir;
                                 pos = transform.position + lPos + plusLpos;
@@ -265,7 +265,7 @@ public class FighterCore : MonoBehaviour
                             if ((skill.customHitBox[i].frameHitBoxes[j].startFrame <= PlayerSkillEditorParameter.instance.window.value) &&
                                 (skill.customHitBox[i].frameHitBoxes[j].endFrame >= PlayerSkillEditorParameter.instance.window.value))
                             {
-                                Vector3 lPos = nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.localPosition;
+                                Vector3 lPos = skill.customHitBox[i].frameHitBoxes[j].hitBox.localPosition;
                                 lPos.x *= dir;
                                 pos = transform.position + lPos;
                                 size = skill.customHitBox[i].frameHitBoxes[j].hitBox.size;

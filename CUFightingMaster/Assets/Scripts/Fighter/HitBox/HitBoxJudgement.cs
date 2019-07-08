@@ -204,9 +204,6 @@ public class HitBoxJudgement
         Collider[] col = Physics.OverlapBox(new Vector3(t.position.x + _bCol.center.x, t.position.y + _bCol.center.y, t.position.z + _bCol.center.z), _bCol.size/2, Quaternion.identity, -1 - (1 << LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber))));
         foreach(Collider c in col)
         {
-            Debug.Log(_bCol.size);
-            Debug.Log(t.position.x + _bCol.center.x);
-            Debug.Log(c.gameObject.name);
             if(c.gameObject.tag == CommonConstants.Tags.GetTags(HitBoxMode.HurtBox))
             {
                 GameManager.Instance.GetPlayFighterCore(c.gameObject.layer).SetDamage(_cHit);
