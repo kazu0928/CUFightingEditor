@@ -12,6 +12,14 @@ public enum PlayerDirection
 	Left,
 }
 
+public enum PlayerStatus
+{
+	Idle,
+	Move,
+	Damage,
+	Attack,
+}
+
 public enum Direction
 {
     Neutral,

@@ -16,6 +16,7 @@ public class FighterCore : MonoBehaviour
     private HitBoxJudgement hitJudgement = null;
     [SerializeField] private FighterSkill nextAnimation = null;//ここにいれればアニメーションが再生される
     [SerializeField] private FighterSkill nowPlaySkill = null;
+    [SerializeField] private FighterSkill.CustomHitBox applyDamageSkill = null;//ダメージを食らった時に入る
     private int changeWeightFrame = 0;
     public bool changeSkill { get; private set; }//技が入れ替わったかどうか
     #region Getter
@@ -42,6 +43,10 @@ public class FighterCore : MonoBehaviour
     public PlayerDirection Direction
     {
         get { return direction; }
+    }
+    public FighterSkill.CustomHitBox GetDamage
+    {
+        get { return applyDamageSkill; }
     }
     #endregion
     private void Start()
@@ -93,6 +98,10 @@ public class FighterCore : MonoBehaviour
 	{
 		hitJudgement.SetGround(_f);
 	}
+    public void SetDamage(FighterSkill.CustomHitBox _s)
+    {
+        applyDamageSkill = _s;
+    }
     #endregion
 
     #region 初期化時エラーチェック
@@ -145,6 +154,11 @@ public class FighterCore : MonoBehaviour
         Vector3 vector3 = new Vector3(1, 1, 1);
         Gizmos.DrawWireCube(new Vector3(transform.position.x, transform.position.y + (vector3.y / 2), transform.position.z), vector3);
         if (status == null) return;
+        int dir = 1;
+        if (direction == PlayerDirection.Left)
+        {
+            dir = -1;
+        }
         #region 未再生
         if (!EditorApplication.isPlaying)
         {
@@ -159,6 +173,7 @@ public class FighterCore : MonoBehaviour
                     //技情報のキャッシュ
                     var skill = PlayerSkillEditorParameter.instance.window.playerSkill;
                     #region Head
+                    //TODO 関数化
                     if (skill.headFlag)
                     {
                         pos = transform.position + status.headHitBox.localPosition;
@@ -168,7 +183,11 @@ public class FighterCore : MonoBehaviour
                         {
                             if ((skill.plusHeadHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusHeadHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
                             {
-                                pos = transform.position + status.headHitBox.localPosition + skill.plusHeadHitBox[i].hitBox.localPosition;
+                                Vector3 lPos = status.headHitBox.localPosition;
+                                Vector3 plusLpos = nowPlaySkill.plusHeadHitBox[i].hitBox.localPosition;
+                                lPos.x *= dir;
+                                plusLpos *= dir;
+                                pos = transform.position + lPos + plusLpos;
                                 size = status.headHitBox.size + skill.plusHeadHitBox[i].hitBox.size;
                             }
                         }
@@ -184,7 +203,11 @@ public class FighterCore : MonoBehaviour
                         {
                             if ((skill.plusBodyHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusBodyHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
                             {
-                                pos = transform.position + status.bodyHitBox.localPosition + skill.plusBodyHitBox[i].hitBox.localPosition;
+                                Vector3 lPos = status.bodyHitBox.localPosition;
+                                Vector3 plusLpos = nowPlaySkill.plusBodyHitBox[i].hitBox.localPosition;
+                                lPos.x *= dir;
+                                plusLpos *= dir;
+                                pos = transform.position + lPos + plusLpos;
                                 size = status.bodyHitBox.size + skill.plusBodyHitBox[i].hitBox.size;
                             }
                         }
@@ -200,7 +223,11 @@ public class FighterCore : MonoBehaviour
                         {
                             if ((skill.plusFootHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusFootHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
                             {
-                                pos = transform.position + status.footHitBox.localPosition + skill.plusFootHitBox[i].hitBox.localPosition;
+                                Vector3 lPos = status.footHitBox.localPosition;
+                                Vector3 plusLpos = nowPlaySkill.plusFootHitBox[i].hitBox.localPosition;
+                                lPos.x *= dir;
+                                plusLpos *= dir;
+                                pos = transform.position + lPos + plusLpos;
                                 size = status.footHitBox.size + skill.plusFootHitBox[i].hitBox.size;
                             }
                         }
@@ -217,7 +244,11 @@ public class FighterCore : MonoBehaviour
                         {
                             if ((skill.plusGrabHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusGrabHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
                             {
-                                pos = transform.position + status.grabHitBox.localPosition + skill.plusGrabHitBox[i].hitBox.localPosition;
+                                Vector3 lPos = status.grabHitBox.localPosition;
+                                Vector3 plusLpos = nowPlaySkill.plusGrabHitBox[i].hitBox.localPosition;
+                                lPos.x *= dir;
+                                plusLpos *= dir;
+                                pos = transform.position + lPos + plusLpos;
                                 size = status.grabHitBox.size + skill.plusGrabHitBox[i].hitBox.size;
                             }
                         }
@@ -234,7 +265,9 @@ public class FighterCore : MonoBehaviour
                             if ((skill.customHitBox[i].frameHitBoxes[j].startFrame <= PlayerSkillEditorParameter.instance.window.value) &&
                                 (skill.customHitBox[i].frameHitBoxes[j].endFrame >= PlayerSkillEditorParameter.instance.window.value))
                             {
-                                pos = transform.position + skill.customHitBox[i].frameHitBoxes[j].hitBox.localPosition;
+                                Vector3 lPos = nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.localPosition;
+                                lPos.x *= dir;
+                                pos = transform.position + lPos;
                                 size = skill.customHitBox[i].frameHitBoxes[j].hitBox.size;
                             }
                         }
@@ -283,7 +316,11 @@ public class FighterCore : MonoBehaviour
                     {
                         if ((nowPlaySkill.plusHeadHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusHeadHitBox[i].endFrame >= animationPlayer.NowFrame)
                         {
-                            pos = transform.position + status.headHitBox.localPosition + nowPlaySkill.plusHeadHitBox[i].hitBox.localPosition;
+                            Vector3 lPos = status.headHitBox.localPosition;
+                            Vector3 plusLpos = nowPlaySkill.plusHeadHitBox[i].hitBox.localPosition;
+                            lPos.x *= dir;
+                            plusLpos *= dir;
+                            pos = transform.position + lPos + plusLpos;
                             size = status.headHitBox.size + nowPlaySkill.plusHeadHitBox[i].hitBox.size;
                         }
                     }
@@ -299,7 +336,11 @@ public class FighterCore : MonoBehaviour
                     {
                         if ((nowPlaySkill.plusBodyHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusBodyHitBox[i].endFrame >= animationPlayer.NowFrame)
                         {
-                            pos = transform.position + status.bodyHitBox.localPosition + nowPlaySkill.plusBodyHitBox[i].hitBox.localPosition;
+                            Vector3 lPos = status.bodyHitBox.localPosition;
+                            Vector3 plusLpos = nowPlaySkill.plusBodyHitBox[i].hitBox.localPosition;
+                            lPos.x *= dir;
+                            plusLpos *= dir;
+                            pos = transform.position + lPos + plusLpos;
                             size = status.bodyHitBox.size + nowPlaySkill.plusBodyHitBox[i].hitBox.size;
                         }
                     }
@@ -315,7 +356,11 @@ public class FighterCore : MonoBehaviour
                     {
                         if ((nowPlaySkill.plusFootHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusFootHitBox[i].endFrame >= animationPlayer.NowFrame)
                         {
-                            pos = transform.position + status.footHitBox.localPosition + nowPlaySkill.plusFootHitBox[i].hitBox.localPosition;
+                            Vector3 lPos = status.footHitBox.localPosition;
+                            Vector3 plusLpos = nowPlaySkill.plusFootHitBox[i].hitBox.localPosition;
+                            lPos.x *= dir;
+                            plusLpos *= dir;
+                            pos = transform.position + lPos + plusLpos;
                             size = status.footHitBox.size + nowPlaySkill.plusFootHitBox[i].hitBox.size;
                         }
                     }
@@ -332,7 +377,11 @@ public class FighterCore : MonoBehaviour
                     {
                         if ((nowPlaySkill.plusGrabHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusGrabHitBox[i].endFrame >= animationPlayer.NowFrame)
                         {
-                            pos = transform.position + status.grabHitBox.localPosition + nowPlaySkill.plusGrabHitBox[i].hitBox.localPosition;
+                            Vector3 lPos = status.grabHitBox.localPosition;
+                            Vector3 plusLpos = nowPlaySkill.plusGrabHitBox[i].hitBox.localPosition;
+                            lPos.x *= dir;
+                            plusLpos *= dir;
+                            pos = transform.position + lPos + plusLpos;
                             size = status.grabHitBox.size + nowPlaySkill.plusGrabHitBox[i].hitBox.size;
                         }
                     }
@@ -349,7 +398,9 @@ public class FighterCore : MonoBehaviour
                         if ((nowPlaySkill.customHitBox[i].frameHitBoxes[j].startFrame <= animationPlayer.NowFrame) &&
                             (nowPlaySkill.customHitBox[i].frameHitBoxes[j].endFrame >= animationPlayer.NowFrame))
                         {
-                            pos = transform.position + nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.localPosition;
+                            Vector3 lPos = nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.localPosition;
+                            lPos.x *= dir;
+                            pos = transform.position + lPos;
                             size = nowPlaySkill.customHitBox[i].frameHitBoxes[j].hitBox.size;
                         }
                     }

@@ -12,7 +12,8 @@ public class HitBoxJudgement
     private List<int> startFrames = new List<int>();
     private List<int> nowPlayCustomNumber = new List<int>();
     private List<ComponentObjectPool<BoxCollider>.Objs> nowPlayCollider = new List<ComponentObjectPool<BoxCollider>.Objs>();
-
+    private int RightLeft = 1;
+    private bool attackHit = false;//技が当たってるかどうか
     #region 初期化
     public HitBoxJudgement(FighterCore fighter)
 	{
@@ -63,11 +64,19 @@ public class HitBoxJudgement
     public void UpdateGame()
     {
         ChangeSkillInit();
+        if (core.Direction == PlayerDirection.Right)
+        {
+            RightLeft = 1;
+        }
+        if (core.Direction == PlayerDirection.Left)
+        {
+            RightLeft = -1;
+        }
         CustomHitBoxes();
         GroundCheck();
     }
     //地面判定
-	private void GroundCheck()
+    private void GroundCheck()
 	{
 		Vector3 vector3 = new Vector3(2, 8, 2);
 		Collider[] col = Physics.OverlapBox(new Vector3(transform.position.x, transform.position.y + (vector3.y / 2), transform.position.z), vector3 / 2.0f, Quaternion.identity, 1 << LayerMask.NameToLayer(CommonConstants.Layers.Ground));
@@ -84,7 +93,7 @@ public class HitBoxJudgement
 	{
 		isGround = _f;
 	}
-    	#region 技入れ替えチェック
+    #region 技入れ替えチェック
 	//入れ替わり処理
 	private void ChangeSkillInit()
 	{
@@ -102,6 +111,7 @@ public class HitBoxJudgement
             customs = new List<FighterSkill.CustomHitBox>(core.NowPlaySkill.customHitBox);
             nowPlayCustomNumber = new List<int>();
             nowPlayCollider = new List<ComponentObjectPool<BoxCollider>.Objs>();
+            attackHit = false;
             foreach (FighterSkill.CustomHitBox c in customs)
             {
                 c.frameHitBoxes = new List<FighterSkill.FrameHitBox>(c.frameHitBoxes);
@@ -123,12 +133,13 @@ public class HitBoxJudgement
             customs = null;
         }
     }
+    #endregion
     private void CustomHitBoxes()
     {
         if ((customs == null) || (customs.Count == 0)) return;
         for (int i = 0; i < customs.Count; i++)
         {
-            if((customs[i].frameHitBoxes == null)||(customs.Count == 0)) continue;
+            if ((customs[i].frameHitBoxes == null) || (customs.Count == 0)) continue;
             if (customs[i].frameHitBoxes.Count > nowPlayCustomNumber[i] + 1)
             {
                 //現在再生中の次フレームを越えれば
@@ -144,7 +155,10 @@ public class HitBoxJudgement
                     nowPlayCollider[i].gameObject.tag = CommonConstants.Tags.GetTags(customs[i].mode);
                     nowPlayCollider[i].gameObject.layer = LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber));
                     nowPlayCollider[i].component.size = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.size;
-                    nowPlayCollider[i].component.center = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
+                    Vector3 tmp = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
+                    tmp.x *= RightLeft;
+                    nowPlayCollider[i].component.center = tmp;
+                    attackHit = false;
                 }
             }
             //ループ時
@@ -163,15 +177,42 @@ public class HitBoxJudgement
                     nowPlayCollider[i].gameObject.tag = CommonConstants.Tags.GetTags(customs[i].mode);
                     nowPlayCollider[i].gameObject.layer = LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber));
                     nowPlayCollider[i].component.size = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.size;
-                    nowPlayCollider[i].component.center = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
+                    Vector3 tmp = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
+                    tmp.x *= RightLeft;
+                    nowPlayCollider[i].component.center = tmp;
+                    attackHit = false;
                 }
             }
             if (nowPlayCustomNumber[i] < 0) continue;
-            if(customs[i].frameHitBoxes[nowPlayCustomNumber[i]].endFrame < core.AnimationPlayerCompornent.NowFrame)
+            if (customs[i].frameHitBoxes[nowPlayCustomNumber[i]].endFrame < core.AnimationPlayerCompornent.NowFrame)
             {
                 nowPlayCollider[i].gameObject.SetActive(false);
+                return;
+            }
+            if (attackHit == true)return;
+            if (nowPlayCollider[i].gameObject.tag == CommonConstants.Tags.GetTags(HitBoxMode.HitBox))
+            {
+                //ダメージ判定処理
+                CheckHitBox(nowPlayCollider[i].component, customs[i]);
             }
         }
     }
-    #endregion
+    private void CheckHitBox(BoxCollider _bCol,FighterSkill.CustomHitBox _cHit)
+    {
+        Transform t = _bCol.transform;
+        
+        Collider[] col = Physics.OverlapBox(new Vector3(t.position.x + _bCol.center.x, t.position.y + _bCol.center.y, t.position.z + _bCol.center.z), _bCol.size/2, Quaternion.identity, -1 - (1 << LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber))));
+        foreach(Collider c in col)
+        {
+            Debug.Log(_bCol.size);
+            Debug.Log(t.position.x + _bCol.center.x);
+            Debug.Log(c.gameObject.name);
+            if(c.gameObject.tag == CommonConstants.Tags.GetTags(HitBoxMode.HurtBox))
+            {
+                GameManager.Instance.GetPlayFighterCore(c.gameObject.layer).SetDamage(_cHit);
+                attackHit = true;
+                return;
+            }
+        }
+    }
 }

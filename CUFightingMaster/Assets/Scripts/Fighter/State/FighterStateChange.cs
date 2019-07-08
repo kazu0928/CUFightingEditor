@@ -12,6 +12,11 @@ public class FighterStateChange : StateBaseScriptMonoBehaviour
     {
         fighter.SetSkill(_change,_weightFrame);
     }
+    public void Damage(FighterSkill _change,int _weightFrame)
+    {
+        fighter.SetDamage(new FighterSkill.CustomHitBox());
+        fighter.SetSkill(_change, _weightFrame);
+    }
 	public void ChangeSkillJump(FighterSkill _change, int _weightFrame)
 	{
 		fighter.SetIsGround(false);

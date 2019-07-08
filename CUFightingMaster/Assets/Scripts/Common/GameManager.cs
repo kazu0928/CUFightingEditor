@@ -6,14 +6,10 @@ using CUEngine;
 
 public class GameManager : SingletonMono<GameManager>
 {
-    [SerializeField]
-    private FighterCore Player_one;
-    [SerializeField]
-    private FighterCore Player_two;
-	[SerializeField]
-	private TestInput input_one;
-	[SerializeField]
-	private TestInput input_two;
+    public FighterCore Player_one;
+    public FighterCore Player_two;
+	public TestInput input_one;
+	public TestInput input_two;
 	void Start()
 	{
 		QualitySettings.vSyncCount = 0;
@@ -27,4 +23,27 @@ public class GameManager : SingletonMono<GameManager>
 		Player_one.UpdateGame();
 		Player_two.UpdateGame();
 	}
+	public FighterCore GetPlayFighterCore(PlayerNumber _mode)
+	{
+		switch (_mode)
+		{
+			case PlayerNumber.Player1:
+                return Player_one;
+			case PlayerNumber.Player2:
+                return Player_two;
+        }
+        return null;
+    }
+	public FighterCore GetPlayFighterCore(int _layer)
+	{
+		if(_layer == LayerMask.NameToLayer(CommonConstants.Layers.Player_One))
+		{
+            return Player_one;
+        }
+		else if(_layer == LayerMask.NameToLayer(CommonConstants.Layers.Player_Two))
+		{
+            return Player_two;
+        }
+        return null;
+    }
 }

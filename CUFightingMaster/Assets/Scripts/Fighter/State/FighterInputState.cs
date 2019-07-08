@@ -7,6 +7,7 @@ public class FighterInputState : StateBaseScriptMonoBehaviour
 {
     private FighterStateChange state = null;
     private TestInput input = null;
+    private Direction beforeInput = Direction.Neutral;
     private void Start()
     {
         state = GetComponent<FighterStateChange>();
@@ -104,14 +105,13 @@ public class FighterInputState : StateBaseScriptMonoBehaviour
 	#region 攻撃系
 	public bool Input_Atk(string _atk)
 	{
-		Debug.Log(GetPlayerAtk());
 		return _atk == GetPlayerAtk();
 	}
 	public bool Input_Atk_True()
 	{
 		return GetPlayerAtk() != null;
 	}
-	public bool GetEndAtk()
+	public bool GetEndAnim()
 	{
 		return state.fighter.AnimationPlayerCompornent.EndAnimFrag;
 	}
@@ -119,10 +119,19 @@ public class FighterInputState : StateBaseScriptMonoBehaviour
 	//ジャンプ
 	public bool Input_Direction(Direction _dir)
     {
+        beforeInput = GetPlayerMoveDirection();
         return GetPlayerMoveDirection() == _dir;
     }
     public bool GroundCheck(bool _frag)
     {
         return state.fighter.GroundCheck() == _frag;
+    }
+    public bool ApplyDamage()
+    {
+        return state.fighter.GetDamage.frameHitBoxes.Count > 0;
+    }
+    public bool InputChange()
+    {
+        return beforeInput != GetPlayerMoveDirection();
     }
 }
