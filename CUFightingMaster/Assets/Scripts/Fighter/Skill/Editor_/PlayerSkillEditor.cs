@@ -164,7 +164,19 @@ public class PlayerSkillEditor : EditorWindow
 			EditorGUILayout.EndHorizontal();
 		}
 		EditorGUILayout.EndVertical();
-	}
+        EditorGUILayout.BeginVertical("Box");
+        playerSkill.status = (SkillStatus)EditorGUILayout.EnumPopup("属性", playerSkill.status);
+        playerSkill.hitMode = (HitMode)EditorGUILayout.EnumPopup("ヒットモード", playerSkill.hitMode);
+		if(playerSkill.hitMode == HitMode.Grab)
+		{
+            EditorGUILayout.BeginVertical("Box");
+            playerSkill.throwMotion = (AnimationClip)EditorGUILayout.ObjectField("投げモーション",playerSkill.throwMotion,typeof(AnimationClip),false);
+            playerSkill.enemyThrowMotion = (AnimationClip)EditorGUILayout.ObjectField("敵投げられモーション", playerSkill.enemyThrowMotion, typeof(AnimationClip), false);
+            EditorGUILayout.EndVertical();
+        }
+        playerSkill.cancelFrag = (SkillStatus)EditorGUILayout.EnumFlagsField("キャンセル属性", playerSkill.cancelFrag);
+        EditorGUILayout.EndVertical();
+    }
     #endregion
     #region 当たり判定_Tab
     private List<bool> foldOutFlags = new List<bool>();
@@ -207,7 +219,37 @@ public class PlayerSkillEditor : EditorWindow
             EditorGUILayout.EndHorizontal();
             bool temp = foldOutFlags[i];
             //FoldOut
-            foldOutFlags[i] = FoldOutHitBox(box.frameHitBoxes, i.ToString(), ref temp);
+            foldOutFlags[i] = FoldOutHitBox(box.frameHitBoxes, i.ToString(), ref temp, box);
+            if (box != null)
+            {
+                if (box.mode == HitBoxMode.HitBox)
+                {
+                    EditorGUILayout.BeginHorizontal();
+                    box.hitPoint = (HitPoint)EditorGUILayout.EnumPopup("上中下", box.hitPoint);
+                    box.hitStrength = (HitStrength)EditorGUILayout.EnumPopup("強弱", box.hitStrength);
+                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal();
+                    box.isDown = EditorGUILayout.Toggle("ダウン", box.isDown);
+                    box.hitStop = EditorGUILayout.IntField("ヒットストップ値", box.hitStop);
+                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal();
+                    box.damage = EditorGUILayout.IntField("ダメージ量", box.damage);
+                    box.stanDamage = EditorGUILayout.IntField("スタン値", box.stanDamage);
+                    EditorGUILayout.EndHorizontal();
+                    EditorGUILayout.BeginHorizontal();
+                    box.knockBack = EditorGUILayout.IntField("ノックバック値", box.knockBack);
+                    box.plusGauge = EditorGUILayout.IntField("ゲージ増加量", box.plusGauge);
+                    EditorGUILayout.EndHorizontal();
+                    if (!box.isDown)
+                    {
+                        EditorGUILayout.BeginHorizontal();
+                        box.hitRigor = EditorGUILayout.IntField("ヒット硬直", box.hitRigor);
+                        box.guardHitRigor = EditorGUILayout.IntField("ガード硬直", box.guardHitRigor);
+                        EditorGUILayout.EndHorizontal();
+                    }
+                }
+            }
+
             i++;
             EditorGUILayout.EndVertical();
         }
@@ -243,7 +285,7 @@ public class PlayerSkillEditor : EditorWindow
 		EditorGUILayout.EndVertical();
 	}
     //ヒットボックス個々（FoldOutした中身）
-	private bool FoldOutHitBox(List<FighterSkill.FrameHitBox> frameHitBox,string label,ref bool frag)
+	private bool FoldOutHitBox(List<FighterSkill.FrameHitBox> frameHitBox,string label,ref bool frag,FighterSkill.CustomHitBox cus = null)
 	{
 		if (frag = CustomUI.Foldout(label, frag))
 		{
@@ -285,6 +327,7 @@ public class PlayerSkillEditor : EditorWindow
 
 				//当たり判定の設定
 				HitFoldOut(frameHitBox[i]);
+
                 EditorGUILayout.EndVertical();
                 if(f)
                 {

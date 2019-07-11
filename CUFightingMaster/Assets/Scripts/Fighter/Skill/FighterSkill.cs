@@ -22,17 +22,28 @@ public class FighterSkill : ScriptableObject
 	{
 		public HitBox_ hitBox;
 		public int startFrame;
-		public int endFrame;
-	}
+		public int endFrame;        
+    }
     //当たり判定群
     [System.Serializable]
     public class CustomHitBox
     {
         public HitBoxMode mode;
         public List<FrameHitBox> frameHitBoxes = new List<FrameHitBox>();
+        public int hitStop;             //ヒットストップ
+        public HitPoint hitPoint;       //上段中段下段
+        public HitStrength hitStrength; //弱中強
+        public int damage;              //ダメージ
+        public int stanDamage;          //スタン値
+        public int knockBack;           //ノックバック値
+                                        //TODO::ヒットエフェクト
+        public bool isDown = false;     //ダウンするかどうか
+        public int hitRigor;            //ヒット硬直
+        public int guardHitRigor;       //ガード硬直
+        public int plusGauge;           //ゲージ増加量
     }
-	//移動量
-	[System.Serializable]
+    //移動量
+    [System.Serializable]
 	public class Move
 	{
 		public Vector3 movement;
@@ -47,9 +58,16 @@ public class FighterSkill : ScriptableObject
 		public int startFrame;
 	}
     #endregion
-    public AnimationClip animationClip = null; //再生するアニメーション
-    public float animationSpeed = 1;
-
+    public AnimationClip animationClip = null;  //再生するアニメーション
+    public float animationSpeed = 1;            //アニメーションの速度
+    public SkillStatus status = SkillStatus.Normal;                  //Normal,Special等
+                                                //地上か空中か
+    public HitMode hitMode = HitMode.Normal;    //投げかどうか
+    public AnimationClip throwMotion = null;    //投げだった場合のモーション
+    public AnimationClip enemyThrowMotion = null;//相手の投げられモーション
+                                                //TODO::エフェクトリスト
+    public SkillStatus cancelFrag = (SkillStatus)(1<<0);//キャンセルできるもの(ビット)
+                                                //TODO::飛び道具
     //ブレンドするかしないか
     public bool inBlend = false;
     public bool outBlend = false;

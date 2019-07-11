@@ -21,7 +21,7 @@ public class FighterStatus : ScriptableObject
 	}
 	public class SkillAnimation
 	{
-		public PlayerSkillStatus status;
+		public SkillStatus status;
 		public FighterSkill skill;
 	}
 

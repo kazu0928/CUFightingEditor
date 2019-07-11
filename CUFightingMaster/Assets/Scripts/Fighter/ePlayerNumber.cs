@@ -11,26 +11,13 @@ public enum PlayerDirection
 	Right,
 	Left,
 }
-
-public enum PlayerSkillStatus
+public enum SkillStatus
 {
-	Idle,		//待機
-	Front_Walk, //前歩き
-	Back_Walk,	//後ろ歩き
-	Jump,		//上ジャンプ
-	Front_Jamp, //前ジャンプ
-	Back_Jamp,  //後ジャンプ
-	Crouching,	//しゃがみ
-
-	Custom_1,
-	Custom_2,
-	Custom_3,
-	Custom_4,
-	Custom_5,
-	Custom_6,
-	Custom_7,
-	Custom_8,
-	Custom_9,
+    Normal = 1 << 0,
+    Special = 1 << 1,
+    Unique = 1 << 2,
+    Critical = 1 << 3,
+    Move = 1 << 4,
 }
 
 public enum Direction
@@ -44,4 +31,24 @@ public enum Direction
 	UpBack,
 	DownFront,
 	DownBack,
+}
+
+public enum HitPoint
+{
+	Top,
+	Middle,
+	Bottom,
+}
+
+public enum HitMode
+{
+	Normal,
+	Grab,
+}
+
+public enum HitStrength
+{
+	Light,
+	Middle,
+	Strong,
 }
