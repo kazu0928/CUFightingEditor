@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: 26a05cd2252cf224190b72a5f7452982, type: 2}
   animationSpeed: 1
+  status: 1
+  hitMode: 0
+  throwMotion: {fileID: 0}
+  enemyThrowMotion: {fileID: 0}
+  cancelFrag: 1
+  barrageCancelFrag: 0
+  cancelLayer: 0
   inBlend: 0
   outBlend: 0
   plusHeadHitBox: []
@@ -23,7 +30,10 @@ MonoBehaviour:
   customHitBox: []
   isContinue: 0
   movements: []
-  gravityMoves: []
+  gravityMoves:
+  - movement: {x: 0, y: -0.24, z: 0}
+    limitMove: {x: 0, y: -22.36, z: 0}
+    startFrame: 0
   headFlag: 1
   bodyFlag: 1
   footFlag: 1

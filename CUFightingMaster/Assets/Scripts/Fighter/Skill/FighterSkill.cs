@@ -38,6 +38,8 @@ public class FighterSkill : ScriptableObject
         public int knockBack;           //ノックバック値
                                         //TODO::ヒットエフェクト
         public bool isDown = false;     //ダウンするかどうか
+        public bool isFaceDown = false; //うつ伏せかどうか
+        public bool isPassiveNotPossible = false;//受け身不可
         public int hitRigor;            //ヒット硬直
         public int guardHitRigor;       //ガード硬直
         public int plusGauge;           //ゲージ増加量
@@ -67,7 +69,9 @@ public class FighterSkill : ScriptableObject
     public AnimationClip enemyThrowMotion = null;//相手の投げられモーション
                                                 //TODO::エフェクトリスト
     public SkillStatus cancelFrag = (SkillStatus)(1<<0);//キャンセルできるもの(ビット)
-                                                //TODO::飛び道具
+                                                        //TODO::飛び道具
+    public bool barrageCancelFrag = false;      //連打キャンセル
+    public int cancelLayer = 0;                 //キャンセルできるレイヤー
     //ブレンドするかしないか
     public bool inBlend = false;
     public bool outBlend = false;

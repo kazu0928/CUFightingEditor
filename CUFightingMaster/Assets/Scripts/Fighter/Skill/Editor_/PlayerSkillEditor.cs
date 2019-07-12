@@ -175,6 +175,10 @@ public class PlayerSkillEditor : EditorWindow
             EditorGUILayout.EndVertical();
         }
         playerSkill.cancelFrag = (SkillStatus)EditorGUILayout.EnumFlagsField("キャンセル属性", playerSkill.cancelFrag);
+        EditorGUILayout.BeginHorizontal();
+        playerSkill.barrageCancelFrag = EditorGUILayout.Toggle("連打キャンセル", playerSkill.barrageCancelFrag);
+        playerSkill.cancelLayer = EditorGUILayout.IntField("キャンセルレイヤー",playerSkill.cancelLayer);
+        EditorGUILayout.EndHorizontal();
         EditorGUILayout.EndVertical();
     }
     #endregion
@@ -232,6 +236,13 @@ public class PlayerSkillEditor : EditorWindow
                     box.isDown = EditorGUILayout.Toggle("ダウン", box.isDown);
                     box.hitStop = EditorGUILayout.IntField("ヒットストップ値", box.hitStop);
                     EditorGUILayout.EndHorizontal();
+					if(box.isDown)
+					{
+                        EditorGUILayout.BeginHorizontal();
+                        box.isFaceDown = EditorGUILayout.Toggle("うつ伏せダウン", box.isFaceDown);
+                        box.isPassiveNotPossible = EditorGUILayout.Toggle("受け身不可", box.isPassiveNotPossible);
+                        EditorGUILayout.EndHorizontal();
+                    }
                     EditorGUILayout.BeginHorizontal();
                     box.damage = EditorGUILayout.IntField("ダメージ量", box.damage);
                     box.stanDamage = EditorGUILayout.IntField("スタン値", box.stanDamage);
@@ -456,7 +467,7 @@ public class PlayerSkillEditor : EditorWindow
         }
     }
     #endregion
-    #region カスタムラベル_CustumLabel()
+    #region カスタムラベル_CustomLabel()
     void CustomLabel(string text, Color textColor, Color backColor, int fontSize, FontStyle fontStyle = FontStyle.Bold)
     {
         Color beforeBackColor = GUI.backgroundColor;

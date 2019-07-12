@@ -14,6 +14,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: 39d96726e7921204d967d1d5ba9b7c24, type: 2}
   animationSpeed: 1
+  status: 1
+  hitMode: 0
+  throwMotion: {fileID: 0}
+  enemyThrowMotion: {fileID: 0}
+  cancelFrag: 1
+  barrageCancelFrag: 0
+  cancelLayer: 0
   inBlend: 0
   outBlend: 0
   plusHeadHitBox: []
@@ -28,6 +35,18 @@ MonoBehaviour:
         localPosition: {x: 2.07, y: 3.76, z: 0}
       startFrame: 2
       endFrame: 4
+    hitStop: 0
+    hitPoint: 2
+    hitStrength: 2
+    damage: 0
+    stanDamage: 0
+    knockBack: 0
+    isDown: 0
+    isFaceDown: 0
+    isPassiveNotPossible: 0
+    hitRigor: 0
+    guardHitRigor: 0
+    plusGauge: 0
   isContinue: 0
   movements: []
   gravityMoves: []

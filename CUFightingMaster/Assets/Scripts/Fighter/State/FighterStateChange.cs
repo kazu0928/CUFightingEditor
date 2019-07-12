@@ -12,15 +12,20 @@ public class FighterStateChange : StateBaseScriptMonoBehaviour
     {
         fighter.SetSkill(_change,_weightFrame);
     }
+    //スキル入れ替え
+    public void ChangeSkillConstant(SkillConstants _constants, int _weightFrame)
+    {
+        fighter.SetSkill(fighter.Status.constantsSkills[(int)_constants], _weightFrame);
+    }
     public void Damage(FighterSkill _change,int _weightFrame)
     {
         fighter.SetDamage(new FighterSkill.CustomHitBox());
         fighter.SetSkill(_change, _weightFrame);
     }
-	public void ChangeSkillJump(FighterSkill _change, int _weightFrame)
+	public void ChangeSkillJump(SkillConstants _constants, int _weightFrame)
 	{
 		fighter.SetIsGround(false);
-		fighter.SetSkill(_change, _weightFrame);
+		fighter.SetSkill(fighter.Status.constantsSkills[(int)_constants], _weightFrame);
 	}
 	public bool True_Method()
     {

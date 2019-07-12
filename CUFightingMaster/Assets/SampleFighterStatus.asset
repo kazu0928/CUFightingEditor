@@ -24,3 +24,75 @@ MonoBehaviour:
   grabHitBox:
     size: {x: 1.18, y: 3.95, z: 1}
     localPosition: {x: 0.06, y: 1.94, z: 0}
+  constantsSkills:
+  - {fileID: 11400000, guid: 048e121f7d7bda0468e9a9c3c8a0e993, type: 2}
+  - {fileID: 11400000, guid: 4ffcb7025c167ab4f87101f280e8c280, type: 2}
+  - {fileID: 11400000, guid: 8d582050ac006f742b333cd6265dcad5, type: 2}
+  - {fileID: 11400000, guid: 91a3f71b2d032ef4e8b5893dc0523603, type: 2}
+  - {fileID: 11400000, guid: 2d501e7d5335f984fa923f77ce6afdd7, type: 2}
+  - {fileID: 11400000, guid: fec45e3b022f4104482be49b39515510, type: 2}
+  - {fileID: 11400000, guid: a24a8d05e09f5174e84d5b1321592301, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  uniqueSkills: []
+  specialSkills: []
+  CASkills: []

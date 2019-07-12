@@ -12,11 +12,11 @@ public class FighterStatus : ScriptableObject
 		public Vector3 size;
 		public Vector3 localPosition;
 	}
-
+	[System.Serializable]
 	public class SkillAnimationCustom
 	{
-		public string Name;
 		public string Command;
+		
 		public FighterSkill skill;
 	}
 	public class SkillAnimation
@@ -30,12 +30,16 @@ public class FighterStatus : ScriptableObject
 	public HitBox_ bodyHitBox = new HitBox_();
 	public HitBox_ footHitBox = new HitBox_();
     public HitBox_ grabHitBox = new HitBox_();
+    //スキル
+    public FighterSkill[] constantsSkills = { };
+    public List<SkillAnimationCustom> uniqueSkills = new List<SkillAnimationCustom>();
+    public List<SkillAnimationCustom> specialSkills = new List<SkillAnimationCustom>();
+    public List<SkillAnimationCustom> CASkills = new List<SkillAnimationCustom>();
 
-	public List<SkillAnimation> skills;
 
-	#region EDITOR_
+    #region EDITOR_
 #if UNITY_EDITOR
-	[CustomEditor(typeof(FighterStatus))]
+    [CustomEditor(typeof(FighterStatus))]
 	public class FigterStatusInspector : Editor
 	{
 		public override void OnInspectorGUI()

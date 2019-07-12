@@ -18,7 +18,9 @@ MonoBehaviour:
   hitMode: 1
   throwMotion: {fileID: 0}
   enemyThrowMotion: {fileID: 0}
-  cancelFrag: 0
+  cancelFrag: 1
+  barrageCancelFrag: 0
+  cancelLayer: 0
   inBlend: 0
   outBlend: 0
   plusHeadHitBox: []
