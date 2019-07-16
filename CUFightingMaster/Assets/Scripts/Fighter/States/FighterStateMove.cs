@@ -41,31 +41,40 @@ public class FighterStateMove : StateBaseScriptMonoBehaviour
         switch (_dir)
         {
             case Direction.Neutral:
-                stateBase.ChangeSkillConstant(SkillConstants.Idle, 5);
+				stateBase.core.SetIsCrouching(false);
+				stateBase.ChangeSkillConstant(SkillConstants.Idle, 5);
                 break;
             case Direction.Front:
-                stateBase.ChangeSkillConstant(SkillConstants.Front_Walk, 0);
+				stateBase.core.SetIsCrouching(false);
+				stateBase.ChangeSkillConstant(SkillConstants.Front_Walk, 5);
                 break;
             case Direction.Back:
-                stateBase.ChangeSkillConstant(SkillConstants.Back_Walk, 0);
+				stateBase.core.SetIsCrouching(false);
+				stateBase.ChangeSkillConstant(SkillConstants.Back_Walk, 5);
                 break;
             case Direction.Down:
+				stateBase.core.SetIsCrouching(true);
                 stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
                 break;
             case Direction.DownBack:
-                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+				stateBase.core.SetIsCrouching(true);
+				stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
                 break;
             case Direction.DownFront:
-                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+				stateBase.core.SetIsCrouching(true);
+				stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
                 break;
             case Direction.Up:
-                stateBase.ChangeSkillConstant(SkillConstants.Jump, 0);
+				stateBase.core.SetIsCrouching(false);
+				stateBase.ChangeSkillConstant(SkillConstants.Jump, 0);
                 break;
             case Direction.UpFront:
-                stateBase.ChangeSkillConstant(SkillConstants.Front_Jump, 0);
+				stateBase.core.SetIsCrouching(false);
+				stateBase.ChangeSkillConstant(SkillConstants.Front_Jump, 0);
                 break;
             case Direction.UpBack:
-                stateBase.ChangeSkillConstant(SkillConstants.Back_Jump, 0);
+				stateBase.core.SetIsCrouching(false);
+				stateBase.ChangeSkillConstant(SkillConstants.Back_Jump, 0);
                 break;
         }
 

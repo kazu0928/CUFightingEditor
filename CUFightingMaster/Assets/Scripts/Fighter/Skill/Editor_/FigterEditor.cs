@@ -134,8 +134,11 @@ public class FigterEditor : EditorWindow
             fighterStatus.constantsSkills[CommonConstants.Skills.Jump] = (FighterSkill)EditorGUILayout.ObjectField("ジャンプ", fighterStatus.constantsSkills[CommonConstants.Skills.Jump], typeof(FighterSkill), false);
             fighterStatus.constantsSkills[CommonConstants.Skills.Front_Jump] = (FighterSkill)EditorGUILayout.ObjectField("前ジャンプ", fighterStatus.constantsSkills[CommonConstants.Skills.Front_Jump], typeof(FighterSkill), false);
             fighterStatus.constantsSkills[CommonConstants.Skills.Back_Jump] = (FighterSkill)EditorGUILayout.ObjectField("後ジャンプ", fighterStatus.constantsSkills[CommonConstants.Skills.Back_Jump], typeof(FighterSkill), false);
-        }
-		if(standHitDamage = CustomUI.Foldout("立ちやられ",standHitDamage))
+			fighterStatus.constantsSkills[CommonConstants.Skills.Stand_Guard] = (FighterSkill)EditorGUILayout.ObjectField("立ちガード", fighterStatus.constantsSkills[CommonConstants.Skills.Stand_Guard], typeof(FighterSkill), false);
+			fighterStatus.constantsSkills[CommonConstants.Skills.Crouching_Guard] = (FighterSkill)EditorGUILayout.ObjectField("しゃがみガード", fighterStatus.constantsSkills[CommonConstants.Skills.Crouching_Guard], typeof(FighterSkill), false);
+
+		}
+		if (standHitDamage = CustomUI.Foldout("立ちやられ",standHitDamage))
 		{
             SSet("上弱", ref fighterStatus.constantsSkills[CommonConstants.Skills.Stand_Light_Top_HitMotion]);
             SSet("上中", ref fighterStatus.constantsSkills[CommonConstants.Skills.Stand_Middle_Top_HitMotion]);

@@ -20,7 +20,6 @@ public class FighterStateAttack : StateBaseScriptMonoBehaviour
                 stateBase.ChangeSkillConstant(SkillConstants.Stand_Light_Jab, 0);
                 break;
             case "_Atk2":
-                Debug.Log("aa");
                 stateBase.ChangeSkillConstant(SkillConstants.Stand_Middle_Jab, 0);
                 break;
         }

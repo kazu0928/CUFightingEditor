@@ -42,6 +42,8 @@ MonoBehaviour:
     stanDamage: 0
     knockBack: 0
     isDown: 0
+    isFaceDown: 0
+    isPassiveNotPossible: 0
     hitRigor: 0
     guardHitRigor: 0
     plusGauge: 0

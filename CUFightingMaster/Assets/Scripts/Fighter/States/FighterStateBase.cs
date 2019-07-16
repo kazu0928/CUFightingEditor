@@ -38,9 +38,14 @@ public class FighterStateBase : StateBaseScriptMonoBehaviour
     {
         return core.GroundCheck() == ground;
     }
+	//ダメージ受けたとき
+	public bool IsApplyDamage()
+	{
+		return core.GetDamage.frameHitBoxes.Count > 0;
+	}
 
-    //スキル入れ替え
-    public void ChangeSkillConstant(SkillConstants _constants, int _weightFrame)
+	//スキル入れ替え
+	public void ChangeSkillConstant(SkillConstants _constants, int _weightFrame)
     {
         core.SetSkill(core.Status.constantsSkills[(int)_constants], _weightFrame);
     }

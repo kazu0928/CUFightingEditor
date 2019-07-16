@@ -17,6 +17,7 @@ public class FighterCore : MonoBehaviour
     [SerializeField] private FighterSkill nextAnimation = null;//ここにいれればアニメーションが再生される
     [SerializeField] private FighterSkill nowPlaySkill = null;
     [SerializeField] private FighterSkill.CustomHitBox applyDamageSkill = null;//ダメージを食らった時に入る
+	[SerializeField] private bool isCrouching = false;
     private int changeWeightFrame = 0;
     public bool changeSkill { get; private set; }//技が入れ替わったかどうか
     #region Getter
@@ -102,6 +103,10 @@ public class FighterCore : MonoBehaviour
     {
         applyDamageSkill = _s;
     }
+	public void SetIsCrouching(bool _f)
+	{
+		isCrouching = _f;
+	}
     #endregion
 
     #region 初期化時エラーチェック
