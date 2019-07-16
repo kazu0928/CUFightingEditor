@@ -109,4 +109,15 @@ public class TestInput : MonoBehaviour {
 		if (Input.GetButtonDown (player + "Attack2")) atkBotton += "_Atk2";
 		if (Input.GetButtonDown (player + "Attack3")) atkBotton += "_Atk3";
 	}
+
+	public string GetPlayerAtk()
+    {
+        string s = null;
+        if (atkBotton != "")
+        {
+            s = atkBotton;
+        }
+        return s;
+    }
+
 }

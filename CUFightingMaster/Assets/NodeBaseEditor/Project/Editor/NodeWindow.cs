@@ -366,7 +366,7 @@ namespace CUEngine.Pattern
 
             }
         }
-        //戻り値booolのメソッドをポップアップで表示
+        //戻り値boolのメソッドをポップアップで表示
         private void PopupBoolMethod()
         {
             //boolメソッド欄表示
@@ -598,7 +598,7 @@ namespace CUEngine.Pattern
                     foreach (NowMethods method in methods)
                     {
                         Array.Resize(ref options, options.Length + 1);
-                        options[count] = method.nowMethod.Name + ":Class " + (method.compornent as StateBaseScriptMonoBehaviour).name;
+                        options[count] = method.nowMethod.Name + ":Class " + (method.compornent as StateBaseScriptMonoBehaviour).stateName;
                         count++;
                     }
                 }
