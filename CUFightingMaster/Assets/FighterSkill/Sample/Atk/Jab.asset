@@ -35,16 +35,16 @@ MonoBehaviour:
         localPosition: {x: 2.07, y: 3.76, z: 0}
       startFrame: 2
       endFrame: 4
-    hitStop: 0
-    hitPoint: 2
-    hitStrength: 2
+    hitStop: 5
+    hitPoint: 0
+    hitStrength: 0
     damage: 0
     stanDamage: 0
     knockBack: 0
     isDown: 0
     isFaceDown: 0
     isPassiveNotPossible: 0
-    hitRigor: 0
+    hitRigor: 16
     guardHitRigor: 0
     plusGauge: 0
   isContinue: 1

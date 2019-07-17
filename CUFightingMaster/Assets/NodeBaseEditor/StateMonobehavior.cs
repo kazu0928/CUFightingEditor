@@ -203,7 +203,11 @@ namespace CUEngine.Pattern
                             mono.nowPlayStateBody.stateProcessor.PlayUpdate();
                         }
                     }
-					if(subState)
+					if (stateProcessor.State != null)
+					{
+						stateProcessor.Execute();
+					}
+					if (subState)
 					{
 						if(judge.nextState.stateBody.states[0].isSkipState)
 						{
@@ -224,7 +228,6 @@ namespace CUEngine.Pattern
 					if (stateMove)
 					{
 						_beforeStateName = stateProcessor.State.getStateName();
-						stateProcessor.Execute();
 					}
 					break;
                 }

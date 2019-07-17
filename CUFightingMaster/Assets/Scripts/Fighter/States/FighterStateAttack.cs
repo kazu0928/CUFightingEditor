@@ -22,6 +22,9 @@ public class FighterStateAttack : StateBaseScriptMonoBehaviour
             case "_Atk2":
                 stateBase.ChangeSkillConstant(SkillConstants.Stand_Middle_Jab, 0);
                 break;
+			case "_Atk3":
+				stateBase.ChangeSkillConstant(SkillConstants.Stand_Strong_Jab, 0);
+				break;
         }
     }
     public void AttackUpdate()

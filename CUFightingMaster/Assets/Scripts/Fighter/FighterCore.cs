@@ -17,6 +17,7 @@ public class FighterCore : MonoBehaviour
     [SerializeField] private FighterSkill nextAnimation = null;//ここにいれればアニメーションが再生される
     [SerializeField] private FighterSkill nowPlaySkill = null;
     [SerializeField] private FighterSkill.CustomHitBox applyDamageSkill = null;//ダメージを食らった時に入る
+	private PlayerNumber enemyNumber;
 	[SerializeField] private bool isCrouching = false;
     private int changeWeightFrame = 0;
     public bool changeSkill { get; private set; }//技が入れ替わったかどうか
@@ -49,6 +50,10 @@ public class FighterCore : MonoBehaviour
     {
         get { return applyDamageSkill; }
     }
+	public PlayerNumber EnemyNumber
+	{
+		get { return enemyNumber; }
+	}
     #endregion
     private void Start()
     {
@@ -82,8 +87,13 @@ public class FighterCore : MonoBehaviour
         //終了
         UpdateEnd();
     }
+	public void HitStopUpdate()
+	{
+		//当たり判定のアップデート
+		hitJudgement.UpdateGame();
+	}
 
-    #region publid メソッド
+	#region publid メソッド
 	//技の設定
 	public void SetSkill(FighterSkill _skill,int _weightFrame)
 	{
@@ -106,6 +116,10 @@ public class FighterCore : MonoBehaviour
 	public void SetIsCrouching(bool _f)
 	{
 		isCrouching = _f;
+	}
+	public void SetEnemyNumber(PlayerNumber _num)
+	{
+		enemyNumber = _num;
 	}
     #endregion
 

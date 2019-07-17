@@ -190,6 +190,7 @@ public class HitBoxJudgement
                 return;
             }
             if (attackHit == true)return;
+			//ヒットボックスの当たり判定
             if (nowPlayCollider[i].gameObject.tag == CommonConstants.Tags.GetTags(HitBoxMode.HitBox))
             {
                 //ダメージ判定処理
@@ -206,7 +207,9 @@ public class HitBoxJudgement
         {
             if(c.gameObject.tag == CommonConstants.Tags.GetTags(HitBoxMode.HurtBox))
             {
-                GameManager.Instance.GetPlayFighterCore(c.gameObject.layer).SetDamage(_cHit);
+				FighterCore cr = GameManager.Instance.GetPlayFighterCore(c.gameObject.layer);
+				cr.SetDamage(_cHit);
+				cr.SetEnemyNumber(core.PlayerNumber);
                 attackHit = true;
                 return;
             }
