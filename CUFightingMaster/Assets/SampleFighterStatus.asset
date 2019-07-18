@@ -24,6 +24,9 @@ MonoBehaviour:
   grabHitBox:
     size: {x: 1.18, y: 3.95, z: 1}
     localPosition: {x: 0.06, y: 1.94, z: 0}
+  pushingHitBox:
+    size: {x: 1.18, y: 3.95, z: 1}
+    localPosition: {x: 0.06, y: 1.94, z: 0}
   constantsSkills:
   - {fileID: 11400000, guid: 048e121f7d7bda0468e9a9c3c8a0e993, type: 2}
   - {fileID: 11400000, guid: 4ffcb7025c167ab4f87101f280e8c280, type: 2}
@@ -34,15 +37,15 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a24a8d05e09f5174e84d5b1321592301, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   - {fileID: 11400000, guid: 95151d7ae3ee00249b36fd1e4e62581e, type: 2}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 95151d7ae3ee00249b36fd1e4e62581e, type: 2}
+  - {fileID: 11400000, guid: 95151d7ae3ee00249b36fd1e4e62581e, type: 2}
+  - {fileID: 11400000, guid: 21d71610656e89941a7683bc4b6a53d7, type: 2}
+  - {fileID: 11400000, guid: 21d71610656e89941a7683bc4b6a53d7, type: 2}
+  - {fileID: 11400000, guid: 21d71610656e89941a7683bc4b6a53d7, type: 2}
+  - {fileID: 11400000, guid: 871c7c4aa88ae6541b8bdc6e9aaba9d8, type: 2}
+  - {fileID: 11400000, guid: 871c7c4aa88ae6541b8bdc6e9aaba9d8, type: 2}
+  - {fileID: 11400000, guid: 871c7c4aa88ae6541b8bdc6e9aaba9d8, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

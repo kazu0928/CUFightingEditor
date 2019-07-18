@@ -191,14 +191,18 @@ public class PlayerSkillEditor : EditorWindow
 			EditorGUILayout.BeginHorizontal();
 			playerSkill.headFlag = EditorGUILayout.Toggle("Head",playerSkill.headFlag);
 			playerSkill.bodyFlag = EditorGUILayout.Toggle("Body",playerSkill.bodyFlag);
+			EditorGUILayout.EndHorizontal();
+			EditorGUILayout.BeginHorizontal();
 			playerSkill.footFlag = EditorGUILayout.Toggle("Foot",playerSkill.footFlag);
             playerSkill.grabFlag = EditorGUILayout.Toggle("Grab", playerSkill.grabFlag);
-            EditorGUILayout.EndHorizontal();
+			EditorGUILayout.EndHorizontal();
+			playerSkill.pushingFlag = EditorGUILayout.Toggle("Pushing", playerSkill.pushingFlag);
 		}
 		if (playerSkill.headFlag) HitBoxSetting(HitBoxPosition.Head);
 		if (playerSkill.bodyFlag) HitBoxSetting(HitBoxPosition.Body);
 		if (playerSkill.footFlag) HitBoxSetting(HitBoxPosition.Foot);
         if (playerSkill.grabFlag) HitBoxSetting(HitBoxPosition.Grab);
+		if (playerSkill.pushingFlag) HitBoxSetting(HitBoxPosition.Pushing);
         int i = 0;
         if (GUILayout.Button("当たり判定作成", GUILayout.Width(100),GUILayout.Height(30)))
         {
@@ -274,6 +278,7 @@ public class PlayerSkillEditor : EditorWindow
 	private bool bodyFold;
 	private bool footFold;
     private bool grabFold;
+	private bool pushingFold;
     //デフォルトヒットBox
 	private void HitBoxSetting(HitBoxPosition? eHitBox = null)
 	{
@@ -291,6 +296,9 @@ public class PlayerSkillEditor : EditorWindow
                 break;
             case HitBoxPosition.Grab:
                 FoldOutHitBox(playerSkill.plusGrabHitBox, "Grab_Default", ref grabFold);
+                break;
+			case HitBoxPosition.Pushing:
+				FoldOutHitBox(playerSkill.plusPushingHitBox, "Push_Default", ref pushingFold);
                 break;
 		}
 		EditorGUILayout.EndVertical();

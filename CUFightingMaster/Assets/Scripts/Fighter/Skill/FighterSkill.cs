@@ -81,6 +81,7 @@ public class FighterSkill : ScriptableObject
 	public List<FrameHitBox> plusBodyHitBox = new List<FrameHitBox>();//体
 	public List<FrameHitBox> plusFootHitBox = new List<FrameHitBox>();//足
     public List<FrameHitBox> plusGrabHitBox = new List<FrameHitBox>();//掴み
+	public List<FrameHitBox> plusPushingHitBox = new List<FrameHitBox>();//押し合い
 
     public List<CustomHitBox> customHitBox = new List<CustomHitBox>();//カスタム
 
@@ -95,6 +96,7 @@ public class FighterSkill : ScriptableObject
     public bool bodyFlag = true;
     public bool footFlag = true;
     public bool grabFlag = true;
+	public bool pushingFlag = true;
 
     #region EDITOR_
 #if UNITY_EDITOR

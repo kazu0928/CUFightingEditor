@@ -12,6 +12,12 @@ public class HitBoxJudgement
     private List<int> startFrames = new List<int>();
     private List<int> nowPlayCustomNumber = new List<int>();
     private List<ComponentObjectPool<BoxCollider>.Objs> nowPlayCollider = new List<ComponentObjectPool<BoxCollider>.Objs>();
+
+	//頭
+	private List<FighterSkill.FrameHitBox> heads = new List<FighterSkill.FrameHitBox>();
+	private List<int> headStartFrames = new List<int>();
+	private int nowPlayHeadsNumber = 0;
+
     private int RightLeft = 1;
     private bool attackHit = false;//技が当たってるかどうか
     #region 初期化
@@ -27,6 +33,7 @@ public class HitBoxJudgement
 	private BoxCollider bodyCollider = null;
 	private BoxCollider footCollider = null;
 	private BoxCollider grabCollider = null;
+	private BoxCollider pushingCollider = null;
 	private ComponentObjectPool<BoxCollider> hitBoxCollider;
     #endregion
 
@@ -40,6 +47,9 @@ public class HitBoxJudgement
         SetCollider(ref bodyCollider, core.Status.bodyHitBox.localPosition, core.Status.bodyHitBox.size, CommonConstants.Names.body, LayerMask.NameToLayer(playerNumber), CommonConstants.Tags.HurtBox);
         SetCollider(ref footCollider, core.Status.footHitBox.localPosition, core.Status.footHitBox.size, CommonConstants.Names.foot, LayerMask.NameToLayer(playerNumber), CommonConstants.Tags.HurtBox);
         SetCollider(ref grabCollider, core.Status.grabHitBox.localPosition, core.Status.grabHitBox.size, CommonConstants.Names.grab, LayerMask.NameToLayer(playerNumber), CommonConstants.Tags.Grab);
+		SetCollider(ref pushingCollider, core.Status.pushingHitBox.localPosition, core.Status.pushingHitBox.size, CommonConstants.Names.pushing, LayerMask.NameToLayer(playerNumber), CommonConstants.Tags.Pushing);
+
+
         //hitboxのプール
         hitBoxCollider = new ComponentObjectPool<BoxCollider>(10,"hitMan",core.gameObject);
     }
@@ -64,6 +74,9 @@ public class HitBoxJudgement
     public void UpdateGame()
     {
         ChangeSkillInit();
+
+
+
         if (core.Direction == PlayerDirection.Right)
         {
             RightLeft = 1;
@@ -72,6 +85,7 @@ public class HitBoxJudgement
         {
             RightLeft = -1;
         }
+		//スキルごとの当たり判定に移動、拡張
         CustomHitBoxes();
         GroundCheck();
     }
@@ -108,7 +122,9 @@ public class HitBoxJudgement
                     g.gameObject.SetActive(false);
                 }
             }
+			//ヒットボックス格納
             customs = new List<FighterSkill.CustomHitBox>(core.NowPlaySkill.customHitBox);
+			heads = new List<FighterSkill.FrameHitBox>(core.NowPlaySkill.plusHeadHitBox);
             nowPlayCustomNumber = new List<int>();
             nowPlayCollider = new List<ComponentObjectPool<BoxCollider>.Objs>();
             attackHit = false;
@@ -126,6 +142,11 @@ public class HitBoxJudgement
                 }
                 nowPlayCustomNumber.Add(-1);
             }
+			if (heads.Count > 1)
+			{
+				heads.Sort((a, b) => a.startFrame - b.startFrame);
+				nowPlayHeadsNumber = -1;
+			}
         }
         //なければなし
         else
@@ -198,6 +219,51 @@ public class HitBoxJudgement
             }
         }
     }
+	//当たり判定の大きさ、場所移動
+	private void HurtBoxMoving()
+	{
+		//if ((heads == null) || (heads.Count == 0)) return;
+		//if (heads.Count > nowPlayHeadsNumber + 1)
+		//{
+		//	//現在再生中の次フレームを越えれば
+		//	if (heads[nowPlayHeadsNumber + 1].startFrame <= core.AnimationPlayerCompornent.NowFrame)
+		//	{
+		//		//処理
+		//		nowPlayHeadsNumber++;
+		//		Vector3 tmp = heads[nowPlayHeadsNumber].hitBox.localPosition + core.Status.headHitBox.localPosition;
+		//		tmp.x *= RightLeft;
+		//		headCollider.center = tmp;
+		//	}
+		//}
+		////ループ時
+		//else
+		//{
+		//	if (customs[i].frameHitBoxes[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && customs[i].frameHitBoxes[nowPlayCustomNumber[i]].startFrame > core.AnimationPlayerCompornent.NowFrame)
+		//	{
+		//		//処理
+		//		if (nowPlayCollider[i].gameObject != null)
+		//		{
+		//			nowPlayCollider[i].gameObject.SetActive(false);
+		//		}
+		//		nowPlayCustomNumber[i] = 0;
+		//		//処理
+		//		nowPlayCollider[i] = hitBoxCollider.GetObjects();
+		//		nowPlayCollider[i].gameObject.tag = CommonConstants.Tags.GetTags(customs[i].mode);
+		//		nowPlayCollider[i].gameObject.layer = LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber));
+		//		nowPlayCollider[i].component.size = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.size;
+		//		Vector3 tmp = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
+		//		tmp.x *= RightLeft;
+		//		nowPlayCollider[i].component.center = tmp;
+		//		attackHit = false;
+		//	}
+		//}
+		//if (nowPlayHeadsNumber < 0) return;
+		//if (customs[i].frameHitBoxes[nowPlayCustomNumber[i]].endFrame < core.AnimationPlayerCompornent.NowFrame)
+		//{
+		//	nowPlayCollider[i].gameObject.SetActive(false);
+		//	return;
+		//}
+	}
     private void CheckHitBox(BoxCollider _bCol,FighterSkill.CustomHitBox _cHit)
     {
         Transform t = _bCol.transform;
@@ -215,4 +281,20 @@ public class HitBoxJudgement
             }
         }
     }
+	//デフォルト(+技ごとのデフォルト拡張)の押し合い判定
+	//TODO 壁判定
+	public void CheckDefaultPushingBox(BoxCollider _col,FighterSkill.FrameHitBox _hitBox)
+	{
+		Transform t = _col.transform;
+		Vector3 pos = new Vector3(t.position.x + _col.center.x + _hitBox.hitBox.localPosition.x, t.position.y + _col.center.y + _hitBox.hitBox.localPosition.y, t.position.z + _col.center.z + _hitBox.hitBox.localPosition.z);
+		Vector3 siz = (_col.size + _hitBox.hitBox.size) / 2;
+		Collider[] col = Physics.OverlapBox(pos, siz, Quaternion.identity, -1 - (1 << LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber))));
+		foreach(Collider c in col)
+		{
+			//if(c.gameObject.tag == CommonConstants.Tags.GetTags(HitBoxMode.Pushing))
+			//{
+			//	pos.x
+			//}
+		}
+	}
 }

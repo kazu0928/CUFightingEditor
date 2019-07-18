@@ -30,6 +30,7 @@ public class FighterStatus : ScriptableObject
 	public HitBox_ bodyHitBox = new HitBox_();
 	public HitBox_ footHitBox = new HitBox_();
     public HitBox_ grabHitBox = new HitBox_();
+	public HitBox_ pushingHitBox = new HitBox_();
     //スキル
     public FighterSkill[] constantsSkills = { };
     public List<SkillAnimationCustom> uniqueSkills = new List<SkillAnimationCustom>();

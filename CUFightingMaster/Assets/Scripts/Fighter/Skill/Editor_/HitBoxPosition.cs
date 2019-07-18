@@ -5,5 +5,6 @@ public enum HitBoxPosition
 	Body,
 	Foot,
 	Grab,
+	Pushing,
 }
 #endif

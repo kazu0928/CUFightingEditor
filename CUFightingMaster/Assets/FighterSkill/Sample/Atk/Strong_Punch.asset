@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Strong_Punch
   m_EditorClassIdentifier: 
   animationClip: {fileID: 7400000, guid: 87bfbe6d7f3e409499f03dd66de6fe33, type: 2}
-  animationSpeed: 1
+  animationSpeed: 0.5
   status: 1
   hitMode: 0
   throwMotion: {fileID: 0}
@@ -27,6 +27,7 @@ MonoBehaviour:
   plusBodyHitBox: []
   plusFootHitBox: []
   plusGrabHitBox: []
+  plusPushingHitBox: []
   customHitBox: []
   isContinue: 0
   movements: []
@@ -35,3 +36,4 @@ MonoBehaviour:
   bodyFlag: 1
   footFlag: 1
   grabFlag: 1
+  pushingFlag: 1

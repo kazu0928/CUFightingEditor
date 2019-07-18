@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
-  m_Name: YarareMiddle
+  m_Name: YarareUp
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: afff3fdf7122f844dad0fb81211eb490, type: 2}
+  animationClip: {fileID: 7400000, guid: 42290da8d24141340a691cdd6cb3e847, type: 2}
   animationSpeed: 1
   status: 1
   hitMode: 0
@@ -27,6 +27,7 @@ MonoBehaviour:
   plusBodyHitBox: []
   plusFootHitBox: []
   plusGrabHitBox: []
+  plusPushingHitBox: []
   customHitBox: []
   isContinue: 0
   movements: []
@@ -35,3 +36,4 @@ MonoBehaviour:
   bodyFlag: 1
   footFlag: 1
   grabFlag: 1
+  pushingFlag: 1

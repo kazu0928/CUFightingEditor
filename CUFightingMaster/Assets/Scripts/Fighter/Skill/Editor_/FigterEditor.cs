@@ -68,10 +68,11 @@ public class FigterEditor : EditorWindow
 	private bool bodyFold = false;
 	private bool footFold = false;
     private bool grabFold = false;
+	private bool pushingFold = false;
 	private void HitBoxTabDraw()
 	{
 		EditorGUILayout.BeginVertical("Box");
-		if(headFold = CustomUI.Foldout("Head", headFold))
+		if (headFold = CustomUI.Foldout("Head", headFold))
 		{
 			HitFoldOut(ref fighterStatus.headHitBox);
 		}
@@ -88,13 +89,20 @@ public class FigterEditor : EditorWindow
 			HitFoldOut(ref fighterStatus.footHitBox);
 		}
 		EditorGUILayout.EndVertical();
-        EditorGUILayout.BeginVertical("Box");
-        if (grabFold = CustomUI.Foldout("Grab", grabFold))
-        {
-            HitFoldOut(ref fighterStatus.grabHitBox);
-        }
-        EditorGUILayout.EndVertical();
-    }
+		EditorGUILayout.BeginVertical("Box");
+		if (grabFold = CustomUI.Foldout("Grab", grabFold))
+		{
+			HitFoldOut(ref fighterStatus.grabHitBox);
+		}
+		EditorGUILayout.EndVertical();
+		EditorGUILayout.BeginVertical("Box");
+		if (pushingFold = CustomUI.Foldout("Pushing", pushingFold))
+		{
+			HitFoldOut(ref fighterStatus.pushingHitBox);
+		}
+		EditorGUILayout.EndVertical();
+
+	}
     private void HitFoldOut(ref FighterStatus.HitBox_ hitBox_)
 	{
 		EditorGUILayout.BeginHorizontal();

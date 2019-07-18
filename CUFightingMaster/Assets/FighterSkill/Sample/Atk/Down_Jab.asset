@@ -27,6 +27,7 @@ MonoBehaviour:
   plusBodyHitBox: []
   plusFootHitBox: []
   plusGrabHitBox: []
+  plusPushingHitBox: []
   customHitBox:
   - mode: 0
     frameHitBoxes:
@@ -54,3 +55,4 @@ MonoBehaviour:
   bodyFlag: 1
   footFlag: 1
   grabFlag: 1
+  pushingFlag: 1

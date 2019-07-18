@@ -11,7 +11,6 @@ public class FighterMover
 	private List<FighterSkill.Move> moves = new List<FighterSkill.Move>();//移動配列
 	private List<FighterSkill.GravityMove> gravity = new List<FighterSkill.GravityMove>();//重力配列
 	private int gravityFrame = 0;   //重力用のフレーム数
-    
 
     //初期化
     public FighterMover(FighterCore fighterCore)
@@ -121,4 +120,5 @@ public class FighterMover
         transform.Translate(move * 0.1f);
     }
     #endregion
+	
 }

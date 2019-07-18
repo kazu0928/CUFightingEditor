@@ -9,6 +9,7 @@ public static class CommonConstants
         public static readonly string body = "body";
         public static readonly string foot = "foot";
         public static readonly string grab = "grab";
+		public static readonly string pushing = "pushing";
     }
     public static class Tags
     {
@@ -16,6 +17,7 @@ public static class CommonConstants
         public static readonly string HurtBox = "HurtBox";
         public static readonly string Grab = "Grab";
         public static readonly string Ground = "Ground";
+		public static readonly string Pushing = "Pushing";
         public static string GetTags(HitBoxMode _mode)
         {
             switch (_mode)
@@ -26,6 +28,8 @@ public static class CommonConstants
                     return HurtBox;
                 case HitBoxMode.GrabAndSqueeze:
                     return Grab;
+				case HitBoxMode.Pushing:
+					return Pushing;
             }
             return "";
         }

@@ -256,7 +256,7 @@ public class FighterCore : MonoBehaviour
                     #region Grab
                     if (skill.grabFlag)
                     {
-                        Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
+						Gizmos.color = Color.blue;
                         pos = transform.position + status.grabHitBox.localPosition;
                         size = status.grabHitBox.size;
                         for (int i = 0; i < skill.plusGrabHitBox.Count; i++)
@@ -271,9 +271,31 @@ public class FighterCore : MonoBehaviour
                                 size = status.grabHitBox.size + skill.plusGrabHitBox[i].hitBox.size;
                             }
                         }
-                        Gizmos.DrawCube(pos, size);
+                        Gizmos.DrawWireCube(pos, size);
                     }
                     #endregion
+					#region Pushing
+                    if (skill.pushingFlag)
+                    {
+                        Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
+                        pos = transform.position + status.pushingHitBox.localPosition;
+                        size = status.pushingHitBox.size;
+                        for (int i = 0; i < skill.plusPushingHitBox.Count; i++)
+                        {
+                            if ((skill.plusPushingHitBox[i].startFrame <= PlayerSkillEditorParameter.instance.window.value) && skill.plusPushingHitBox[i].endFrame >= PlayerSkillEditorParameter.instance.window.value)
+                            {
+                                Vector3 lPos = status.pushingHitBox.localPosition;
+                                Vector3 plusLpos = skill.plusPushingHitBox[i].hitBox.localPosition;
+                                lPos.x *= dir;
+                                plusLpos *= dir;
+                                pos = transform.position + lPos + plusLpos;
+                                size = status.pushingHitBox.size + skill.plusPushingHitBox[i].hitBox.size;
+                            }
+                        }
+                        Gizmos.DrawCube(pos, size);
+					}
+                    #endregion
+
                     #region Custom
                     for (int i = 0; i < skill.customHitBox.Count; i++)
                     {
@@ -306,8 +328,8 @@ public class FighterCore : MonoBehaviour
                                 break;
                         }
                     }
-                    #endregion
-                }
+					#endregion
+				}
                 else
                 {
                     DefaultHitBoxDraw();
@@ -389,7 +411,7 @@ public class FighterCore : MonoBehaviour
                 #region Grab
                 if (nowPlaySkill.grabFlag)
                 {
-                    Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
+					Gizmos.color = Color.blue;
                     pos = transform.position + status.grabHitBox.localPosition;
                     size = status.grabHitBox.size;
                     for (int i = 0; i < nowPlaySkill.plusGrabHitBox.Count; i++)
@@ -402,6 +424,27 @@ public class FighterCore : MonoBehaviour
                             plusLpos *= dir;
                             pos = transform.position + lPos + plusLpos;
                             size = status.grabHitBox.size + nowPlaySkill.plusGrabHitBox[i].hitBox.size;
+                        }
+                    }
+                    Gizmos.DrawWireCube(pos, size);
+                }
+                #endregion
+				#region Pushing
+                if (nowPlaySkill.pushingFlag)
+                {
+                    Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
+                    pos = transform.position + status.pushingHitBox.localPosition;
+                    size = status.pushingHitBox.size;
+                    for (int i = 0; i < nowPlaySkill.plusPushingHitBox.Count; i++)
+                    {
+                        if ((nowPlaySkill.plusPushingHitBox[i].startFrame <= animationPlayer.NowFrame) && nowPlaySkill.plusPushingHitBox[i].endFrame >= animationPlayer.NowFrame)
+                        {
+                            Vector3 lPos = status.pushingHitBox.localPosition;
+                            Vector3 plusLpos = nowPlaySkill.plusPushingHitBox[i].hitBox.localPosition;
+                            lPos.x *= dir;
+                            plusLpos *= dir;
+                            pos = transform.position + lPos + plusLpos;
+                            size = status.pushingHitBox.size + nowPlaySkill.plusPushingHitBox[i].hitBox.size;
                         }
                     }
                     Gizmos.DrawCube(pos, size);
@@ -457,7 +500,9 @@ public class FighterCore : MonoBehaviour
         Gizmos.DrawWireCube(transform.position + status.bodyHitBox.localPosition, status.bodyHitBox.size);
         Gizmos.DrawWireCube(transform.position + status.footHitBox.localPosition, status.footHitBox.size);
         Gizmos.color = new Color(1, 0.92f, 0.016f, 0.5f);
-        Gizmos.DrawCube(transform.position + status.grabHitBox.localPosition, status.grabHitBox.size);
+        Gizmos.DrawCube(transform.position + status.pushingHitBox.localPosition, status.pushingHitBox.size);
+		Gizmos.color = Color.blue;
+		Gizmos.DrawWireCube(transform.position + status.grabHitBox.localPosition, status.grabHitBox.size);
     }
 #endif
     #endregion
