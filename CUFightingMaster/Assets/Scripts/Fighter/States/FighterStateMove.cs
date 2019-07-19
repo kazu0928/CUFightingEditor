@@ -24,6 +24,16 @@ public class FighterStateMove : StateBaseScriptMonoBehaviour
     /* ステート中 */
     public void MoveUpdate()
     {
+		if(stateBase.core.Direction == PlayerDirection.Right)
+		{
+			if(stateBase.core.PlayerNumber==PlayerNumber.Player1)
+			{
+				if (GameManager.Instance.GetPlayFighterCore(PlayerNumber.Player2).gameObject.transform.position.x < stateBase.transform.position.x)
+				{
+					stateBase.core.SetDirection(PlayerDirection.Left);
+				}
+			}
+		}
         Direction inp = GetPlayerMoveDirection();
         if (inp == beforeInput) return;
         ChangeMove(inp);

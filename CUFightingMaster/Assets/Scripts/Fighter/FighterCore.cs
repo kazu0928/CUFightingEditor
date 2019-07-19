@@ -121,6 +121,10 @@ public class FighterCore : MonoBehaviour
 	{
 		enemyNumber = _num;
 	}
+	public void SetDirection(PlayerDirection _dir)
+	{
+		direction = _dir;
+	}
     #endregion
 
     #region 初期化時エラーチェック

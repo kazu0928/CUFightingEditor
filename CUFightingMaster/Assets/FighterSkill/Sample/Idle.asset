@@ -23,12 +23,7 @@ MonoBehaviour:
   cancelLayer: 0
   inBlend: 0
   outBlend: 0
-  plusHeadHitBox:
-  - hitBox:
-      size: {x: 2.07, y: 0, z: 0}
-      localPosition: {x: 0, y: 0, z: 0}
-    startFrame: 24
-    endFrame: 59
+  plusHeadHitBox: []
   plusBodyHitBox: []
   plusFootHitBox: []
   plusGrabHitBox: []

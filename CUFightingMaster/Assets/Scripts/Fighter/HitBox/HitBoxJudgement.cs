@@ -109,10 +109,18 @@ public class HitBoxJudgement
 
 		//スキルごとの当たり判定に移動、拡張
         CustomHitBoxes();
-		HurtBoxMoving();
-        //DefaultBoxMoving(ref heads,ref nowPlayHeadsNumber,ref headCollider,core.Status.headHitBox);
-		CheckDefaultPushingBox(pushingCollider);
-        GroundCheck();
+		//HurtBoxMoving();
+        DefaultBoxMoving(ref heads,ref nowPlayHeadsNumber,ref headCollider,core.Status.headHitBox);
+		DefaultBoxMoving(ref bodies, ref nowPlayBodyNumber, ref bodyCollider, core.Status.bodyHitBox);
+		DefaultBoxMoving(ref pushes, ref nowPlayPushNumber, ref pushingCollider, core.Status.pushingHitBox);
+		if (core.NowPlaySkill != null)
+		{
+			if (core.NowPlaySkill.pushingFlag)
+			{
+				CheckDefaultPushingBox(pushingCollider);
+			}
+		}
+		GroundCheck();
     }
     //地面判定
     private void GroundCheck()
@@ -185,7 +193,8 @@ public class HitBoxJudgement
 		{
 			_col.gameObject.SetActive(true);
 			//デフォルトの大きさに
-			_col.center = _hitbox.localPosition;
+			Vector3 cent = new Vector3(_hitbox.localPosition.x * RightLeft, _hitbox.localPosition.y, _hitbox.localPosition.z);
+			_col.center = cent;
 			_col.size = _hitbox.size;
 			_hit = new List<FighterSkill.FrameHitBox>(_plusBox);
 			if (_hit.Count > 1)
@@ -302,7 +311,7 @@ public class HitBoxJudgement
 		//ループ時
 		else
 		{
-			if (heads[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && heads[nowPlayHeadsNumber].startFrame > core.AnimationPlayerCompornent.NowFrame)
+			if ((heads[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && heads[nowPlayHeadsNumber].startFrame > core.AnimationPlayerCompornent.NowFrame)||(heads.Count==1&& heads[nowPlayHeadsNumber].startFrame == core.AnimationPlayerCompornent.NowFrame))
 			{
                 //処理
                 nowPlayHeadsNumber = 0;
@@ -341,7 +350,7 @@ public class HitBoxJudgement
 		//ループ時
 		else
 		{
-			if (_defs[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && _defs[_number].startFrame > core.AnimationPlayerCompornent.NowFrame)
+			if (_defs[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && _defs[_number].startFrame > core.AnimationPlayerCompornent.NowFrame || (_defs.Count == 1 && _defs[_number].startFrame == core.AnimationPlayerCompornent.NowFrame))
 			{
 				//処理
 				_number = 0;
@@ -382,14 +391,32 @@ public class HitBoxJudgement
 	public void CheckDefaultPushingBox(BoxCollider _col)
 	{
 		Transform t = _col.gameObject.transform;
-		Vector3 pos = new Vector3(t.position.x + _col.center.x, t.position.y + _col.center.y, t.position.z + _col.center.z);
-		Vector3 siz = _col.size / 2;
-		Collider[] col = Physics.OverlapBox(pos, siz, Quaternion.identity, -1 - (1 << LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber))));
+		float posX = t.position.x + _col.center.x;
+		float posY = t.position.y + _col.center.y;
+		float posZ = t.position.z + _col.center.z;
+		Vector3 pos = new Vector3(posX,posY,posZ );
+		Vector3 siz = new Vector3(_col.size.x / 2.0f, _col.size.y / 2.0f, _col.size.z / 2.0f);
+		Collider[] col = Physics.OverlapBox(new Vector3(posX,posY,posZ), siz, Quaternion.identity, -1 - (1 << LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber))));
 		foreach(Collider c in col)
 		{
 			if (c.gameObject.tag == CommonConstants.Tags.GetTags(HitBoxMode.Pushing))
 			{
-				_col.gameObject.transform.position = new Vector3((pos.x + siz.x) + c.transform.position.x + (((BoxCollider)c).size.x / 2), c.transform.position.y, c.transform.position.z);
+				int i = 1;
+				if(t.position.x>c.transform.position.x)
+				{
+					i = -1;
+				}
+				float x = (pos.x + (siz.x * i)) + ((((BoxCollider)c).size.x / 2.0f) * i) + (((BoxCollider)c).center.x);
+				float checkX = x - c.gameObject.transform.parent.transform.position.x;
+				if(i==1&&checkX<0)
+				{
+					continue;
+				}
+				else if(i==-1&&checkX>0)
+				{
+					continue;
+				}
+				c.gameObject.transform.parent.transform.position = new Vector3(x, c.transform.position.y, c.transform.position.z);
 			}
 		}
 	}

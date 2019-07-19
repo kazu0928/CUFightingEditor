@@ -25,8 +25,8 @@ MonoBehaviour:
     size: {x: 1.18, y: 3.95, z: 1}
     localPosition: {x: 0.06, y: 1.94, z: 0}
   pushingHitBox:
-    size: {x: 0, y: 0, z: 0}
-    localPosition: {x: 0, y: 0, z: 0}
+    size: {x: 1.18, y: 3.95, z: 1}
+    localPosition: {x: 0.06, y: 1.94, z: 0}
   constantsSkills:
   - {fileID: 11400000, guid: 048e121f7d7bda0468e9a9c3c8a0e993, type: 2}
   - {fileID: 11400000, guid: 4ffcb7025c167ab4f87101f280e8c280, type: 2}
