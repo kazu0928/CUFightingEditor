@@ -85,8 +85,12 @@ public class HitBoxJudgement
         {
             RightLeft = -1;
         }
+        //最初に地面のチェックを一度やらないと移動値がそのまま入っているのでチェック
+        GroundCheck();
+
 		//スキルごとの当たり判定に移動、拡張
         CustomHitBoxes();
+        HurtBoxMoving();
         GroundCheck();
     }
     //地面判定
@@ -122,6 +126,8 @@ public class HitBoxJudgement
                     g.gameObject.SetActive(false);
                 }
             }
+            headCollider.center = core.Status.headHitBox.localPosition;
+            headCollider.size = core.Status.headHitBox.size;
 			//ヒットボックス格納
             customs = new List<FighterSkill.CustomHitBox>(core.NowPlaySkill.customHitBox);
 			heads = new List<FighterSkill.FrameHitBox>(core.NowPlaySkill.plusHeadHitBox);
@@ -145,8 +151,8 @@ public class HitBoxJudgement
 			if (heads.Count > 1)
 			{
 				heads.Sort((a, b) => a.startFrame - b.startFrame);
-				nowPlayHeadsNumber = -1;
 			}
+            nowPlayHeadsNumber = -1;
         }
         //なければなし
         else
@@ -185,6 +191,7 @@ public class HitBoxJudgement
             //ループ時
             else
             {
+                //一番最初のスタートフレーム以上かつ現在のフレームが現在の再生フレーム数より小さい場合ループありの
                 if (customs[i].frameHitBoxes[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && customs[i].frameHitBoxes[nowPlayCustomNumber[i]].startFrame > core.AnimationPlayerCompornent.NowFrame)
                 {
                     //処理
@@ -222,52 +229,48 @@ public class HitBoxJudgement
 	//当たり判定の大きさ、場所移動
 	private void HurtBoxMoving()
 	{
-		//if ((heads == null) || (heads.Count == 0)) return;
-		//if (heads.Count > nowPlayHeadsNumber + 1)
-		//{
-		//	//現在再生中の次フレームを越えれば
-		//	if (heads[nowPlayHeadsNumber + 1].startFrame <= core.AnimationPlayerCompornent.NowFrame)
-		//	{
-		//		//処理
-		//		nowPlayHeadsNumber++;
-		//		Vector3 tmp = heads[nowPlayHeadsNumber].hitBox.localPosition + core.Status.headHitBox.localPosition;
-		//		tmp.x *= RightLeft;
-		//		headCollider.center = tmp;
-		//	}
-		//}
-		////ループ時
-		//else
-		//{
-		//	if (customs[i].frameHitBoxes[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && customs[i].frameHitBoxes[nowPlayCustomNumber[i]].startFrame > core.AnimationPlayerCompornent.NowFrame)
-		//	{
-		//		//処理
-		//		if (nowPlayCollider[i].gameObject != null)
-		//		{
-		//			nowPlayCollider[i].gameObject.SetActive(false);
-		//		}
-		//		nowPlayCustomNumber[i] = 0;
-		//		//処理
-		//		nowPlayCollider[i] = hitBoxCollider.GetObjects();
-		//		nowPlayCollider[i].gameObject.tag = CommonConstants.Tags.GetTags(customs[i].mode);
-		//		nowPlayCollider[i].gameObject.layer = LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber));
-		//		nowPlayCollider[i].component.size = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.size;
-		//		Vector3 tmp = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
-		//		tmp.x *= RightLeft;
-		//		nowPlayCollider[i].component.center = tmp;
-		//		attackHit = false;
-		//	}
-		//}
-		//if (nowPlayHeadsNumber < 0) return;
-		//if (customs[i].frameHitBoxes[nowPlayCustomNumber[i]].endFrame < core.AnimationPlayerCompornent.NowFrame)
-		//{
-		//	nowPlayCollider[i].gameObject.SetActive(false);
-		//	return;
-		//}
-	}
+		if ((heads == null) || (heads.Count == 0)) return;
+		if (heads.Count > nowPlayHeadsNumber + 1)
+		{
+			//現在再生中の次フレームを越えれば
+			if (heads[nowPlayHeadsNumber + 1].startFrame <= core.AnimationPlayerCompornent.NowFrame)
+			{
+                Debug.Log("aass");
+                //処理
+                nowPlayHeadsNumber++;
+				Vector3 tmp = heads[nowPlayHeadsNumber].hitBox.localPosition + core.Status.headHitBox.localPosition;
+				tmp.x *= RightLeft;
+				headCollider.center = tmp;
+                headCollider.size = core.Status.headHitBox.size + heads[nowPlayHeadsNumber].hitBox.size;
+            }
+		}
+		//ループ時
+		else
+		{
+			if (heads[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && heads[nowPlayHeadsNumber].startFrame > core.AnimationPlayerCompornent.NowFrame)
+			{
+                //処理
+                nowPlayHeadsNumber = 0;
+                Vector3 tmp = heads[nowPlayHeadsNumber].hitBox.localPosition + core.Status.headHitBox.localPosition;
+				tmp.x *= RightLeft;
+				headCollider.center = tmp;
+                headCollider.size = core.Status.headHitBox.size + heads[nowPlayHeadsNumber].hitBox.size;
+            }
+		}
+		if (nowPlayHeadsNumber < 0) return;
+        if (heads[nowPlayHeadsNumber].endFrame < core.AnimationPlayerCompornent.NowFrame)
+        {
+            Debug.Log( "aaaa");
+            Vector3 tmp = core.Status.headHitBox.localPosition;
+            tmp.x *= RightLeft;
+            headCollider.center = tmp;
+            headCollider.size = core.Status.headHitBox.size;
+            return;
+        }
+    }
     private void CheckHitBox(BoxCollider _bCol,FighterSkill.CustomHitBox _cHit)
     {
-        Transform t = _bCol.transform;
-        
+        Transform t = _bCol.gameObject.transform;
         Collider[] col = Physics.OverlapBox(new Vector3(t.position.x + _bCol.center.x, t.position.y + _bCol.center.y, t.position.z + _bCol.center.z), _bCol.size/2, Quaternion.identity, -1 - (1 << LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber))));
         foreach(Collider c in col)
         {
@@ -285,7 +288,7 @@ public class HitBoxJudgement
 	//TODO 壁判定
 	public void CheckDefaultPushingBox(BoxCollider _col,FighterSkill.FrameHitBox _hitBox)
 	{
-		Transform t = _col.transform;
+		Transform t = _col.gameObject.transform;
 		Vector3 pos = new Vector3(t.position.x + _col.center.x + _hitBox.hitBox.localPosition.x, t.position.y + _col.center.y + _hitBox.hitBox.localPosition.y, t.position.z + _col.center.z + _hitBox.hitBox.localPosition.z);
 		Vector3 siz = (_col.size + _hitBox.hitBox.size) / 2;
 		Collider[] col = Physics.OverlapBox(pos, siz, Quaternion.identity, -1 - (1 << LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber))));

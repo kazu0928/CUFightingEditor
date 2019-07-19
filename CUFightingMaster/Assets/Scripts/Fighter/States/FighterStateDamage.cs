@@ -15,7 +15,6 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 	//やられ
 	public void HitStunStart()
 	{
-		Debug.Log(hitRigor);
 		FighterSkill.CustomHitBox box = stateBase.core.GetDamage;
 		//硬直
 		hitRigor = box.hitRigor;
