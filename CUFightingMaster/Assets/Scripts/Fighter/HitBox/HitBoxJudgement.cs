@@ -113,9 +113,11 @@ public class HitBoxJudgement
         DefaultBoxMoving(ref heads,ref nowPlayHeadsNumber,ref headCollider,core.Status.headHitBox);
 		DefaultBoxMoving(ref bodies, ref nowPlayBodyNumber, ref bodyCollider, core.Status.bodyHitBox);
 		DefaultBoxMoving(ref pushes, ref nowPlayPushNumber, ref pushingCollider, core.Status.pushingHitBox);
+		
 		if (core.NowPlaySkill != null)
 		{
-			if (core.NowPlaySkill.pushingFlag)
+            CheckDefaultPushingWall(pushingCollider);
+            if (core.NowPlaySkill.pushingFlag)
 			{
 				CheckDefaultPushingBox(pushingCollider);
 			}
@@ -247,9 +249,6 @@ public class HitBoxJudgement
                     nowPlayCollider[i].gameObject.tag = CommonConstants.Tags.GetTags(customs[i].mode);
                     nowPlayCollider[i].gameObject.layer = LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber));
                     nowPlayCollider[i].component.size = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.size;
-                    Vector3 tmp = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
-                    tmp.x *= RightLeft;
-                    nowPlayCollider[i].component.center = tmp;
                     attackHit = false;
                 }
             }
@@ -270,9 +269,6 @@ public class HitBoxJudgement
                     nowPlayCollider[i].gameObject.tag = CommonConstants.Tags.GetTags(customs[i].mode);
                     nowPlayCollider[i].gameObject.layer = LayerMask.NameToLayer(CommonConstants.Layers.GetPlayerNumberLayer(core.PlayerNumber));
                     nowPlayCollider[i].component.size = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.size;
-                    Vector3 tmp = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
-                    tmp.x *= RightLeft;
-                    nowPlayCollider[i].component.center = tmp;
                     attackHit = false;
                 }
             }
@@ -281,6 +277,12 @@ public class HitBoxJudgement
             {
                 nowPlayCollider[i].gameObject.SetActive(false);
                 return;
+            }
+            else
+            {
+                Vector3 tmp = customs[i].frameHitBoxes[nowPlayCustomNumber[i]].hitBox.localPosition;
+                tmp.x *= RightLeft;
+                nowPlayCollider[i].component.center = tmp;
             }
             if (attackHit == true)return;
 			//ヒットボックスの当たり判定
@@ -331,45 +333,51 @@ public class HitBoxJudgement
             return;
         }
     }
-	private void DefaultBoxMoving(ref List<FighterSkill.FrameHitBox> _defs,ref int _number,ref BoxCollider _col, FighterStatus.HitBox_ _hit)
-	{
-		if ((_defs == null) || (_defs.Count == 0)) return;
-		if (_defs.Count > _number + 1)
-		{
-			//現在再生中の次フレームを越えれば
-			if (_defs[_number + 1].startFrame <= core.AnimationPlayerCompornent.NowFrame)
-			{
-				//処理
-				_number++;
-				Vector3 tmp = _defs[_number].hitBox.localPosition + _hit.localPosition;
-				tmp.x *= RightLeft;
-				_col.center = tmp;
-				_col.size = _hit.size + _defs[_number].hitBox.size;
-			}
-		}
-		//ループ時
-		else
-		{
-			if (_defs[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && _defs[_number].startFrame > core.AnimationPlayerCompornent.NowFrame || (_defs.Count == 1 && _defs[_number].startFrame == core.AnimationPlayerCompornent.NowFrame))
-			{
-				//処理
-				_number = 0;
-				Vector3 tmp = _defs[_number].hitBox.localPosition + _hit.localPosition;
-				tmp.x *= RightLeft;
-				_col.center = tmp;
-				_col.size = _hit.size + _defs[_number].hitBox.size;
-			}
-		}
-		if (_number < 0) return;
-		if (_defs[_number].endFrame < core.AnimationPlayerCompornent.NowFrame)
-		{
-			Vector3 tmp = _hit.localPosition;
-			tmp.x *= RightLeft;
-			_col.center = tmp;
-			_col.size = _hit.size;
-			return;
-		}
-	}
+    private void DefaultBoxMoving(ref List<FighterSkill.FrameHitBox> _defs, ref int _number, ref BoxCollider _col, FighterStatus.HitBox_ _hit)
+    {
+		//最初に当たり判定をデフォに
+        Vector3 tt = _hit.localPosition;
+        tt.x *= RightLeft;
+        _col.center = tt;
+        _col.size = _hit.size;
+        if ((_defs == null) || (_defs.Count == 0)) return;
+        if (_defs.Count > _number + 1)
+        {
+            //現在再生中の次フレームを越えれば
+            if (_defs[_number + 1].startFrame <= core.AnimationPlayerCompornent.NowFrame)
+            {
+                //処理
+                _number++;
+            }
+        }
+        //ループ時
+        else
+        {
+            if (_defs[0].startFrame <= core.AnimationPlayerCompornent.NowFrame && _defs[_number].startFrame > core.AnimationPlayerCompornent.NowFrame || (_defs.Count == 1 && _defs[_number].startFrame == core.AnimationPlayerCompornent.NowFrame))
+            {
+                //処理
+                _number = 0;
+            }
+        }
+        if (_number < 0) return;
+        if (_defs[_number].endFrame < core.AnimationPlayerCompornent.NowFrame)
+        {
+            Vector3 tmp = _hit.localPosition;
+            tmp.x *= RightLeft;
+            _col.center = tmp;
+            _col.size = _hit.size;
+            return;
+        }
+        else
+        {
+            //常時当たり判定を移動
+            Vector3 tmp = _defs[_number].hitBox.localPosition + _hit.localPosition;
+            tmp.x *= RightLeft;
+            _col.center = tmp;
+            //サイズ
+            _col.size = _hit.size + _defs[_number].hitBox.size;
+        }
+    }
     private void CheckHitBox(BoxCollider _bCol,FighterSkill.CustomHitBox _cHit)
     {
         Transform t = _bCol.gameObject.transform;
@@ -390,7 +398,7 @@ public class HitBoxJudgement
 	//TODO 壁判定
 	public void CheckDefaultPushingBox(BoxCollider _col)
 	{
-		Transform t = _col.gameObject.transform;
+        Transform t = _col.gameObject.transform;
 		float posX = t.position.x + _col.center.x;
 		float posY = t.position.y + _col.center.y;
 		float posZ = t.position.z + _col.center.z;
@@ -419,5 +427,42 @@ public class HitBoxJudgement
 				c.gameObject.transform.parent.transform.position = new Vector3(x, c.transform.position.y, c.transform.position.z);
 			}
 		}
+	}
+    public void CheckDefaultPushingWall(BoxCollider _col)
+    {
+        Transform t = _col.gameObject.transform;
+        float posX = t.position.x + _col.center.x;
+        float posY = t.position.y + _col.center.y;
+        float posZ = t.position.z + _col.center.z;
+        Vector3 pos = new Vector3(posX, posY, posZ);
+        Vector3 siz = new Vector3(_col.size.x / 2.0f, _col.size.y / 2.0f, _col.size.z / 2.0f);
+        Collider[] col = Physics.OverlapBox(new Vector3(posX, posY, posZ), siz, Quaternion.identity, (1 << LayerMask.NameToLayer(CommonConstants.Layers.Wall)));
+		if(col.Length<=0)
+		{
+            return;
+        }
+        foreach (Collider c in col)
+        {
+            int i = 1;
+            if (c.transform.position.x + (((BoxCollider)c).center.x) > t.transform.position.x)
+            {
+                i = -1;
+            }
+            float x = ((c.transform.position.x+((BoxCollider)c).center.x))+((((BoxCollider)c).size.x/2)*i)+((_col.center.x*-1+(siz.x*i)));
+            float checkX = x - c.gameObject.transform.parent.transform.position.x;
+            if (i == 1 && checkX > 0)
+            {
+                continue;
+            }
+            else if (i == -1 && checkX < 0)
+            {
+                continue;
+            }
+            t.parent.transform.position = new Vector3(x, t.transform.position.y, t.transform.position.z);
+        }
+    }
+    public void CheckHalfPushingBox()
+	{
+		
 	}
 }

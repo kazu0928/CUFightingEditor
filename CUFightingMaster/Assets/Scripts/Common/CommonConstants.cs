@@ -37,6 +37,7 @@ public static class CommonConstants
     public static class Layers
     {
         public static readonly string Ground = "Ground";
+        public static readonly string Wall = "Wall";
         public static readonly string Player_One = "Player1";
         public static readonly string Player_Two = "Player2";
         public static string GetPlayerNumberLayer(PlayerNumber _n)

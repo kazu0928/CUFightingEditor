@@ -28,12 +28,48 @@ public class FighterStateMove : StateBaseScriptMonoBehaviour
 		{
 			if(stateBase.core.PlayerNumber==PlayerNumber.Player1)
 			{
-				if (GameManager.Instance.GetPlayFighterCore(PlayerNumber.Player2).gameObject.transform.position.x < stateBase.transform.position.x)
+                Transform t = stateBase.core.AnimationPlayerCompornent.gameObject.transform;
+                if (GameManager.Instance.GetPlayFighterCore(PlayerNumber.Player2).gameObject.transform.position.x < stateBase.core.transform.position.x)
 				{
 					stateBase.core.SetDirection(PlayerDirection.Left);
-				}
+                    t.localScale = new Vector3(1, 1, -1);
+                    t.rotation = Quaternion.Euler(0, 0, 0);
+                }
 			}
+            else if(stateBase.core.PlayerNumber==PlayerNumber.Player2)
+            {
+                if(GameManager.Instance.GetPlayFighterCore(PlayerNumber.Player1).gameObject.transform.position.x < stateBase.core.transform.position.x)
+                {
+                    Transform t = stateBase.core.AnimationPlayerCompornent.gameObject.transform;
+                    stateBase.core.SetDirection(PlayerDirection.Left);
+                    stateBase.core.AnimationPlayerCompornent.gameObject.transform.localScale = new Vector3(1, 1, -1);
+                    t.rotation = Quaternion.Euler(0, 0, 0);
+                }
+            }
 		}
+        else if (stateBase.core.Direction == PlayerDirection.Left)
+        {
+            if (stateBase.core.PlayerNumber == PlayerNumber.Player1)
+            {
+                Transform t = stateBase.core.AnimationPlayerCompornent.gameObject.transform;
+                if (GameManager.Instance.GetPlayFighterCore(PlayerNumber.Player2).gameObject.transform.position.x > stateBase.core.transform.position.x)
+                {
+                    stateBase.core.SetDirection(PlayerDirection.Right);
+                    stateBase.core.AnimationPlayerCompornent.gameObject.transform.localScale = new Vector3(1, 1, 1);
+                    t.rotation = Quaternion.Euler(0, 180, 0);
+                }
+            }
+            else if (stateBase.core.PlayerNumber == PlayerNumber.Player2)
+            {
+                Transform t = stateBase.core.AnimationPlayerCompornent.gameObject.transform;
+                if (GameManager.Instance.GetPlayFighterCore(PlayerNumber.Player1).gameObject.transform.position.x > stateBase.core.transform.position.x)
+                {
+                    stateBase.core.SetDirection(PlayerDirection.Right);
+                    stateBase.core.AnimationPlayerCompornent.gameObject.transform.localScale = new Vector3(1, 1, 1);
+                    t.rotation = Quaternion.Euler(0, 180, 0);
+                }
+            }
+        }
         Direction inp = GetPlayerMoveDirection();
         if (inp == beforeInput) return;
         ChangeMove(inp);
