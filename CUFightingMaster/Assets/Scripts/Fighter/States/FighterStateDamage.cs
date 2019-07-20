@@ -30,7 +30,13 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 		//立ちやられ
 		if (stateBase.core.GetDamage.frameHitBoxes.Count > 0)
 		{
-			switch(box.hitPoint)
+            //ダメージ処理
+            stateBase.core.HP -= box.damage;
+			if(stateBase.core.HP<0)
+			{
+                stateBase.core.HP = 0;
+            }
+            switch(box.hitPoint)
 			{
 				case HitPoint.Bottom:
 					switch(box.hitStrength)

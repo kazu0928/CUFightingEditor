@@ -25,6 +25,8 @@ public class FighterStatus : ScriptableObject
 		public FighterSkill skill;
 	}
 
+    public int HP = 100;
+
     //当たり判定
     public HitBox_ headHitBox = new HitBox_();
 	public HitBox_ bodyHitBox = new HitBox_();

@@ -378,6 +378,7 @@ public class HitBoxJudgement
             _col.size = _hit.size + _defs[_number].hitBox.size;
         }
     }
+    //技が当たった時の処理
     private void CheckHitBox(BoxCollider _bCol,FighterSkill.CustomHitBox _cHit)
     {
         Transform t = _bCol.gameObject.transform;

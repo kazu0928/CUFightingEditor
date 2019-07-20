@@ -49,7 +49,10 @@ public class FigterEditor : EditorWindow
         }
         switch (_tab)
 		{
-			case Tab.当たり判定:
+            case Tab.ステータス:
+                StatusTabDraw();
+                break;
+            case Tab.当たり判定:
 				HitBoxTabDraw();
                 break;
             case Tab.移動アニメーション:
@@ -63,8 +66,18 @@ public class FigterEditor : EditorWindow
         //エディタ全体の再描画
         EditorApplication.QueuePlayerLoopUpdate();
 	}
-	#region 当たり判定_Tab
-	private bool headFold = false;
+
+    #region  ステータス_Tab
+    private void StatusTabDraw()
+    {
+        EditorGUILayout.BeginVertical("Box");
+        fighterStatus.HP = EditorGUILayout.IntField("HP",fighterStatus.HP);
+        EditorGUILayout.EndVertical();
+    }
+    #endregion
+
+    #region 当たり判定_Tab
+    private bool headFold = false;
 	private bool bodyFold = false;
 	private bool footFold = false;
     private bool grabFold = false;
@@ -347,6 +360,7 @@ public class FigterEditor : EditorWindow
 	#region タブ_Styles
 	private enum Tab
 	{
+        ステータス,
 		当たり判定,
 		移動アニメーション,
 		攻撃,

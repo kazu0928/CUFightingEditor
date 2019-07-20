@@ -39,7 +39,7 @@ MonoBehaviour:
     hitStop: 5
     hitPoint: 0
     hitStrength: 0
-    damage: 0
+    damage: 10
     stanDamage: 0
     knockBack: 0
     isDown: 0

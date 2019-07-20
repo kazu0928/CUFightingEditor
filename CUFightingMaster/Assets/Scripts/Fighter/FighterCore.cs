@@ -21,6 +21,7 @@ public class FighterCore : MonoBehaviour
 	[SerializeField] private bool isCrouching = false;
     private int changeWeightFrame = 0;
     public bool changeSkill { get; private set; }//技が入れ替わったかどうか
+    public int HP = 0;
     #region Getter
     public GameObject PlayerModel
     {
@@ -60,6 +61,7 @@ public class FighterCore : MonoBehaviour
         //アタッチエラーチェック
         if (InitErrorCheck())
         {
+            HP = status.HP;
             //アニメーションプレイヤーの取得
             animationPlayer = playerModel.GetComponent<FightingAnimationPlayer>();
             mover = new FighterMover(this);
