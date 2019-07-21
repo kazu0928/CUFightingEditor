@@ -22,6 +22,8 @@ public class FighterCore : MonoBehaviour
     private int changeWeightFrame = 0;
     public bool changeSkill { get; private set; }//技が入れ替わったかどうか
     public int HP = 0;
+    //現在のプレイヤーの移動の状況、状態
+    private PlayerMoveState playerMoveState = PlayerMoveState.Idle;
     #region Getter
     public GameObject PlayerModel
     {
@@ -55,6 +57,10 @@ public class FighterCore : MonoBehaviour
 	{
 		get { return enemyNumber; }
 	}
+    public PlayerMoveState PlayerMoveStates
+    {
+        get { return playerMoveState; }
+    }
     #endregion
     private void Start()
     {
@@ -127,6 +133,10 @@ public class FighterCore : MonoBehaviour
 	{
 		direction = _dir;
 	}
+    public void SetPlayerMoveState(PlayerMoveState _state)
+    {
+        playerMoveState = _state;
+    }
     #endregion
 
     #region 初期化時エラーチェック

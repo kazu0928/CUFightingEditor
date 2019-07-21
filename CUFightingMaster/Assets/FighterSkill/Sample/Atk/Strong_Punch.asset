@@ -28,9 +28,41 @@ MonoBehaviour:
   plusFootHitBox: []
   plusGrabHitBox: []
   plusPushingHitBox: []
-  customHitBox: []
+  customHitBox:
+  - mode: 0
+    frameHitBoxes:
+    - hitBox:
+        size: {x: 2, y: 1, z: 1}
+        localPosition: {x: 1.76, y: 3.26, z: 0}
+      startFrame: 6
+      endFrame: 14
+    hitStop: 9
+    hitPoint: 2
+    hitStrength: 2
+    damage: 15
+    stanDamage: 0
+    knockBack: 0
+    hitEffects:
+    - effect: {fileID: 452643502229921951, guid: 161600caced3d6549b170bb498b1e048,
+        type: 3}
+      position: {x: 0, y: 0, z: -0.5}
+    - effect: {fileID: 452643502229921951, guid: 161600caced3d6549b170bb498b1e048,
+        type: 3}
+      position: {x: 0, y: 0.33, z: -0.5}
+    - effect: {fileID: 0}
+      position: {x: 0, y: -0.33, z: -0.5}
+    isDown: 0
+    isFaceDown: 0
+    isPassiveNotPossible: 0
+    hitRigor: 40
+    guardHitRigor: 0
+    plusGauge: 0
   isContinue: 0
-  movements: []
+  movements:
+  - movement: {x: 2.5, y: 0, z: 0}
+    startFrame: 0
+  - movement: {x: 0, y: 0, z: 0}
+    startFrame: 9
   gravityMoves: []
   headFlag: 1
   bodyFlag: 1

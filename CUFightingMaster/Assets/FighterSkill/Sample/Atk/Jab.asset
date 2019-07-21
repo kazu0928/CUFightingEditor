@@ -42,13 +42,17 @@ MonoBehaviour:
     damage: 10
     stanDamage: 0
     knockBack: 0
+    hitEffects:
+    - effect: {fileID: 452643502229921951, guid: 161600caced3d6549b170bb498b1e048,
+        type: 3}
+      position: {x: 0, y: 0.2, z: -1}
     isDown: 0
     isFaceDown: 0
     isPassiveNotPossible: 0
     hitRigor: 16
     guardHitRigor: 0
     plusGauge: 0
-  isContinue: 1
+  isContinue: 0
   movements:
   - movement: {x: 0, y: 0, z: 0}
     startFrame: 0

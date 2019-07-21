@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4555c0d7fe2368a48b3d4bbeb834ba4f, type: 3}
   m_Name: SampleFighterStatus
   m_EditorClassIdentifier: 
+  HP: 100
   headHitBox:
     size: {x: 0.79, y: 0.83, z: 1}
     localPosition: {x: 0.15, y: 4.08, z: 0}
@@ -25,7 +26,7 @@ MonoBehaviour:
     size: {x: 1.18, y: 3.95, z: 1}
     localPosition: {x: 0.06, y: 1.94, z: 0}
   pushingHitBox:
-    size: {x: 1.18, y: 3.95, z: 1}
+    size: {x: 1.18, y: 3, z: 1}
     localPosition: {x: 0.06, y: 1.94, z: 0}
   constantsSkills:
   - {fileID: 11400000, guid: 048e121f7d7bda0468e9a9c3c8a0e993, type: 2}
@@ -70,13 +71,13 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 6539abae662f8dd4a9500dd0080e3cae, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 11400000, guid: f93e4baadabcb60439c367092f0cfdf9, type: 2}
+  - {fileID: 11400000, guid: 1736e085dca147746a0bb363ee2c5a25, type: 2}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 11400000, guid: 1736e085dca147746a0bb363ee2c5a25, type: 2}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 1736e085dca147746a0bb363ee2c5a25, type: 2}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}

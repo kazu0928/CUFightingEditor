@@ -20,6 +20,17 @@ public enum SkillStatus
     Move = 1 << 4,
 }
 
+public enum PlayerMoveState
+{
+    Idle,
+    Front_Jump,
+    Back_Jump,
+    Jump,
+    Crouching,
+	Front_Walk,
+	Back_Walk,
+}
+
 public enum Direction
 {
     Neutral,

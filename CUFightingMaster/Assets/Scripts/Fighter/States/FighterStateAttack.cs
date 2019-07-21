@@ -41,11 +41,50 @@ public class FighterStateAttack : StateBaseScriptMonoBehaviour
     public void AirAttackStart()
     {
         string atk = stateBase.input.GetPlayerAtk();
-        switch(atk)
+        if (stateBase.core.PlayerMoveStates == PlayerMoveState.Jump)
         {
-            case "_Atk1":
-                stateBase.ChangeSkillConstant(SkillConstants.Air_Light_Jab, 0);
-                break;
+            switch (atk)
+            {
+                case "_Atk1":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Light_Jab, 0);
+                    break;
+                case "_Atk2":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Middle_Jab, 0);
+                    break;
+                case "_Atk3":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Strong_Jab, 0);
+                    break;
+            }
+        }
+        else if (stateBase.core.PlayerMoveStates == PlayerMoveState.Back_Jump)
+        {
+            switch (atk)
+            {
+                case "_Atk1":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Back_Light_Jab, 0);
+                    break;
+                case "_Atk2":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Back_Middle_Jab, 0);
+                    break;
+                case "_Atk3":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Back_Strong_Jab, 0);
+                    break;
+            }
+        }
+        else if (stateBase.core.PlayerMoveStates == PlayerMoveState.Front_Jump)
+        {
+            switch (atk)
+            {
+                case "_Atk1":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Front_Light_Jab, 0);
+                    break;
+                case "_Atk2":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Front_Middle_Jab, 0);
+                    break;
+                case "_Atk3":
+                    stateBase.ChangeSkillConstant(SkillConstants.Air_Front_Strong_Jab, 0);
+                    break;
+            }
         }
     }
     public bool IsEndAirAttack()

@@ -183,7 +183,13 @@ public class PlayerSkillEditor : EditorWindow
     }
     #endregion
     #region 当たり判定_Tab
-    private List<bool> foldOutFlags = new List<bool>();
+	private class FoldOutFlags
+	{
+		public bool foldOutFlag = false;
+        public bool statusFlag = false;
+        public bool effectFlag = false;
+    }
+    private List<FoldOutFlags> foldOutFlags = new List<FoldOutFlags>();
 	private void HitBoxTabDraw()
 	{
 		if (playerSkill != null)
@@ -216,7 +222,7 @@ public class PlayerSkillEditor : EditorWindow
             {
                 while (foldOutFlags.Count < i + 1)
                 {
-                    foldOutFlags.Add(new bool());
+                    foldOutFlags.Add(new FoldOutFlags());
                 }
             }
             EditorGUILayout.BeginVertical("Box");
@@ -225,44 +231,79 @@ public class PlayerSkillEditor : EditorWindow
             box.mode = (HitBoxMode)EditorGUILayout.EnumPopup(box.mode);
             if (GUILayout.Button("×", GUILayout.Width(20))) removeNumber.Add(i);
             EditorGUILayout.EndHorizontal();
-            bool temp = foldOutFlags[i];
+            bool temp = foldOutFlags[i].foldOutFlag;
             //FoldOut
-            foldOutFlags[i] = FoldOutHitBox(box.frameHitBoxes, i.ToString(), ref temp, box);
+            foldOutFlags[i].foldOutFlag = FoldOutHitBox(box.frameHitBoxes, i.ToString(), ref temp, box);
             if (box != null)
             {
-                if (box.mode == HitBoxMode.HitBox)
+                if ((foldOutFlags[i].foldOutFlag) && (foldOutFlags[i].statusFlag = CustomUI.Foldout("ステータス", foldOutFlags[i].statusFlag)))
                 {
-                    EditorGUILayout.BeginHorizontal();
-                    box.hitPoint = (HitPoint)EditorGUILayout.EnumPopup("上中下", box.hitPoint);
-                    box.hitStrength = (HitStrength)EditorGUILayout.EnumPopup("強弱", box.hitStrength);
-                    EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.BeginHorizontal();
-                    box.isDown = EditorGUILayout.Toggle("ダウン", box.isDown);
-                    box.hitStop = EditorGUILayout.IntField("ヒットストップ値", box.hitStop);
-                    EditorGUILayout.EndHorizontal();
-					if(box.isDown)
-					{
-                        EditorGUILayout.BeginHorizontal();
-                        box.isFaceDown = EditorGUILayout.Toggle("うつ伏せダウン", box.isFaceDown);
-                        box.isPassiveNotPossible = EditorGUILayout.Toggle("受け身不可", box.isPassiveNotPossible);
-                        EditorGUILayout.EndHorizontal();
-                    }
-                    EditorGUILayout.BeginHorizontal();
-                    box.damage = EditorGUILayout.IntField("ダメージ量", box.damage);
-                    box.stanDamage = EditorGUILayout.IntField("スタン値", box.stanDamage);
-                    EditorGUILayout.EndHorizontal();
-                    EditorGUILayout.BeginHorizontal();
-                    box.knockBack = EditorGUILayout.IntField("ノックバック値", box.knockBack);
-                    box.plusGauge = EditorGUILayout.IntField("ゲージ増加量", box.plusGauge);
-                    EditorGUILayout.EndHorizontal();
-                    if (!box.isDown)
+                    if (box.mode == HitBoxMode.HitBox)
                     {
                         EditorGUILayout.BeginHorizontal();
-                        box.hitRigor = EditorGUILayout.IntField("ヒット硬直", box.hitRigor);
-                        box.guardHitRigor = EditorGUILayout.IntField("ガード硬直", box.guardHitRigor);
+                        box.hitPoint = (HitPoint)EditorGUILayout.EnumPopup("上中下", box.hitPoint);
+                        box.hitStrength = (HitStrength)EditorGUILayout.EnumPopup("強弱", box.hitStrength);
                         EditorGUILayout.EndHorizontal();
+                        EditorGUILayout.BeginHorizontal();
+                        box.isDown = EditorGUILayout.Toggle("ダウン", box.isDown);
+                        box.hitStop = EditorGUILayout.IntField("ヒットストップ値", box.hitStop);
+                        EditorGUILayout.EndHorizontal();
+                        if (box.isDown)
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            box.isFaceDown = EditorGUILayout.Toggle("うつ伏せダウン", box.isFaceDown);
+                            box.isPassiveNotPossible = EditorGUILayout.Toggle("受け身不可", box.isPassiveNotPossible);
+                            EditorGUILayout.EndHorizontal();
+                        }
+                        EditorGUILayout.BeginHorizontal();
+                        box.damage = EditorGUILayout.IntField("ダメージ量", box.damage);
+                        box.stanDamage = EditorGUILayout.IntField("スタン値", box.stanDamage);
+                        EditorGUILayout.EndHorizontal();
+                        EditorGUILayout.BeginHorizontal();
+                        box.knockBack = EditorGUILayout.IntField("ノックバック値", box.knockBack);
+                        box.plusGauge = EditorGUILayout.IntField("ゲージ増加量", box.plusGauge);
+                        EditorGUILayout.EndHorizontal();
+                        if (!box.isDown)
+                        {
+                            EditorGUILayout.BeginHorizontal();
+                            box.hitRigor = EditorGUILayout.IntField("ヒット硬直", box.hitRigor);
+                            box.guardHitRigor = EditorGUILayout.IntField("ガード硬直", box.guardHitRigor);
+                            EditorGUILayout.EndHorizontal();
+                        }
                     }
                 }
+                if ((foldOutFlags[i].foldOutFlag) && (foldOutFlags[i].effectFlag = CustomUI.Foldout("エフェクト", foldOutFlags[i].effectFlag)))
+                {
+                    EditorGUILayout.BeginVertical("Box");
+                    if (box.mode == HitBoxMode.HitBox)
+                    {
+                        if (GUILayout.Button("ヒットエフェクト作成", GUILayout.Width(150), GUILayout.Height(20)))
+                        {
+                            box.hitEffects.Add(new FighterSkill.HitEffects());
+                        }
+                        for (int ef = 0; ef < box.hitEffects.Count; ef++)
+                        {
+                            EditorGUILayout.BeginVertical("Box");
+                            //削除
+                            bool f = false;
+                            EditorGUILayout.BeginHorizontal();
+                            box.hitEffects[ef].effect = EditorGUILayout.ObjectField("エフェクト", box.hitEffects[ef].effect, typeof(GameObject), true) as GameObject;
+                            if (GUILayout.Button("×", GUILayout.Width(20)))
+                            {
+                                f = true;
+                            }
+                            EditorGUILayout.EndHorizontal();
+                            box.hitEffects[ef].position = EditorGUILayout.Vector3Field("ポジション", box.hitEffects[ef].position);
+                            EditorGUILayout.EndHorizontal();
+                            if (f)
+                            {
+                                box.hitEffects.Remove(box.hitEffects[ef]);
+                            }
+                        }
+                    }
+                    EditorGUILayout.EndHorizontal();
+                }
+
             }
 
             i++;

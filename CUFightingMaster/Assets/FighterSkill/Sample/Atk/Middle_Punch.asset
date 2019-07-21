@@ -42,6 +42,10 @@ MonoBehaviour:
     damage: 0
     stanDamage: 0
     knockBack: 0
+    hitEffects:
+    - effect: {fileID: 452643502229921951, guid: 161600caced3d6549b170bb498b1e048,
+        type: 3}
+      position: {x: 0, y: 0, z: -0.51}
     isDown: 0
     isFaceDown: 0
     isPassiveNotPossible: 0

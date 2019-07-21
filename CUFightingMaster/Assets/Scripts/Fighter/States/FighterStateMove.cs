@@ -87,40 +87,54 @@ public class FighterStateMove : StateBaseScriptMonoBehaviour
         switch (_dir)
         {
             case Direction.Neutral:
-				stateBase.core.SetIsCrouching(false);
-				stateBase.ChangeSkillConstant(SkillConstants.Idle, 5);
+                stateBase.core.SetIsCrouching(false);
+                stateBase.ChangeSkillConstant(SkillConstants.Idle, 5);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Idle);
                 break;
             case Direction.Front:
-				stateBase.core.SetIsCrouching(false);
-				stateBase.ChangeSkillConstant(SkillConstants.Front_Walk, 5);
+                stateBase.core.SetIsCrouching(false);
+                stateBase.ChangeSkillConstant(SkillConstants.Front_Walk, 5);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Front_Walk);
                 break;
             case Direction.Back:
-				stateBase.core.SetIsCrouching(false);
-				stateBase.ChangeSkillConstant(SkillConstants.Back_Walk, 5);
+                stateBase.core.SetIsCrouching(false);
+                stateBase.ChangeSkillConstant(SkillConstants.Back_Walk, 5);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Back_Walk);
                 break;
             case Direction.Down:
-				stateBase.core.SetIsCrouching(true);
+                stateBase.core.SetIsCrouching(true);
                 stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Crouching);
                 break;
             case Direction.DownBack:
-				stateBase.core.SetIsCrouching(true);
-				stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+                stateBase.core.SetIsCrouching(true);
+                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Crouching);
+
                 break;
             case Direction.DownFront:
-				stateBase.core.SetIsCrouching(true);
-				stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+                stateBase.core.SetIsCrouching(true);
+                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Crouching);
+
                 break;
             case Direction.Up:
-				stateBase.core.SetIsCrouching(false);
-				stateBase.ChangeSkillConstant(SkillConstants.Jump, 0);
+                stateBase.core.SetIsCrouching(false);
+                stateBase.ChangeSkillConstant(SkillConstants.Jump, 0);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Jump);
+
                 break;
             case Direction.UpFront:
-				stateBase.core.SetIsCrouching(false);
-				stateBase.ChangeSkillConstant(SkillConstants.Front_Jump, 0);
+                stateBase.core.SetIsCrouching(false);
+                stateBase.ChangeSkillConstant(SkillConstants.Front_Jump, 0);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Front_Jump);
+
                 break;
             case Direction.UpBack:
-				stateBase.core.SetIsCrouching(false);
-				stateBase.ChangeSkillConstant(SkillConstants.Back_Jump, 0);
+                stateBase.core.SetIsCrouching(false);
+                stateBase.ChangeSkillConstant(SkillConstants.Back_Jump, 0);
+                stateBase.core.SetPlayerMoveState(PlayerMoveState.Back_Jump);
+
                 break;
         }
 

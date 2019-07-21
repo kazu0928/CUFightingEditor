@@ -1,0 +1,64 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
+  m_Name: Air_Jab
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: c8c496fc33b897e40b285cea23fd3efa, type: 2}
+  animationSpeed: 1
+  status: 1
+  hitMode: 0
+  throwMotion: {fileID: 0}
+  enemyThrowMotion: {fileID: 0}
+  cancelFrag: 1
+  barrageCancelFrag: 0
+  cancelLayer: 0
+  inBlend: 0
+  outBlend: 0
+  plusHeadHitBox: []
+  plusBodyHitBox: []
+  plusFootHitBox: []
+  plusGrabHitBox: []
+  plusPushingHitBox: []
+  customHitBox:
+  - mode: 0
+    frameHitBoxes:
+    - hitBox:
+        size: {x: 1, y: 1.28, z: 1}
+        localPosition: {x: 1.2, y: 2.46, z: 0}
+      startFrame: 3
+      endFrame: 7
+    hitStop: 5
+    hitPoint: 0
+    hitStrength: 0
+    damage: 0
+    stanDamage: 0
+    knockBack: 0
+    hitEffects:
+    - effect: {fileID: 452643502229921951, guid: 161600caced3d6549b170bb498b1e048,
+        type: 3}
+      position: {x: 0, y: 0, z: -0.5}
+    isDown: 0
+    isFaceDown: 0
+    isPassiveNotPossible: 0
+    hitRigor: 18
+    guardHitRigor: 0
+    plusGauge: 0
+  isContinue: 1
+  movements:
+  - movement: {x: 0, y: 4.89, z: 0}
+    startFrame: 0
+  gravityMoves: []
+  headFlag: 1
+  bodyFlag: 1
+  footFlag: 1
+  grabFlag: 1
+  pushingFlag: 1

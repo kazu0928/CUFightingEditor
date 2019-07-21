@@ -39,9 +39,12 @@ public class FighterMover
 				gravityFrame = 0;
 			}
 			moves = new List<FighterSkill.Move>(core.NowPlaySkill.movements);
-			gravity = new List<FighterSkill.GravityMove>(core.NowPlaySkill.gravityMoves);
-			//移動配列のソート、フレームが近い順に並べる
-			if(moves.Count > 1)
+            if (!core.NowPlaySkill.isContinue)
+            {
+                gravity = new List<FighterSkill.GravityMove>(core.NowPlaySkill.gravityMoves);
+            }
+            //移動配列のソート、フレームが近い順に並べる
+            if(moves.Count > 1)
 			{
 				moves.Sort((a, b) => a.startFrame - b.startFrame);
 			}

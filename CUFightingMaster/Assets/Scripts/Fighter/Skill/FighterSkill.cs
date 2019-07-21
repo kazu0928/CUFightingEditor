@@ -24,6 +24,12 @@ public class FighterSkill : ScriptableObject
 		public int startFrame;
 		public int endFrame;        
     }
+    [System.Serializable]
+    public class HitEffects
+    {
+        public GameObject effect;
+        public Vector3 position;
+    }
     //当たり判定群
     [System.Serializable]
     public class CustomHitBox
@@ -36,7 +42,7 @@ public class FighterSkill : ScriptableObject
         public int damage;              //ダメージ
         public int stanDamage;          //スタン値
         public int knockBack;           //ノックバック値
-                                        //TODO::ヒットエフェクト
+        public List<HitEffects> hitEffects;//TODO::ヒットエフェクト
         public bool isDown = false;     //ダウンするかどうか
         public bool isFaceDown = false; //うつ伏せかどうか
         public bool isPassiveNotPossible = false;//受け身不可
