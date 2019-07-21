@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
+  m_Name: YarareMiddle 1
+  m_EditorClassIdentifier: 
+  animationClip: {fileID: 7400000, guid: 58e70b7ec8aa26a49854b1deb1360751, type: 2}
+  animationSpeed: 1
+  status: 1
+  hitMode: 0
+  throwMotion: {fileID: 0}
+  enemyThrowMotion: {fileID: 0}
+  cancelFrag: 1
+  barrageCancelFrag: 0
+  cancelLayer: 0
+  inBlend: 0
+  outBlend: 0
+  plusHeadHitBox: []
+  plusBodyHitBox: []
+  plusFootHitBox: []
+  plusGrabHitBox: []
+  plusPushingHitBox: []
+  customHitBox: []
+  isContinue: 1
+  movements: []
+  gravityMoves: []
+  headFlag: 1
+  bodyFlag: 1
+  footFlag: 1
+  grabFlag: 1
+  pushingFlag: 1

@@ -84,6 +84,79 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 		}
 		stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
 	}
+		//やられ
+	public void AirHitStunStart()
+	{
+		FighterSkill.CustomHitBox box = stateBase.core.GetDamage;
+		//硬直
+		hitRigor = box.hitRigor;
+		hitCount = 0;
+
+		//ヒットストップ
+		GameManager.Instance.SetHitStop(stateBase.core.PlayerNumber, box.hitStop);
+		//相打ち時に受けたほうを優先する
+		if (GameManager.Instance.GetHitStop(stateBase.core.EnemyNumber) <= 0)
+		{
+			GameManager.Instance.SetHitStop(stateBase.core.EnemyNumber, box.hitStop);
+		}
+		//立ちやられ
+		if (stateBase.core.GetDamage.frameHitBoxes.Count > 0)
+		{
+            //ダメージ処理
+            stateBase.core.HP -= box.damage;
+			if(stateBase.core.HP<0)
+			{
+                stateBase.core.HP = 0;
+            }
+            switch(box.hitPoint)
+			{
+				case HitPoint.Bottom:
+					switch(box.hitStrength)
+					{
+						case HitStrength.Light:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Light_Bottom_HitMotion, 0);
+							break;
+						case HitStrength.Middle:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Middle_Bottom_HitMotion, 0);
+							break;
+						case HitStrength.Strong:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Strong_Bottom_HitMotion, 0);
+							break;
+					}
+					break;
+				case HitPoint.Middle:
+					switch (box.hitStrength)
+					{
+						case HitStrength.Light:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Light_Middle_HitMotion, 0);
+							break;
+						case HitStrength.Middle:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Middle_Middle_HitMotion, 0);
+							break;
+						case HitStrength.Strong:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Strong_Middle_HitMotion, 0);
+							break;
+					}
+					break;
+				case HitPoint.Top:
+					switch (box.hitStrength)
+					{
+						case HitStrength.Light:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Light_Top_HitMotion, 0);
+							break;
+						case HitStrength.Middle:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Middle_Top_HitMotion, 0);
+							break;
+						case HitStrength.Strong:
+							stateBase.ChangeSkillConstant(SkillConstants.Air_Strong_Top_HitMotion, 0);
+							break;
+					}
+					break;
+			}
+		}
+		stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
+	}
+
 	public void HitStunUpdate()
 	{
 		if (GameManager.Instance.GetHitStop(stateBase.core.PlayerNumber) <= 0)

@@ -6829,6 +6829,64 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 433619320}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &707327192
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 707327193}
+  - component: {fileID: 707327195}
+  - component: {fileID: 707327194}
+  m_Layer: 15
+  m_Name: GameObject (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &707327193
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707327192}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1453529986}
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &707327194
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707327192}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 25, y: 50, z: 50}
+  m_Center: {x: -37.5, y: 0, z: 0}
+--- !u!65 &707327195
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 707327192}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 25, y: 50, z: 50}
+  m_Center: {x: 37.5, y: 0, z: 0}
 --- !u!1 &932342826
 GameObject:
   m_ObjectHideFlags: 0
@@ -10515,7 +10573,7 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 811, y: 103}
+      nodePosition: {x: 820, y: 102}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -10531,7 +10589,7 @@ MonoBehaviour:
       ID:
         number: 1
       nextStateJudge:
-      - nextStateName: 
+      - nextStateName: "\u7A7A\u4E2D\u3084\u3089\u308C"
         nextID:
           number: 2
         arg1:
@@ -10589,19 +10647,95 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 86, y: 207}
+      nodePosition: {x: 124, y: 247}
       toggleWindow: 1
       stateMode: 0
       subStateID:
         number: 0
       isSkipState: 1
-    - stateName: 
+    - stateName: "\u7A7A\u4E2D\u3084\u3089\u308C"
       ID:
         number: 2
-      nextStateJudge: []
-      execDelegate: []
-      playUpdateDelegate: []
-      nodePosition: {x: 653, y: 80}
+      nextStateJudge:
+      - nextStateName: Entry_
+        nextID:
+          number: 1
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: IsApplyDamage
+        judgeFuncInstance: {fileID: 2074770960}
+        priority: 0
+        comment: 
+      execDelegate:
+      - actionName: AirHitStunStart
+        instance: {fileID: 2074770966}
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: SkillConstants
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 5
+        argType2: 1
+        comment: 
+      playUpdateDelegate:
+      - actionName: HitStunUpdate
+        instance: {fileID: 2074770966}
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: SkillConstants
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 5
+        argType2: 1
+        comment: 
+      nodePosition: {x: 700, y: 111}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -10689,7 +10823,7 @@ MonoBehaviour:
         argType1: 5
         argType2: 1
         comment: 
-      nodePosition: {x: 656, y: 379}
+      nodePosition: {x: 694, y: 419}
       toggleWindow: 1
       stateMode: 0
       subStateID:
