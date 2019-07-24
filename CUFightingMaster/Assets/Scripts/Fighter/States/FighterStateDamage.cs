@@ -8,6 +8,8 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 	private FighterStateBase stateBase;
 	private int hitRigor = 0;
 	private int hitCount = 0;
+
+	private bool isEndStun = false;
 	private void Start()
 	{
 		stateBase = GetComponent<FighterStateBase>();
@@ -15,6 +17,7 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 	//やられ
 	public void HitStunStart()
 	{
+		isEndStun = false;
 		FighterSkill.CustomHitBox box = stateBase.core.GetDamage;
 		//硬直
 		hitRigor = box.hitRigor;
@@ -84,9 +87,10 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 		}
 		stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
 	}
-		//やられ
+	//やられ
 	public void AirHitStunStart()
 	{
+		isEndStun = false;
 		FighterSkill.CustomHitBox box = stateBase.core.GetDamage;
 		//硬直
 		hitRigor = box.hitRigor;
@@ -157,6 +161,7 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 		stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
 	}
 
+	//ヒット硬直時間をプラス
 	public void HitStunUpdate()
 	{
 		if (GameManager.Instance.GetHitStop(stateBase.core.PlayerNumber) <= 0)
@@ -164,10 +169,45 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 			hitCount++;
 		}
 	}
+	//受け身再生
+	public void PlayPassive()
+	{
+		Direction dir = stateBase.input.GetPlayerMoveDirection(stateBase);
+		if (dir == Direction.Back)
+		{
+			stateBase.ChangeSkillConstant(SkillConstants.Air_Back_Passive, 0);
+		}
+		else if(dir == Direction.Front)
+		{
+			stateBase.ChangeSkillConstant(SkillConstants.Air_Front_Passive, 0);
+		}
+		else
+		{
+			stateBase.ChangeSkillConstant(SkillConstants.Air_Passive, 0);
+		}
+	}
+	//ステートエンド
+	public void EndHitStunFlag()
+	{
+		if (hitCount >= hitRigor)
+		{
+			isEndStun = true;
+		}
+	}
+	//ヒット硬直時間が終わったら
+	public bool IsEndHitStunCount()
+	{
+		return hitCount >= hitRigor;
+	}
 	public bool IsEndHitStun()
 	{
-		if(hitCount >= hitRigor)
+		return isEndStun;
+	}
+	public bool IsPassiveInput()
+	{
+		if(stateBase.input.atkBotton != "")
 		{
+			stateBase.input.atkBotton = "";
 			return true;
 		}
 		return false;

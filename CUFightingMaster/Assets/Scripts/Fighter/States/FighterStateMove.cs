@@ -18,7 +18,7 @@ public class FighterStateMove : StateBaseScriptMonoBehaviour
     /* ステートに入った時 */
     public void MoveStart()
     {
-        beforeInput = GetPlayerMoveDirection();
+        beforeInput = stateBase.input.GetPlayerMoveDirection(stateBase);
         ChangeMove(beforeInput);
     }
     /* ステート中 */
@@ -70,7 +70,7 @@ public class FighterStateMove : StateBaseScriptMonoBehaviour
                 }
             }
         }
-        Direction inp = GetPlayerMoveDirection();
+        Direction inp = stateBase.input.GetPlayerMoveDirection(stateBase);
         if (inp == beforeInput) return;
         ChangeMove(inp);
         beforeInput = inp;
@@ -138,74 +138,6 @@ public class FighterStateMove : StateBaseScriptMonoBehaviour
                 break;
         }
 
-    }
-    //移動の取得
-    private Direction GetPlayerMoveDirection()
-    {
-        switch (stateBase.input.playerDirection)
-        {
-            case "1":
-                if (stateBase.core.Direction == PlayerDirection.Right)
-                {
-                    return Direction.DownBack;
-                }
-                else
-                {
-                    return Direction.DownFront;
-                }
-            case "2":
-                return Direction.Down;
-            case "3":
-                if (stateBase.core.Direction == PlayerDirection.Right)
-                {
-                    return Direction.DownFront;
-                }
-                else
-                {
-                    return Direction.DownBack;
-                }
-            case "4":
-                if (stateBase.core.Direction == PlayerDirection.Right)
-                {
-                    return Direction.Back;
-                }
-                else
-                {
-                    return Direction.Front;
-                }
-            case "5":
-                return Direction.Neutral;
-            case "6":
-                if (stateBase.core.Direction == PlayerDirection.Right)
-                {
-                    return Direction.Front;
-                }
-                else
-                {
-                    return Direction.Back;
-                }
-            case "7":
-                if (stateBase.core.Direction == PlayerDirection.Right)
-                {
-                    return Direction.UpBack;
-                }
-                else
-                {
-                    return Direction.UpFront;
-                }
-            case "8":
-                return Direction.Up;
-            case "9":
-                if (stateBase.core.Direction == PlayerDirection.Right)
-                {
-                    return Direction.UpFront;
-                }
-                else
-                {
-                    return Direction.UpBack;
-                }
-        }
-        return Direction.Neutral;
     }
     #endregion
 }

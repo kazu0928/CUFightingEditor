@@ -97,6 +97,9 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 11400000, guid: 2d501e7d5335f984fa923f77ce6afdd7, type: 2}
+  - {fileID: 11400000, guid: fec45e3b022f4104482be49b39515510, type: 2}
+  - {fileID: 11400000, guid: a24a8d05e09f5174e84d5b1321592301, type: 2}
   uniqueSkills: []
   specialSkills: []
   CASkills: []

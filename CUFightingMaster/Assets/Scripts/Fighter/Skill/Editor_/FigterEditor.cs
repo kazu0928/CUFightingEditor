@@ -199,9 +199,12 @@ public class FigterEditor : EditorWindow
         {
             SSet("ダウン", ref fighterStatus.constantsSkills[CommonConstants.Skills.Down]);
             SSet("起き上がり", ref fighterStatus.constantsSkills[CommonConstants.Skills.Wake_Up]);
-        }
+			SSet("空中受け身", ref fighterStatus.constantsSkills[CommonConstants.Skills.Air_Passive]);
+			SSet("空中前受け身", ref fighterStatus.constantsSkills[CommonConstants.Skills.Air_Front_Passive]);
+			SSet("空中後ろ受け身", ref fighterStatus.constantsSkills[CommonConstants.Skills.Air_Back_Passive]);
+		}
 
-    }
+	}
 	private void SSet(string _s,ref FighterSkill _fs)
 	{
 		_fs = (FighterSkill)EditorGUILayout.ObjectField(_s,_fs,typeof(FighterSkill),false);

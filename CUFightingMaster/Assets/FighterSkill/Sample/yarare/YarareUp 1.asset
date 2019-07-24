@@ -31,7 +31,7 @@ MonoBehaviour:
   customHitBox: []
   isContinue: 0
   movements:
-  - movement: {x: -0.5, y: 3.55, z: 0}
+  - movement: {x: -0.5, y: 0, z: 0}
     startFrame: 0
   gravityMoves:
   - movement: {x: 0, y: -0.24, z: 0}
