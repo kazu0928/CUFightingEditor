@@ -27,7 +27,12 @@ MonoBehaviour:
   plusBodyHitBox: []
   plusFootHitBox: []
   plusGrabHitBox: []
-  plusPushingHitBox: []
+  plusPushingHitBox:
+  - hitBox:
+      size: {x: 0, y: 0, z: 0}
+      localPosition: {x: 0, y: 0, z: 0}
+    startFrame: 22
+    endFrame: 38
   customHitBox:
   - mode: 0
     frameHitBoxes:
@@ -42,6 +47,7 @@ MonoBehaviour:
     damage: 0
     stanDamage: 0
     knockBack: 0
+    hitEffects: []
     isDown: 0
     isFaceDown: 0
     isPassiveNotPossible: 0
