@@ -263,6 +263,10 @@ public class PlayerSkillEditor : EditorWindow
                         box.knockBack = EditorGUILayout.FloatField("ノックバック値", box.knockBack);
                         box.plusGauge = EditorGUILayout.IntField("ゲージ増加量", box.plusGauge);
                         EditorGUILayout.EndHorizontal();
+                        EditorGUILayout.BeginHorizontal();
+                        box.airKnockBack = EditorGUILayout.FloatField("空中ノックバック値", box.airKnockBack);
+                        box.guardKnockBack = EditorGUILayout.FloatField("ガードバック値", box.guardKnockBack);
+                        EditorGUILayout.EndHorizontal();
                         if (!box.isDown)
                         {
                             EditorGUILayout.BeginHorizontal();

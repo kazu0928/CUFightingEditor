@@ -49,6 +49,8 @@ public class HitBoxJudgement
 	private PlayerNumber DamageEnemyNumber = 0;
 	private float wallX = 0;
     private int countKnockBack = 0;
+    private bool isKnockGround = true;
+    private PlayerDirection knockBackDir = PlayerDirection.Right;
 
     #region 初期化
     public HitBoxJudgement(FighterCore fighter)
@@ -503,13 +505,29 @@ public class HitBoxJudgement
 	}
     public void KnockBackPushing()
     {
-        //ノックバックがあれば
-        if (countKnockBack >= Knock_Back_Count)
-        {
-            return;
-        }
         Transform t = pushingCollider.gameObject.transform;
-        t.parent.transform.position += new Vector3(knockBackMinus * (RightLeft * -1), 0, 0);
+
+        int rl = 1;
+        if (knockBackDir == PlayerDirection.Right)
+		{
+            rl = -1;
+        }
+
+            //ノックバックがあれば
+            if (countKnockBack >= Knock_Back_Count)
+            {
+                //空中の場合継続
+                if (!core.GroundCheck() && !isKnockGround)
+                {
+                    t.parent.transform.position += new Vector3(knockBackMinus * (rl), 0, 0);
+                }
+                else if (core.GroundCheck())
+                {
+                    isKnockGround = true;
+                }
+                return;
+            }
+        t.parent.transform.position += new Vector3(knockBackMinus * (rl), 0, 0);
         float x = CheckDefaultPushingWall(pushingCollider);
         if (DamageEnemyNumber != PlayerNumber.None)
         {
@@ -517,7 +535,14 @@ public class HitBoxJudgement
             if (Mathf.Abs(x) > 0)
             {
                 Debug.Log((int)(Knock_Back_Count - ((knockBackMinus * Knock_Back_Count) - knockBackPower) / knockBackMinus));
-                GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).SetKnockBack(knockBackPower - (knockBackMinus - Mathf.Abs(x)), PlayerNumber.None, Knock_Back_Count - countKnockBack);
+				if(knockBackDir == PlayerDirection.Right)
+				{
+                    GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).SetKnockBack(knockBackPower - (knockBackMinus - Mathf.Abs(x)), PlayerNumber.None,PlayerDirection.Left, Knock_Back_Count - countKnockBack);
+                }
+				else
+				{
+                    GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).SetKnockBack(knockBackPower - (knockBackMinus - Mathf.Abs(x)), PlayerNumber.None, PlayerDirection.Right, Knock_Back_Count - countKnockBack);
+                }
                 GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).KnockBackUpdate();
 
                 knockBackPower = 0;
@@ -529,12 +554,14 @@ public class HitBoxJudgement
         countKnockBack++;
     }
     //ノックバックの初期化
-    public void SetKnockBack(float _power,PlayerNumber _number,int _count)
+    public void SetKnockBack(float _power,PlayerNumber _number,PlayerDirection _dir, int _count)
 	{
 		knockBackPower = _power;
         Knock_Back_Count = _count;
         knockBackMinus = knockBackPower / Knock_Back_Count;
 		DamageEnemyNumber = _number;
         countKnockBack = 0;
+        isKnockGround = false;
+        knockBackDir = _dir;
     }
 }
