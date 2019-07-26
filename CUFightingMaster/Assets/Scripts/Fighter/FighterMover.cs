@@ -123,5 +123,4 @@ public class FighterMover
         transform.Translate(move * 0.1f);
     }
     #endregion
-	
 }

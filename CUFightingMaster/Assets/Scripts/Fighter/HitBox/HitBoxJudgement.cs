@@ -44,7 +44,7 @@ public class HitBoxJudgement
 
 	//ノックバック
 	private float knockBackMinus = 0;
-	private const int Knock_Back_Count = 6;
+	private int Knock_Back_Count = 6;
 	private float knockBackPower = 0;
 	private PlayerNumber DamageEnemyNumber = 0;
 	private float wallX = 0;
@@ -508,20 +508,23 @@ public class HitBoxJudgement
 			return;
 		}
 		Transform t = pushingCollider.gameObject.transform;
-		t.parent.transform.position += new Vector3(knockBackPower*(RightLeft*-1), 0, 0);
+		t.parent.transform.position += new Vector3(knockBackMinus*(RightLeft*-1), 0, 0);
 		float x = CheckDefaultPushingWall(pushingCollider);
 		if (Mathf.Abs(x) >0)
 		{
-			GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).SetKnockBack(knockBackPower -(knockBackPower - Mathf.Abs(x)), core.PlayerNumber);
-			knockBackPower = 0;
+            Debug.Log((int)(Knock_Back_Count-((knockBackMinus*Knock_Back_Count)-knockBackPower)/knockBackMinus));
+            GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).SetKnockBack(knockBackPower -(knockBackMinus - Mathf.Abs(x)), core.PlayerNumber,(int)(Knock_Back_Count-((knockBackMinus*Knock_Back_Count)-knockBackPower)/knockBackMinus));
+            GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).KnockBackUpdate();
+            knockBackPower = 0;
 		}
 		knockBackPower -= knockBackMinus;
 	}
 	//ノックバックの初期化
-	public void SetKnockBack(float _power,PlayerNumber _number)
+	public void SetKnockBack(float _power,PlayerNumber _number,int _count)
 	{
 		knockBackPower = _power;
-		knockBackMinus = knockBackPower / Knock_Back_Count;
+        Knock_Back_Count = _count;
+        knockBackMinus = knockBackPower / Knock_Back_Count;
 		DamageEnemyNumber = _number;
-	}
+    }
 }
