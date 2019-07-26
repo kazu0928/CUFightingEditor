@@ -85,6 +85,8 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 					break;
 			}
 		}
+		//ノックバックのセット
+		stateBase.core.SetKnockBack(box.knockBack,stateBase.core.EnemyNumber);
 		stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
 	}
 	//やられ

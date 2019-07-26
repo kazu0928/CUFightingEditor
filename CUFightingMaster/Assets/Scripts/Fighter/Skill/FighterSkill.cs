@@ -41,7 +41,7 @@ public class FighterSkill : ScriptableObject
         public HitStrength hitStrength; //弱中強
         public int damage;              //ダメージ
         public int stanDamage;          //スタン値
-        public int knockBack;           //ノックバック値
+        public float knockBack;           //ノックバック値
         public List<HitEffects> hitEffects;//TODO::ヒットエフェクト
         public bool isDown = false;     //ダウンするかどうか
         public bool isFaceDown = false; //うつ伏せかどうか

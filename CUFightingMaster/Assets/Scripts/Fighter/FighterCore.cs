@@ -100,6 +100,10 @@ public class FighterCore : MonoBehaviour
 		//当たり判定のアップデート
 		hitJudgement.UpdateGame();
 	}
+	public void KnockBackUpdate()
+	{
+		hitJudgement.KnockBackPushing();
+	}
 
 	#region publid メソッド
 	//技の設定
@@ -137,6 +141,11 @@ public class FighterCore : MonoBehaviour
     {
         playerMoveState = _state;
     }
+
+	public void SetKnockBack(float _backCount,PlayerNumber _number)
+	{
+		hitJudgement.SetKnockBack(_backCount,_number);
+	}
     #endregion
 
     #region 初期化時エラーチェック

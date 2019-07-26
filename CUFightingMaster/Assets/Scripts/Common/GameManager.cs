@@ -30,6 +30,10 @@ public class GameManager : SingletonMono<GameManager>
 		{
 			isHitStop_one = false;
 			Player_one.UpdateGame();
+			if(hitStop_one<=0)
+			{
+				Player_one.KnockBackUpdate();
+			}
 		}
 		else
 		{
@@ -40,6 +44,10 @@ public class GameManager : SingletonMono<GameManager>
 		{
 			isHitStop_two = false;
 			Player_two.UpdateGame();
+			if (hitStop_one <= 0)
+			{
+				Player_two.KnockBackUpdate();
+			}
 		}
 		else
 		{

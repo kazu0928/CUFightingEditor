@@ -41,6 +41,14 @@ public class HitBoxJudgement
 
     private int RightLeft = 1;
     private bool attackHit = false;//技が当たってるかどうか
+
+	//ノックバック
+	private float knockBackMinus = 0;
+	private const int Knock_Back_Count = 6;
+	private float knockBackPower = 0;
+	private PlayerNumber DamageEnemyNumber = 0;
+	private float wallX = 0;
+
     #region 初期化
     public HitBoxJudgement(FighterCore fighter)
 	{
@@ -116,7 +124,7 @@ public class HitBoxJudgement
 		
 		if (core.NowPlaySkill != null)
 		{
-            CheckDefaultPushingWall(pushingCollider);
+            wallX = CheckDefaultPushingWall(pushingCollider);
             if (core.NowPlaySkill.pushingFlag)
 			{
 				CheckDefaultPushingBox(pushingCollider);
@@ -428,9 +436,16 @@ public class HitBoxJudgement
 			if (c.gameObject.tag == CommonConstants.Tags.GetTags(HitBoxMode.Pushing))
 			{
 				int i = 1;
-				if(t.position.x>c.transform.position.x)
+				if(t.position.x>=c.transform.position.x)
 				{
 					i = -1;
+					if(t.position.x == c.transform.position.x)
+					{
+							if(core.Direction == PlayerDirection.Right)
+							{
+								i = 1;
+							}
+					}
 				}
 				float x = (pos.x + (siz.x * i)) + ((((BoxCollider)c).size.x / 2.0f) * i) + (((BoxCollider)c).center.x);
 				float checkX = x - c.gameObject.transform.parent.transform.position.x;
@@ -446,7 +461,8 @@ public class HitBoxJudgement
 			}
 		}
 	}
-    public void CheckDefaultPushingWall(BoxCollider _col)
+	//壁用の当たり判定
+    public float CheckDefaultPushingWall(BoxCollider _col)
     {
         Transform t = _col.gameObject.transform;
         float posX = t.position.x + _col.center.x;
@@ -457,8 +473,9 @@ public class HitBoxJudgement
         Collider[] col = Physics.OverlapBox(new Vector3(posX, posY, posZ), siz, Quaternion.identity, (1 << LayerMask.NameToLayer(CommonConstants.Layers.Wall)));
 		if(col.Length<=0)
 		{
-            return;
+            return 0;
         }
+		float x = 0;
         foreach (Collider c in col)
         {
             int i = 1;
@@ -466,8 +483,9 @@ public class HitBoxJudgement
             {
                 i = -1;
             }
-            float x = ((c.transform.position.x+((BoxCollider)c).center.x))+((((BoxCollider)c).size.x/2)*i)+((_col.center.x*-1+(siz.x*i)));
-            float checkX = x - c.gameObject.transform.parent.transform.position.x;
+            x = ((c.transform.position.x+((BoxCollider)c).center.x))+((((BoxCollider)c).size.x/2)*i)+((_col.center.x*-1+(siz.x*i)));
+			//プラスかマイナスか
+			float checkX = x - c.gameObject.transform.parent.transform.position.x;
             if (i == 1 && checkX > 0)
             {
                 continue;
@@ -476,11 +494,34 @@ public class HitBoxJudgement
             {
                 continue;
             }
+			float xTmp = t.parent.transform.position.x - x;
             t.parent.transform.position = new Vector3(x, t.transform.position.y, t.transform.position.z);
-        }
-    }
-    public void CheckHalfPushingBox()
+			x = xTmp;
+		}
+		return  x;
+	}
+	public void KnockBackPushing()
 	{
-		
+		//ノックバックがあれば
+		if(knockBackPower <= 0)
+		{
+			return;
+		}
+		Transform t = pushingCollider.gameObject.transform;
+		t.parent.transform.position += new Vector3(knockBackPower*(RightLeft*-1), 0, 0);
+		float x = CheckDefaultPushingWall(pushingCollider);
+		if (Mathf.Abs(x) >0)
+		{
+			GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).SetKnockBack(knockBackPower -(knockBackPower - Mathf.Abs(x)), core.PlayerNumber);
+			knockBackPower = 0;
+		}
+		knockBackPower -= knockBackMinus;
+	}
+	//ノックバックの初期化
+	public void SetKnockBack(float _power,PlayerNumber _number)
+	{
+		knockBackPower = _power;
+		knockBackMinus = knockBackPower / Knock_Back_Count;
+		DamageEnemyNumber = _number;
 	}
 }
