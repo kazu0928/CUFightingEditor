@@ -48,6 +48,7 @@ public class HitBoxJudgement
 	private float knockBackPower = 0;
 	private PlayerNumber DamageEnemyNumber = 0;
 	private float wallX = 0;
+    private int countKnockBack = 0;
 
     #region 初期化
     public HitBoxJudgement(FighterCore fighter)
@@ -500,31 +501,40 @@ public class HitBoxJudgement
 		}
 		return  x;
 	}
-	public void KnockBackPushing()
-	{
-		//ノックバックがあれば
-		if(knockBackPower <= 0)
-		{
-			return;
-		}
-		Transform t = pushingCollider.gameObject.transform;
-		t.parent.transform.position += new Vector3(knockBackMinus*(RightLeft*-1), 0, 0);
-		float x = CheckDefaultPushingWall(pushingCollider);
-		if (Mathf.Abs(x) >0)
-		{
-            Debug.Log((int)(Knock_Back_Count-((knockBackMinus*Knock_Back_Count)-knockBackPower)/knockBackMinus));
-            GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).SetKnockBack(knockBackPower -(knockBackMinus - Mathf.Abs(x)), core.PlayerNumber,(int)(Knock_Back_Count-((knockBackMinus*Knock_Back_Count)-knockBackPower)/knockBackMinus));
-            GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).KnockBackUpdate();
-            knockBackPower = 0;
-		}
-		knockBackPower -= knockBackMinus;
-	}
-	//ノックバックの初期化
-	public void SetKnockBack(float _power,PlayerNumber _number,int _count)
+    public void KnockBackPushing()
+    {
+        //ノックバックがあれば
+        if (countKnockBack >= Knock_Back_Count)
+        {
+            return;
+        }
+        Transform t = pushingCollider.gameObject.transform;
+        t.parent.transform.position += new Vector3(knockBackMinus * (RightLeft * -1), 0, 0);
+        float x = CheckDefaultPushingWall(pushingCollider);
+        if (DamageEnemyNumber != PlayerNumber.None)
+        {
+
+            if (Mathf.Abs(x) > 0)
+            {
+                Debug.Log((int)(Knock_Back_Count - ((knockBackMinus * Knock_Back_Count) - knockBackPower) / knockBackMinus));
+                GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).SetKnockBack(knockBackPower - (knockBackMinus - Mathf.Abs(x)), PlayerNumber.None, Knock_Back_Count - countKnockBack);
+                GameManager.Instance.GetPlayFighterCore(DamageEnemyNumber).KnockBackUpdate();
+
+                knockBackPower = 0;
+                countKnockBack = Knock_Back_Count;
+                return;
+            }
+        }
+        knockBackPower -= knockBackMinus;
+        countKnockBack++;
+    }
+    //ノックバックの初期化
+    public void SetKnockBack(float _power,PlayerNumber _number,int _count)
 	{
 		knockBackPower = _power;
         Knock_Back_Count = _count;
         knockBackMinus = knockBackPower / Knock_Back_Count;
 		DamageEnemyNumber = _number;
+        countKnockBack = 0;
     }
 }

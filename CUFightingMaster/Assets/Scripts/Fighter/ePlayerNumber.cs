@@ -4,6 +4,7 @@
 	Player2,
 	Player3,
 	Player4,
+	None,
 }
 
 public enum PlayerDirection
