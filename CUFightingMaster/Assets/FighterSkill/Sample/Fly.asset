@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
-  m_Name: Back_Jump
+  m_Name: Fly
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: b50b85bf5a555414f903d8512672e46c, type: 2}
-  animationSpeed: 0.5
+  animationClip: {fileID: 7400000, guid: a34189175e400e54fa4d47d29f5cf7a8, type: 2}
+  animationSpeed: 1
   status: 1
   hitMode: 0
   throwMotion: {fileID: 0}
@@ -30,13 +30,8 @@ MonoBehaviour:
   plusPushingHitBox: []
   customHitBox: []
   isContinue: 0
-  movements:
-  - movement: {x: 0, y: 4.89, z: 0}
-    startFrame: 0
-  gravityMoves:
-  - movement: {x: -1, y: -0.24, z: 0}
-    limitMove: {x: -1, y: -22.36, z: 0}
-    startFrame: 0
+  movements: []
+  gravityMoves: []
   headFlag: 1
   bodyFlag: 1
   footFlag: 1

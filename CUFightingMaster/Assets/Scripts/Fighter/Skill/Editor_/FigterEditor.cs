@@ -198,11 +198,13 @@ public class FigterEditor : EditorWindow
         if (down = CustomUI.Foldout("ダウン", down))
         {
             SSet("ダウン", ref fighterStatus.constantsSkills[CommonConstants.Skills.Down]);
+            SSet("打ち付け",ref fighterStatus.constantsSkills[CommonConstants.Skills.Ground_Knock]);
             SSet("起き上がり", ref fighterStatus.constantsSkills[CommonConstants.Skills.Wake_Up]);
 			SSet("空中受け身", ref fighterStatus.constantsSkills[CommonConstants.Skills.Air_Passive]);
 			SSet("空中前受け身", ref fighterStatus.constantsSkills[CommonConstants.Skills.Air_Front_Passive]);
 			SSet("空中後ろ受け身", ref fighterStatus.constantsSkills[CommonConstants.Skills.Air_Back_Passive]);
-		}
+            SSet("飛ばされ", ref fighterStatus.constantsSkills[CommonConstants.Skills.Damage_Fly_HitMotion]);
+        }
 
 	}
 	private void SSet(string _s,ref FighterSkill _fs)

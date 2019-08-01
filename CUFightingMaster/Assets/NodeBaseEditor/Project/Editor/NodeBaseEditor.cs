@@ -110,6 +110,42 @@ namespace CUEngine.Pattern
                     initFlag = true;
                 }
             }
+            if(GUILayout.Button("整理",GUILayout.Width(50)))
+            {
+                List<int> del = new List<int>();
+                for (int i = 0; i < stateMonobehaviors[nowStateMonoNuber].stateBody.Count; i++)
+                {
+                    for (int j = 0; j < stateMonobehaviors[nowStateMonoNuber].stateBody[i].states.Count;j++)
+                    {
+                        if(stateMonobehaviors[nowStateMonoNuber].stateBody[i].states[j].stateMode == StateMode.SubState)
+                        {
+                            stateMonobehaviors[nowStateMonoNuber].stateBody[i].states[j].subStateID = stateMonobehaviors[nowStateMonoNuber].stateBody[stateMonobehaviors[nowStateMonoNuber].stateBody[i].states[j].subStateID.number - 1].ID;
+                            del.Add(stateMonobehaviors[nowStateMonoNuber].stateBody[i].states[j].subStateID.number);
+                        }
+                    }
+                }
+                List<StateBody> s = new List<StateBody>();
+                for (int i = 1; i < stateMonobehaviors[nowStateMonoNuber].stateBody.Count; i++)
+                {
+                    bool f = false;
+                    foreach (int d in del)
+                    {
+                        if(d == stateMonobehaviors[nowStateMonoNuber].stateBody[i].ID.number)
+                        {
+                            f = true;
+                            break;
+                        }
+                    }
+                    if (f == false)
+                    {
+                        s.Add(stateMonobehaviors[nowStateMonoNuber].stateBody[i]);
+                    }
+                }
+                foreach(StateBody sb in s)
+                {
+                    stateMonobehaviors[nowStateMonoNuber].stateBody.Remove(sb);
+                }
+            }
 
             //イベント処理
             ProcessNodeEvents(Event.current);

@@ -95,11 +95,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 11400000, guid: 615420a21ef97ef4f9ee283079987f7b, type: 2}
+  - {fileID: 11400000, guid: e0f3e030a97634d4cabead301bb98092, type: 2}
   - {fileID: 11400000, guid: 2d501e7d5335f984fa923f77ce6afdd7, type: 2}
   - {fileID: 11400000, guid: fec45e3b022f4104482be49b39515510, type: 2}
   - {fileID: 11400000, guid: a24a8d05e09f5174e84d5b1321592301, type: 2}
+  - {fileID: 11400000, guid: 2c5165761d533d34ebb3ce9e416150bb, type: 2}
+  - {fileID: 11400000, guid: 4499518d0b026c84b9c778018acd37de, type: 2}
   uniqueSkills: []
   specialSkills: []
   CASkills: []

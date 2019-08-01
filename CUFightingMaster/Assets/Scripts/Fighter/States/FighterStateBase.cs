@@ -49,4 +49,13 @@ public class FighterStateBase : StateBaseScriptMonoBehaviour
     {
         core.SetSkill(core.Status.constantsSkills[(int)_constants], _weightFrame);
     }
+    //スキル入れ替え（移動カスタム）
+    public void ChangeSkillCustomMoveConstant(SkillConstants _constants, int _weightFrame,List<FighterSkill.Move> _move,List<FighterSkill.GravityMove> _grav,bool _con)
+    {
+        FighterSkill s = Instantiate(core.Status.constantsSkills[(int)_constants]);
+        s.movements = _move;
+        s.gravityMoves = _grav;
+        s.isContinue = _con;
+        core.SetSkill(s, _weightFrame);
+    }
 }

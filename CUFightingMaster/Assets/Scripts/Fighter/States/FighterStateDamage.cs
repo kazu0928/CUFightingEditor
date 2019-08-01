@@ -14,6 +14,7 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 	{
 		stateBase = GetComponent<FighterStateBase>();
 	}
+	#region 地上やられ
 	//やられ
 	public void HitStunStart()
 	{
@@ -100,6 +101,9 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 		//ダメージを受けたのでリセット
 		stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
 	}
+	#endregion
+
+	#region 空中やられ
     //やられ
     public void AirHitStunStart()
     {
@@ -187,6 +191,52 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
         stateBase.core.SetKnockBack(box.airKnockBack, stateBase.core.EnemyNumber,tmpDir, 6);
         stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
     }
+	#endregion
+
+	#region 飛ばし（ダウン技）
+	public void DownHitStart()
+	{
+		isEndStun = false;
+        FighterSkill.CustomHitBox box = stateBase.core.GetDamage;
+        //ヒット硬直（空中受け身まで）
+        hitRigor = box.hitRigor;
+        hitCount = 0;
+
+        //ヒットストップ
+        GameManager.Instance.SetHitStop(stateBase.core.PlayerNumber, box.hitStop);
+        //相打ち時に受けたほうを優先する
+        if (GameManager.Instance.GetHitStop(stateBase.core.EnemyNumber) <= 0)
+        {
+            GameManager.Instance.SetHitStop(stateBase.core.EnemyNumber, box.hitStop);
+        }
+        //ダウンやられ
+        if (stateBase.core.GetDamage.frameHitBoxes.Count > 0)
+        {
+            //ダメージ処理
+            stateBase.core.HP -= box.damage;
+            if (stateBase.core.HP < 0)
+            {
+                stateBase.core.HP = 0;
+            }
+            stateBase.ChangeSkillCustomMoveConstant(SkillConstants.Damage_Fly_HitMotion,0,box.movements,box.gravityMoves,box.isContinue);
+        }
+        PlayerDirection tmpDir;
+
+        //ノックバックのセット
+        if (GameManager.Instance.GetPlayFighterCore(stateBase.core.EnemyNumber).Direction == PlayerDirection.Right)
+        {
+            tmpDir = PlayerDirection.Left;
+        }
+        else
+        {
+            tmpDir = PlayerDirection.Right;
+        }
+
+        //ノックバックのセット
+        stateBase.core.SetKnockBack(box.airKnockBack, stateBase.core.EnemyNumber,tmpDir, 6);
+        stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
+	}
+	#endregion
 
     //ヒット硬直時間をプラス
     public void HitStunUpdate()
@@ -222,8 +272,13 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 			isEndStun = true;
 		}
 	}
-	//ヒット硬直時間が終わったら
-	public bool IsEndHitStunCount()
+    //ダウンかどうか
+    public bool isDownHit()
+    {
+        return stateBase.core.GetDamage.isDown;
+    }
+    //ヒット硬直時間が終わったら
+    public bool IsEndHitStunCount()
 	{
 		return hitCount >= hitRigor;
 	}
