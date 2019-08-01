@@ -264,14 +264,13 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 			stateBase.ChangeSkillConstant(SkillConstants.Air_Passive, 0);
 		}
 	}
-	//ステートエンド
-	public void EndHitStunFlag()
-	{
-		if (hitCount >= hitRigor)
-		{
-			isEndStun = true;
-		}
-	}
+    //ステートエンド
+    public void EndHitStunFlag()
+    {
+
+        isEndStun = true;
+
+    }
     //ダウンかどうか
     public bool isDownHit()
     {

@@ -9823,6 +9823,9 @@ MonoBehaviour:
     guardKnockBack: 0
     hitEffects: []
     isDown: 0
+    isContinue: 0
+    movements: []
+    gravityMoves: []
     isFaceDown: 0
     isPassiveNotPossible: 0
     hitRigor: 0
@@ -10166,6 +10169,9 @@ MonoBehaviour:
     guardKnockBack: 0
     hitEffects: []
     isDown: 0
+    isContinue: 0
+    movements: []
+    gravityMoves: []
     isFaceDown: 0
     isPassiveNotPossible: 0
     hitRigor: 0
@@ -10337,7 +10343,7 @@ MonoBehaviour:
         comment: "\u30B2\u30FC\u30E0\u30EB\u30FC\u30D7\u304C\u958B\u59CB\u3059\u308B\u6761\u4EF6"
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 80, y: 200}
+      nodePosition: {x: 110, y: 213}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -10377,7 +10383,7 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 439, y: 312}
+      nodePosition: {x: 469, y: 325}
       toggleWindow: 1
       stateMode: 1
       subStateID:
@@ -10417,7 +10423,7 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 869, y: 147}
+      nodePosition: {x: 899, y: 160}
       toggleWindow: 1
       stateMode: 1
       subStateID:
@@ -10871,6 +10877,34 @@ MonoBehaviour:
       ID:
         number: 1
       nextStateJudge:
+      - nextStateName: "\u30C0\u30A6\u30F3\uFF08\u98DB\u3070\u3057\uFF09\u6280"
+        nextID:
+          number: 9
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: isDownHit
+        judgeFuncInstance: {fileID: 2049663209}
+        priority: 0
+        comment: 
       - nextStateName: "\u7A7A\u4E2D\u3084\u3089\u308C"
         nextID:
           number: 2
@@ -10929,7 +10963,7 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: -522, y: 398}
+      nodePosition: {x: -356, y: 105}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11045,7 +11079,7 @@ MonoBehaviour:
         argType1: 4
         argType2: 1
         comment: 
-      nodePosition: {x: -19, y: 178}
+      nodePosition: {x: 248, y: 118}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11161,7 +11195,7 @@ MonoBehaviour:
         argType1: 4
         argType2: 1
         comment: 
-      nodePosition: {x: -35, y: 544}
+      nodePosition: {x: 232, y: 484}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11257,7 +11291,7 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 296, y: 268}
+      nodePosition: {x: 592, y: 31}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11293,7 +11327,7 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 973, y: 696}
+      nodePosition: {x: 1240, y: 636}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11353,7 +11387,7 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 833, y: 422}
+      nodePosition: {x: 1206, y: 361}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11393,7 +11427,7 @@ MonoBehaviour:
         comment: 
       execDelegate: []
       playUpdateDelegate: []
-      nodePosition: {x: 983, y: 162}
+      nodePosition: {x: 1351, y: 69}
       toggleWindow: 1
       stateMode: 1
       subStateID:
@@ -11485,7 +11519,151 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 629, y: 69}
+      nodePosition: {x: 948, y: 14}
+      toggleWindow: 1
+      stateMode: 0
+      subStateID:
+        number: 0
+      isSkipState: 0
+    - stateName: "\u30C0\u30A6\u30F3\uFF08\u98DB\u3070\u3057\uFF09\u6280"
+      ID:
+        number: 9
+      nextStateJudge:
+      - nextStateName: Entry_
+        nextID:
+          number: 1
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: IsApplyDamage
+        judgeFuncInstance: {fileID: 2049663213}
+        priority: 0
+        comment: 
+      - nextStateName: "\u7A7A\u4E2D\u53D7\u3051\u8EAB\u5F85\u6A5F\u6642\u9593"
+        nextID:
+          number: 4
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 0
+        argType2: 0
+        judgeFuncName: IsEndHitStunCount
+        judgeFuncInstance: {fileID: 2049663209}
+        priority: 0
+        comment: 
+      - nextStateName: "\u6253\u3061\u4ED8\u3051"
+        nextID:
+          number: 8
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 1
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 1
+        argType1: 4
+        argType2: 0
+        judgeFuncName: IsGroundCheck
+        judgeFuncInstance: {fileID: 2049663213}
+        priority: 0
+        comment: 
+      execDelegate:
+      - actionName: DownHitStart
+        instance: {fileID: 2049663209}
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: SkillConstants
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 5
+        argType2: 1
+        comment: 
+      playUpdateDelegate:
+      - actionName: HitStunUpdate
+        instance: {fileID: 2049663209}
+        arg1:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: SkillConstants
+          assembly_Name: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        arg2:
+          object_Arg: {fileID: 0}
+          int_Arg: 0
+          float_Arg: 0
+          string_Arg: 
+          bool_Arg: 0
+          enum_Arg: 0
+          enum_Name: 
+          assembly_Name: 
+        argMode: 0
+        argType1: 5
+        argType2: 1
+        comment: 
+      nodePosition: {x: 238, y: -289}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11555,7 +11733,7 @@ MonoBehaviour:
         argType1: 5
         argType2: 1
         comment: 
-      nodePosition: {x: 72, y: 168}
+      nodePosition: {x: -483, y: 112}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11643,7 +11821,7 @@ MonoBehaviour:
         argType1: 5
         argType2: 1
         comment: 
-      nodePosition: {x: 598, y: 182}
+      nodePosition: {x: 43, y: 126}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11707,7 +11885,7 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 1018, y: 360}
+      nodePosition: {x: 463, y: 304}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11743,7 +11921,7 @@ MonoBehaviour:
         argType2: 1
         comment: 
       playUpdateDelegate: []
-      nodePosition: {x: 1360, y: 441}
+      nodePosition: {x: 805, y: 385}
       toggleWindow: 1
       stateMode: 0
       subStateID:
@@ -11889,7 +12067,7 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -11944,7 +12122,7 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.size
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -12058,6 +12236,21 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].execDelegate.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].playUpdateDelegate.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
       propertyPath: stateBody.Array.data[7].states.Array.data[0].nodePosition.y
       value: 224
       objectReference: {fileID: 0}
@@ -12139,32 +12332,32 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[0].states.Array.data[0].nodePosition.x
-      value: 80
+      value: 110
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[0].states.Array.data[0].nodePosition.y
-      value: 200
+      value: 213
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[0].states.Array.data[1].nodePosition.x
-      value: 439
+      value: 469
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[0].states.Array.data[1].nodePosition.y
-      value: 312
+      value: 325
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[0].states.Array.data[2].nodePosition.x
-      value: 869
+      value: 899
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[0].states.Array.data[2].nodePosition.y
-      value: 147
+      value: 160
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -12714,27 +12907,27 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[0].nextStateName
-      value: "\u7A7A\u4E2D\u3084\u3089\u308C"
+      value: "\u30C0\u30A6\u30F3\uFF08\u98DB\u3070\u3057\uFF09\u6280"
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[0].nextID.number
-      value: 2
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[0].argMode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[0].argType1
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[0].judgeFuncName
-      value: IsGroundCheck
+      value: isDownHit
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -12744,17 +12937,17 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[1].nextStateName
-      value: "\u5730\u4E0A\u3084\u3089\u308C"
+      value: "\u7A7A\u4E2D\u3084\u3089\u308C"
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[1].nextID.number
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[1].arg1.bool_Arg
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -12779,12 +12972,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nodePosition.x
-      value: -522
+      value: -356
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[0].nodePosition.y
-      value: 398
+      value: 105
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -12909,12 +13102,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[1].nodePosition.x
-      value: -19
+      value: 248
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[1].nodePosition.y
-      value: 178
+      value: 118
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13034,12 +13227,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[2].nodePosition.x
-      value: -35
+      value: 232
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[2].nodePosition.y
-      value: 544
+      value: 484
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13134,12 +13327,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[3].nodePosition.x
-      value: 296
+      value: 592
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[3].nodePosition.y
-      value: 268
+      value: 31
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13189,12 +13382,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[4].nodePosition.x
-      value: 973
+      value: 1240
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[4].nodePosition.y
-      value: 696
+      value: 636
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13279,12 +13472,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[5].nodePosition.x
-      value: 833
+      value: 1206
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[5].nodePosition.y
-      value: 422
+      value: 361
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13324,12 +13517,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[3].states.Array.data[0].nodePosition.x
-      value: 72
+      value: -483
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[3].states.Array.data[0].nodePosition.y
-      value: 168
+      value: 112
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13349,12 +13542,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[3].states.Array.data[1].nodePosition.y
-      value: 182
+      value: 126
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[3].states.Array.data[1].nodePosition.x
-      value: 598
+      value: 43
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13474,12 +13667,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[3].states.Array.data[2].nodePosition.y
-      value: 360
+      value: 304
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[3].states.Array.data[2].nodePosition.x
-      value: 1018
+      value: 463
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13514,12 +13707,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[6].nodePosition.x
-      value: 983
+      value: 1351
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[6].nodePosition.y
-      value: 162
+      value: 69
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13599,12 +13792,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[3].states.Array.data[3].nodePosition.x
-      value: 1360
+      value: 805
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[3].states.Array.data[3].nodePosition.y
-      value: 441
+      value: 385
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13689,12 +13882,12 @@ PrefabInstance:
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[7].nodePosition.x
-      value: 629
+      value: 948
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[7].nodePosition.y
-      value: 69
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
@@ -13770,6 +13963,176 @@ PrefabInstance:
         type: 3}
       propertyPath: stateBody.Array.data[2].states.Array.data[6].nextStateJudge.Array.data[0].nextID.number
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[2].judgeFuncName
+      value: IsGroundCheck
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[2].nextStateName
+      value: "\u5730\u4E0A\u3084\u3089\u308C"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[2].nextID.number
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[2].arg1.bool_Arg
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[2].argMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[0].nextStateJudge.Array.data[2].argType1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].stateName
+      value: "\u30C0\u30A6\u30F3\uFF08\u98DB\u3070\u3057\uFF09\u6280"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].ID.number
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nodePosition.x
+      value: 238
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nodePosition.y
+      value: -289
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].execDelegate.Array.data[0].actionName
+      value: DownHitStart
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].execDelegate.Array.data[0].arg1.enum_Name
+      value: SkillConstants
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].execDelegate.Array.data[0].arg1.assembly_Name
+      value: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].execDelegate.Array.data[0].argMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].execDelegate.Array.data[0].argType1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].execDelegate.Array.data[0].argType2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].playUpdateDelegate.Array.data[0].actionName
+      value: HitStunUpdate
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].playUpdateDelegate.Array.data[0].arg1.enum_Name
+      value: SkillConstants
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].playUpdateDelegate.Array.data[0].arg1.assembly_Name
+      value: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].playUpdateDelegate.Array.data[0].argMode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].playUpdateDelegate.Array.data[0].argType1
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].playUpdateDelegate.Array.data[0].argType2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[0].judgeFuncName
+      value: IsApplyDamage
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[0].nextStateName
+      value: Entry_
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[0].nextID.number
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[1].judgeFuncName
+      value: IsEndHitStunCount
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[1].nextStateName
+      value: "\u7A7A\u4E2D\u53D7\u3051\u8EAB\u5F85\u6A5F\u6642\u9593"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[1].nextID.number
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[2].judgeFuncName
+      value: IsGroundCheck
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[2].argMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[2].argType1
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[2].arg1.bool_Arg
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[2].nextStateName
+      value: "\u6253\u3061\u4ED8\u3051"
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942710479481081787, guid: e3bd4bf71c60665408fe0eeb710abb8b,
+        type: 3}
+      propertyPath: stateBody.Array.data[2].states.Array.data[8].nextStateJudge.Array.data[2].nextID.number
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 6942710479481081786, guid: e3bd4bf71c60665408fe0eeb710abb8b,
         type: 3}
