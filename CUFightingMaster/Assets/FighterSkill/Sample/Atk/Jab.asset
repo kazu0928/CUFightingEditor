@@ -43,12 +43,17 @@ MonoBehaviour:
     stanDamage: 0
     knockBack: 1
     airKnockBack: 0.3
-    guardKnockBack: 0
+    guardKnockBack: 0.1
     hitEffects:
     - effect: {fileID: 452643502229921951, guid: 161600caced3d6549b170bb498b1e048,
         type: 3}
-      position: {x: 0, y: 0.2, z: -1}
+      guardEffect: {fileID: 103288804354123571, guid: 8eea3721bc3fc884eafd65d00f7413aa,
+        type: 3}
+      position: {x: 0, y: 0, z: -0.5}
     isDown: 0
+    isContinue: 0
+    movements: []
+    gravityMoves: []
     isFaceDown: 0
     isPassiveNotPossible: 0
     hitRigor: 16

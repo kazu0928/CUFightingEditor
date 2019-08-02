@@ -97,9 +97,27 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
 		{
             tmpDir = PlayerDirection.Right;
         }
+		//エフェクト再生
+		BoxCollider _bCol = stateBase.core.GetDamageCollider;
+		Transform t = _bCol.gameObject.transform;
+		for (int i = 0; i < box.hitEffects.Count; i++)
+		{
+			if (box.hitEffects[i].effect != null)
+			{
+				if (GameManager.Instance.GetPlayFighterCore(stateBase.core.EnemyNumber).Direction == PlayerDirection.Right)
+				{
+					Object.Instantiate(box.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + box.hitEffects[i].position.x, t.position.y + _bCol.center.y + box.hitEffects[i].position.y, t.position.z + _bCol.center.z + box.hitEffects[i].position.z), Quaternion.identity);
+				}
+				else if (GameManager.Instance.GetPlayFighterCore(stateBase.core.EnemyNumber).Direction == PlayerDirection.Left)
+				{
+					Object.Instantiate(box.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + box.hitEffects[i].position.x, t.position.y + _bCol.center.y + box.hitEffects[i].position.y, t.position.z + _bCol.center.z + box.hitEffects[i].position.z), Quaternion.Euler(0, 180, 0));
+				}
+			}
+		}
+
 		stateBase.core.SetKnockBack(box.knockBack,stateBase.core.EnemyNumber,tmpDir);
 		//ダメージを受けたのでリセット
-		stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
+		stateBase.core.SetDamage(new FighterSkill.CustomHitBox(),null);
 	}
 	#endregion
 
@@ -187,9 +205,27 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
             tmpDir = PlayerDirection.Right;
         }
 
-        //ノックバックのセット
-        stateBase.core.SetKnockBack(box.airKnockBack, stateBase.core.EnemyNumber,tmpDir, 6);
-        stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
+		//エフェクト再生
+		BoxCollider _bCol = stateBase.core.GetDamageCollider;
+		Transform t = _bCol.gameObject.transform;
+		for (int i = 0; i < box.hitEffects.Count; i++)
+		{
+			if (box.hitEffects[i].effect != null)
+			{
+				if (GameManager.Instance.GetPlayFighterCore(stateBase.core.EnemyNumber).Direction == PlayerDirection.Right)
+				{
+					Object.Instantiate(box.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + box.hitEffects[i].position.x, t.position.y + _bCol.center.y + box.hitEffects[i].position.y, t.position.z + _bCol.center.z + box.hitEffects[i].position.z), Quaternion.identity);
+				}
+				else if (GameManager.Instance.GetPlayFighterCore(stateBase.core.EnemyNumber).Direction == PlayerDirection.Left)
+				{
+					Object.Instantiate(box.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + box.hitEffects[i].position.x, t.position.y + _bCol.center.y + box.hitEffects[i].position.y, t.position.z + _bCol.center.z + box.hitEffects[i].position.z), Quaternion.Euler(0, 180, 0));
+				}
+			}
+		}
+
+		//ノックバックのセット
+		stateBase.core.SetKnockBack(box.airKnockBack, stateBase.core.EnemyNumber,tmpDir, 6);
+        stateBase.core.SetDamage(new FighterSkill.CustomHitBox(),null);
     }
 	#endregion
 
@@ -232,14 +268,32 @@ public class FighterStateDamage : StateBaseScriptMonoBehaviour
             tmpDir = PlayerDirection.Right;
         }
 
-        //ノックバックのセット
-        stateBase.core.SetKnockBack(box.airKnockBack, stateBase.core.EnemyNumber,tmpDir, 6);
-        stateBase.core.SetDamage(new FighterSkill.CustomHitBox());
+		//エフェクト再生
+		BoxCollider _bCol = stateBase.core.GetDamageCollider;
+		Transform t = _bCol.gameObject.transform;
+		for (int i = 0; i < box.hitEffects.Count; i++)
+		{
+			if (box.hitEffects[i].effect != null)
+			{
+				if (GameManager.Instance.GetPlayFighterCore(stateBase.core.EnemyNumber).Direction == PlayerDirection.Right)
+				{
+					Object.Instantiate(box.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + box.hitEffects[i].position.x, t.position.y + _bCol.center.y + box.hitEffects[i].position.y, t.position.z + _bCol.center.z + box.hitEffects[i].position.z), Quaternion.identity);
+				}
+				else if (GameManager.Instance.GetPlayFighterCore(stateBase.core.EnemyNumber).Direction == PlayerDirection.Left)
+				{
+					Object.Instantiate(box.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + box.hitEffects[i].position.x, t.position.y + _bCol.center.y + box.hitEffects[i].position.y, t.position.z + _bCol.center.z + box.hitEffects[i].position.z), Quaternion.Euler(0, 180, 0));
+				}
+			}
+		}
+
+		//ノックバックのセット
+		stateBase.core.SetKnockBack(box.airKnockBack, stateBase.core.EnemyNumber,tmpDir, 6);
+        stateBase.core.SetDamage(new FighterSkill.CustomHitBox(),null);
 	}
 	#endregion
 
-    //ヒット硬直時間をプラス
-    public void HitStunUpdate()
+	//ヒット硬直時間をプラス
+	public void HitStunUpdate()
 	{
 		if (GameManager.Instance.GetHitStop(stateBase.core.PlayerNumber) <= 0)
 		{

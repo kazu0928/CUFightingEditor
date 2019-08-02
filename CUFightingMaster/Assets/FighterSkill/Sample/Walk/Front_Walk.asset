@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: Front_Walk
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: f51573353ffe78b4fb0e46779ec53ed7, type: 2}
-  animationSpeed: 0.8
+  animationClip: {fileID: 7400000, guid: f6aa9b925e2e0f0468321b2385fb37a0, type: 2}
+  animationSpeed: 3
   status: 1
   hitMode: 0
   throwMotion: {fileID: 0}
@@ -31,7 +31,7 @@ MonoBehaviour:
   customHitBox: []
   isContinue: 0
   movements:
-  - movement: {x: 1.85, y: 0, z: 0}
+  - movement: {x: 2.37, y: 0, z: 0}
     startFrame: 0
   gravityMoves:
   - movement: {x: 0, y: -0.23, z: 0}

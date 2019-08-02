@@ -299,7 +299,8 @@ public class PlayerSkillEditor : EditorWindow
                             bool f = false;
                             EditorGUILayout.BeginHorizontal();
                             box.hitEffects[ef].effect = EditorGUILayout.ObjectField("エフェクト", box.hitEffects[ef].effect, typeof(GameObject), true) as GameObject;
-                            if (GUILayout.Button("×", GUILayout.Width(20)))
+							box.hitEffects[ef].guardEffect = EditorGUILayout.ObjectField("ガードエフェクト", box.hitEffects[ef].guardEffect, typeof(GameObject), true) as GameObject;
+							if (GUILayout.Button("×", GUILayout.Width(20)))
                             {
                                 f = true;
                             }

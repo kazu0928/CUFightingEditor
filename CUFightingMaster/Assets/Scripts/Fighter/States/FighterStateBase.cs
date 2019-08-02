@@ -7,6 +7,8 @@ public class FighterStateBase : StateBaseScriptMonoBehaviour
 {
     public FighterCore core;
     public TestInput input = null;
+	public FighterStateGuard stateGuard;
+
     #region 初期化
     private void Start()
     {
@@ -19,6 +21,7 @@ public class FighterStateBase : StateBaseScriptMonoBehaviour
                 input = InputManager.Instance.testInput[1];
                 break;
         }
+		stateGuard = GetComponent<FighterStateGuard>();
     }
     #endregion
 
@@ -41,6 +44,10 @@ public class FighterStateBase : StateBaseScriptMonoBehaviour
 	//ダメージ受けたとき
 	public bool IsApplyDamage()
 	{
+		if(stateGuard.isGuard == true)
+		{
+			return false;
+		}
 		return core.GetDamage.frameHitBoxes.Count > 0;
 	}
 

@@ -400,23 +400,23 @@ public class HitBoxJudgement
             {
 				FighterCore cr = GameManager.Instance.GetPlayFighterCore(c.gameObject.layer);
                 //ダメージを与える
-				cr.SetDamage(_cHit);
+				cr.SetDamage(_cHit,_bCol);
 				cr.SetEnemyNumber(core.PlayerNumber);//現在フォーカス中の敵のセット（未使用）
-                //エフェクト再生
-                for (int i = 0; i < _cHit.hitEffects.Count; i++)
-                {
-                    if (_cHit.hitEffects[i].effect != null)
-                    {
-                        if (core.Direction == PlayerDirection.Right)
-                        {
-                            Object.Instantiate(_cHit.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + _cHit.hitEffects[i].position.x, t.position.y + _bCol.center.y + _cHit.hitEffects[i].position.y, t.position.z + _bCol.center.z + _cHit.hitEffects[i].position.z), Quaternion.identity);
-                        }
-                        else if (core.Direction == PlayerDirection.Left)
-                        {
-                            Object.Instantiate(_cHit.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + _cHit.hitEffects[i].position.x, t.position.y + _bCol.center.y + _cHit.hitEffects[i].position.y, t.position.z + _bCol.center.z + _cHit.hitEffects[i].position.z), Quaternion.Euler(0,180,0));
-                        }
-                    }
-                }
+                ////エフェクト再生 ※エフェクトは当たった側で管理
+                //for (int i = 0; i < _cHit.hitEffects.Count; i++)
+                //{
+                //    if (_cHit.hitEffects[i].effect != null)
+                //    {
+                //        if (core.Direction == PlayerDirection.Right)
+                //        {
+                //            Object.Instantiate(_cHit.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + _cHit.hitEffects[i].position.x, t.position.y + _bCol.center.y + _cHit.hitEffects[i].position.y, t.position.z + _bCol.center.z + _cHit.hitEffects[i].position.z), Quaternion.identity);
+                //        }
+                //        else if (core.Direction == PlayerDirection.Left)
+                //        {
+                //            Object.Instantiate(_cHit.hitEffects[i].effect, new Vector3(t.position.x + _bCol.center.x + _cHit.hitEffects[i].position.x, t.position.y + _bCol.center.y + _cHit.hitEffects[i].position.y, t.position.z + _bCol.center.z + _cHit.hitEffects[i].position.z), Quaternion.Euler(0,180,0));
+                //        }
+                //    }
+                //}
 
                 attackHit = true;
                 return;

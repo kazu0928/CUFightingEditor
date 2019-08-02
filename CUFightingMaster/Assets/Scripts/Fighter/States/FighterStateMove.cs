@@ -88,33 +88,33 @@ public class FighterStateMove : StateBaseScriptMonoBehaviour
         {
             case Direction.Neutral:
                 stateBase.core.SetIsCrouching(false);
-                stateBase.ChangeSkillConstant(SkillConstants.Idle, 5);
+                stateBase.ChangeSkillConstant(SkillConstants.Idle, 10);
                 stateBase.core.SetPlayerMoveState(PlayerMoveState.Idle);
                 break;
             case Direction.Front:
                 stateBase.core.SetIsCrouching(false);
-                stateBase.ChangeSkillConstant(SkillConstants.Front_Walk, 5);
+                stateBase.ChangeSkillConstant(SkillConstants.Front_Walk, 10);
                 stateBase.core.SetPlayerMoveState(PlayerMoveState.Front_Walk);
                 break;
             case Direction.Back:
                 stateBase.core.SetIsCrouching(false);
-                stateBase.ChangeSkillConstant(SkillConstants.Back_Walk, 5);
+                stateBase.ChangeSkillConstant(SkillConstants.Back_Walk, 10);
                 stateBase.core.SetPlayerMoveState(PlayerMoveState.Back_Walk);
                 break;
             case Direction.Down:
                 stateBase.core.SetIsCrouching(true);
-                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 10);
                 stateBase.core.SetPlayerMoveState(PlayerMoveState.Crouching);
                 break;
             case Direction.DownBack:
                 stateBase.core.SetIsCrouching(true);
-                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 10);
                 stateBase.core.SetPlayerMoveState(PlayerMoveState.Crouching);
 
                 break;
             case Direction.DownFront:
                 stateBase.core.SetIsCrouching(true);
-                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 5);
+                stateBase.ChangeSkillConstant(SkillConstants.Crouching, 10);
                 stateBase.core.SetPlayerMoveState(PlayerMoveState.Crouching);
 
                 break;

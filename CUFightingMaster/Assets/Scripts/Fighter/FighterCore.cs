@@ -17,6 +17,7 @@ public class FighterCore : MonoBehaviour
     [SerializeField] private FighterSkill nextAnimation = null;//ここにいれればアニメーションが再生される
     [SerializeField] private FighterSkill nowPlaySkill = null;
     [SerializeField] private FighterSkill.CustomHitBox applyDamageSkill = null;//ダメージを食らった時に入る
+	[SerializeField] private BoxCollider applyDamageCollider = null;
 	private PlayerNumber enemyNumber;
 	[SerializeField] private bool isCrouching = false;
     private int changeWeightFrame = 0;
@@ -53,6 +54,10 @@ public class FighterCore : MonoBehaviour
     {
         get { return applyDamageSkill; }
     }
+	public BoxCollider GetDamageCollider
+	{
+		get { return applyDamageCollider; }
+	}
 	public PlayerNumber EnemyNumber
 	{
 		get { return enemyNumber; }
@@ -121,9 +126,10 @@ public class FighterCore : MonoBehaviour
 	{
 		hitJudgement.SetGround(_f);
 	}
-    public void SetDamage(FighterSkill.CustomHitBox _s)
+    public void SetDamage(FighterSkill.CustomHitBox _s,BoxCollider _col)
     {
         applyDamageSkill = _s;
+		applyDamageCollider = _col;
     }
 	public void SetIsCrouching(bool _f)
 	{

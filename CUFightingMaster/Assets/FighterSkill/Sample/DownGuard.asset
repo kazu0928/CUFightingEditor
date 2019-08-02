@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
-  m_Name: Middle_Punch
+  m_Name: DownGuard
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: 160482ab48241e741bb12fa7c6e3b375, type: 2}
+  animationClip: {fileID: 7400000, guid: ef54b6927ceb0a2498ca147662b01504, type: 2}
   animationSpeed: 1
   status: 1
   hitMode: 0
@@ -28,35 +28,7 @@ MonoBehaviour:
   plusFootHitBox: []
   plusGrabHitBox: []
   plusPushingHitBox: []
-  customHitBox:
-  - mode: 0
-    frameHitBoxes:
-    - hitBox:
-        size: {x: 2.08, y: 1, z: 1}
-        localPosition: {x: 1.7, y: 3.33, z: 0}
-      startFrame: 3
-      endFrame: 7
-    hitStop: 7
-    hitPoint: 1
-    hitStrength: 1
-    damage: 0
-    stanDamage: 0
-    knockBack: 0
-    airKnockBack: 0
-    guardKnockBack: 0
-    hitEffects:
-    - effect: {fileID: 452643502229921951, guid: 161600caced3d6549b170bb498b1e048,
-        type: 3}
-      position: {x: 0, y: 0, z: -0.51}
-    isDown: 0
-    isContinue: 0
-    movements: []
-    gravityMoves: []
-    isFaceDown: 0
-    isPassiveNotPossible: 0
-    hitRigor: 16
-    guardHitRigor: 0
-    plusGauge: 0
+  customHitBox: []
   isContinue: 0
   movements: []
   gravityMoves: []

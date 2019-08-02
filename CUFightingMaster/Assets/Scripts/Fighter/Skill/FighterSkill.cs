@@ -28,6 +28,7 @@ public class FighterSkill : ScriptableObject
     public class HitEffects
     {
         public GameObject effect;
+		public GameObject guardEffect;
         public Vector3 position;
     }
     //当たり判定群
