@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: Front_Jump
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: b50b85bf5a555414f903d8512672e46c, type: 2}
+  animationClip: {fileID: 7400000, guid: 25f8b2f478a311942bcb3cea71bfe2c6, type: 3}
   animationSpeed: 0.5
   status: 1
   hitMode: 0

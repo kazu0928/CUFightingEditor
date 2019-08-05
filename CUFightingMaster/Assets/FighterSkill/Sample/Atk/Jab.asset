@@ -43,7 +43,7 @@ MonoBehaviour:
     stanDamage: 0
     knockBack: 1
     airKnockBack: 0.3
-    guardKnockBack: 0.1
+    guardKnockBack: 0.7
     hitEffects:
     - effect: {fileID: 452643502229921951, guid: 161600caced3d6549b170bb498b1e048,
         type: 3}

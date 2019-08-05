@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: Idle
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: a301df8a43969084b9f307a1ac24b222, type: 2}
+  animationClip: {fileID: 7400000, guid: 26a05cd2252cf224190b72a5f7452982, type: 2}
   animationSpeed: 1
   status: 1
   hitMode: 0
@@ -26,7 +26,12 @@ MonoBehaviour:
   plusHeadHitBox: []
   plusBodyHitBox: []
   plusFootHitBox: []
-  plusGrabHitBox: []
+  plusGrabHitBox:
+  - hitBox:
+      size: {x: 0, y: 0, z: 0}
+      localPosition: {x: 0, y: 0, z: 0}
+    startFrame: 0
+    endFrame: 59
   plusPushingHitBox: []
   customHitBox: []
   isContinue: 0

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: Jump
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: b50b85bf5a555414f903d8512672e46c, type: 2}
+  animationClip: {fileID: 7400000, guid: 864e0e2031c33954e8f4d58a5c9bb405, type: 3}
   animationSpeed: 0.5
   status: 1
   hitMode: 1
@@ -47,8 +47,13 @@ MonoBehaviour:
     damage: 0
     stanDamage: 0
     knockBack: 0
+    airKnockBack: 0
+    guardKnockBack: 0
     hitEffects: []
     isDown: 0
+    isContinue: 0
+    movements: []
+    gravityMoves: []
     isFaceDown: 0
     isPassiveNotPossible: 0
     hitRigor: 0

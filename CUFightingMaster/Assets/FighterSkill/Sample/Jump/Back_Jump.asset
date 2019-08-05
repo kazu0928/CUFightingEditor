@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4fbd35985d310504d81036cc55356454, type: 3}
   m_Name: Back_Jump
   m_EditorClassIdentifier: 
-  animationClip: {fileID: 7400000, guid: b50b85bf5a555414f903d8512672e46c, type: 2}
-  animationSpeed: 0.5
+  animationClip: {fileID: 7400000, guid: fe51f4f996abcf3468be0f8def4f840f, type: 3}
+  animationSpeed: 0.6
   status: 1
   hitMode: 0
   throwMotion: {fileID: 0}
